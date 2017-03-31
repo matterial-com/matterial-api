@@ -5,7 +5,7 @@
     <name>matterial-api</name>
     <groupId>matterial</groupId>
     <artifactId>matterial-api</artifactId>
-    <version>0.9.1</version>
+    <version>0.9-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <url>http://maven.apache.org</url>
@@ -17,10 +17,6 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- drivve repositories -->
-        <repo.drivve.public.url>http://172.20.0.7:8081/repository/drivveGroup</repo.drivve.public.url>
-        <repo.drivve.snapshot.url>http://172.20.0.7:8081/repository/drivve-snapshots</repo.drivve.snapshot.url>
-        <repo.drivve.url>http://172.20.0.7:8081/repository/drivve</repo.drivve.url>
     </properties>
     
     <build>
@@ -54,16 +50,5 @@
             
         </plugins>
     </build>
-    
-    <distributionManagement>
-        <snapshotRepository>
-            <id>drivve-snapshots</id>
-            <url>${repo.drivve.snapshot.url}</url>
-        </snapshotRepository>
-        <repository>
-            <id>drivve</id>
-            <url>${repo.drivve.url}</url>
-        </repository>
-    </distributionManagement>
     
 </project>
