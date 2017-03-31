@@ -15,6 +15,7 @@ public class PreferenceMapContainer implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Map<String, String> preferences;
+    private Map<String, String> preferenceDescriptions;
     
     public Map<String, String> getPreferences() {
         if(this.preferences == null) {
@@ -25,6 +26,17 @@ public class PreferenceMapContainer implements Serializable {
     
     public void setPreferences(Map<String, String> preferences) {
         this.preferences = preferences;
+    }
+    
+    public Map<String, String> getPreferenceDescriptions() {
+        if(this.preferenceDescriptions == null) {
+            this.preferenceDescriptions = new LinkedHashMap<>();
+        }
+        return preferenceDescriptions;
+    }
+    
+    public void setPreferenceDescriptions(Map<String, String> preferenceDescriptions) {
+        this.preferenceDescriptions = preferenceDescriptions;
     }
     
 }
