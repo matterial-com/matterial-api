@@ -12,7 +12,8 @@ public class WildflyDataSource implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private String name;
+    private String dataSourceDisplayName;
+    private String dataSourceReference;
     private String connectionUrl;
     private String driverClass;
     private String driver;
@@ -30,7 +31,8 @@ public class WildflyDataSource implements Serializable {
         this.maxPoolSize = 15;
     }
     
-    public WildflyDataSource(String name,
+    public WildflyDataSource(String dataSourceDisplayName,
+                             String dataSourceReference,
                              String connectionUrl,
                              String driverClass,
                              String driver,
@@ -42,7 +44,8 @@ public class WildflyDataSource implements Serializable {
                              boolean poolPrefill) {
         // *** init with some defaults;
         this();
-        this.name = name;
+        this.dataSourceDisplayName = dataSourceDisplayName;
+        this.dataSourceReference = dataSourceReference;
         this.connectionUrl = connectionUrl;
         this.driverClass = driverClass;
         this.driver = driver;
@@ -60,12 +63,20 @@ public class WildflyDataSource implements Serializable {
         this.poolPrefill = poolPrefill;
     }
     
-    public String getName() {
-        return name;
+    public String getDataSourceDisplayName() {
+        return dataSourceDisplayName;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setDataSourceDisplayName(String dataSourceDisplayName) {
+        this.dataSourceDisplayName = dataSourceDisplayName;
+    }
+    
+    public String getDataSourceReference() {
+        return dataSourceReference;
+    }
+    
+    public void setDataSourceReference(String dataSourceReference) {
+        this.dataSourceReference = dataSourceReference;
     }
     
     public String getConnectionUrl() {
@@ -142,8 +153,10 @@ public class WildflyDataSource implements Serializable {
     
     @Override
     public String toString() {
-        return "WildflyDataSource [name=" + name + ", connectionUrl=" + connectionUrl + ", driverClass=" + driverClass +
-               ", driver=" + driver + ", userName=" + userName + ", password=***]";
+        return "WildflyDataSource [dataSourceDisplayName=" + dataSourceDisplayName + 
+               ", dataSourceReference=" + dataSourceReference + ", connectionUrl=" + connectionUrl + 
+               ", driverClass=" + driverClass + ", driver=" + driver + 
+               ", userName=" + userName + ", password=***]";
     }
 
 }

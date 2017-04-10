@@ -15,8 +15,8 @@ public class LoginData implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private String dataSource;
     private String sessionId;
+    private DataSource dataSource;
     private Permissions permissions;
     private Person person;
     private Client client;
@@ -24,20 +24,20 @@ public class LoginData implements Serializable {
     private Map<String, Object> accountSettings;
     private Map<String, String> clientPreferences;
 
-    public String getDataSource() {
-        return dataSource;
-    }
-    
-    public void setDataSource(String dataSource) {
-        this.dataSource = dataSource;
-    }
-    
     public String getSessionId() {
         return sessionId;
     }
     
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+    
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+    
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
     
     public Permissions getPermissions() {
