@@ -1,6 +1,7 @@
 package com.matterial.mtr.api.object;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,12 @@ public class LoginData implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String sessionId;
-    private DataSource dataSource;
+    private DataSource currentDataSource;
+    private DataSource favouriteDataSource;
     private Permissions permissions;
     private Person person;
     private Client client;
-    private List<DataSource> dataSources;
+    private List<DataSource> availableDataSources;
     private Map<String, Object> accountSettings;
     private Map<String, String> clientPreferences;
 
@@ -32,12 +34,20 @@ public class LoginData implements Serializable {
         this.sessionId = sessionId;
     }
     
-    public DataSource getDataSource() {
-        return dataSource;
+    public DataSource getCurrentDataSource() {
+        return currentDataSource;
     }
     
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setCurrentDataSource(DataSource currentDataSource) {
+        this.currentDataSource = currentDataSource;
+    }
+    
+    public DataSource getFavouriteDataSource() {
+        return favouriteDataSource;
+    }
+    
+    public void setFavouriteDataSource(DataSource favouriteDataSource) {
+        this.favouriteDataSource = favouriteDataSource;
     }
     
     public Permissions getPermissions() {
@@ -64,12 +74,15 @@ public class LoginData implements Serializable {
         this.client = client;
     }
     
-    public List<DataSource> getDataSources() {
-        return dataSources;
+    public List<DataSource> getAvailableDataSources() {
+        if(this.availableDataSources == null) {
+            this.availableDataSources = new ArrayList<>();
+        }
+        return availableDataSources;
     }
     
-    public void setDataSources(List<DataSource> dataSources) {
-        this.dataSources = dataSources;
+    public void setAvailableDataSources(List<DataSource> availableDataSources) {
+        this.availableDataSources = availableDataSources;
     }
     
     public Map<String, Object> getAccountSettings() {
