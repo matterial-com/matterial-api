@@ -1,12 +1,16 @@
 package com.matterial.mtr.api.object;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * <strong>LicenceUsage</strong>
  */
 @XmlRootElement
-public class LicenceUsage {
+public class LicenceUsage implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     
     private int user;
     private int casSize;
