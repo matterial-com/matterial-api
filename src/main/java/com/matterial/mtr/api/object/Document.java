@@ -37,6 +37,10 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
      * this bit marks the version as reviewed;
      */
     public static final int STATUS_BIT_REVIEWED = 4;
+    
+    public static final int EDITOR_TYPE_MARKDOWN = 0;
+    public static final int EDITOR_TYPE_WYSIWYG = 1;
+    
     /**
      * typeName to be used in index
      */
@@ -53,6 +57,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     
     // *** document-poperties;
     private long id;
+    private int editorType;
     private Long createTimeInSeconds;
     private int clickCount;
     private boolean valid;
@@ -116,7 +121,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         // *** do nothing;
     }
     
-    public Document(long id, Long createTimeInSeconds, int clickCount, boolean valid, Long validBeginInSeconds, Long validEndInSeconds,
+    public Document(long id, int editorType, Long createTimeInSeconds, int clickCount, boolean valid, Long validBeginInSeconds, Long validEndInSeconds,
                     boolean removed, boolean archived, Long archivedBeginInSeconds, Long reviewUntilInSeconds,
                     Long removeTimeInSeconds, int downloadCount, boolean template, long languageVersionId,
                     int languageVersionVersion, String languageVersionTitle, String languageVersionAbstract,
@@ -131,6 +136,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
                     Long firstReadTimeInSeconds, Long lastReadTimeInSeconds, Number lastWriteTimeInSeconds, 
                     Number roleRelationType, Number sumRating, Number countOfRelatedReviewRoles, Number accountId) {
         this.setId(id);
+        this.editorType = editorType;
         this.createTimeInSeconds = createTimeInSeconds;
         this.clickCount = clickCount;
         this.valid = valid;
@@ -205,6 +211,14 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     @Override
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public int getEditorType() {
+        return editorType;
+    }
+    
+    public void setEditorType(int editorType) {
+        this.editorType = editorType;
     }
     
     public Long getCreateTimeInSeconds() {
