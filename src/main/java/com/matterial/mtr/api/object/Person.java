@@ -28,6 +28,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long superiorAccountId;
     private Long accountCreateTimeInSeconds;
     private Long accountLastLoginInSeconds;
+    private boolean instanceAdmin;
     
     private long contactId;
     private String firstName;
@@ -59,19 +60,33 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
      * @param superiorAccountId
      * @param accountCreateTimeInSeconds
      * @param accountLastLoginInSeconds
+     * @param instanceAdmin
      * @param contactId
      * @param firstName
      * @param lastName
-     * @param title
+     * @param position
      * @param birthdayInSeconds
      * @param gender 
      */
-    public Person(long accountId, String accountLogin, Long superiorAccountId, Long accountCreateTimeInSeconds, Long accountLastLoginInSeconds, long contactId, String firstName, String lastName, String position, Long birthdayInSeconds, Integer gender) {
+    public Person(long accountId, 
+                  String accountLogin, 
+                  Long superiorAccountId, 
+                  Long accountCreateTimeInSeconds, 
+                  Long accountLastLoginInSeconds,
+                  Boolean instanceAdmin,
+                  long contactId, 
+                  String firstName, 
+                  String lastName, 
+                  String position, 
+                  Long birthdayInSeconds, 
+                  Integer gender) {
         this.accountId = accountId;
         this.accountLogin = accountLogin;
         this.superiorAccountId = superiorAccountId;
         this.accountCreateTimeInSeconds = accountCreateTimeInSeconds;
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
+        // *** no acount => no instance-admin;
+        this.instanceAdmin = instanceAdmin==null?false:instanceAdmin;
         this.contactId = contactId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -136,6 +151,14 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     public void setAccountLastLoginInSeconds(Long accountLastLoginInSeconds) {
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
+    }
+    
+    public boolean isInstanceAdmin() {
+        return this.instanceAdmin;
+    }
+
+    public void setInstanceAdmin(boolean instanceAdmin) {
+        this.instanceAdmin = instanceAdmin;
     }
 
     public long getContactId() {
@@ -319,6 +342,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         indexMap.put("accountId", this.getAccountId());
         indexMap.put("accountLastLoginInSeconds", this.getAccountLastLoginInSeconds());
         indexMap.put("accountLogin", this.getAccountLogin());
+        indexMap.put("instanceAdmin", this.isInstanceAdmin());
         indexMap.put("birthdayInSeconds", this.getBirthdayInSeconds());
         
         List<Map<String, Object>> addressMap = new ArrayList<>();

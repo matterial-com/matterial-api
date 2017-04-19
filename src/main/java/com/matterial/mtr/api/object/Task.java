@@ -43,7 +43,7 @@ public class Task extends ListResultEntry implements Identifiable {
              // *** assigned-role;
              assignedRoleId, null, null, null, null,
              // *** assigned-account;
-             assignedAccountId, null, null, null, null, null, null, null, null, null, null, null);
+             assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     public Task(long id, 
@@ -65,6 +65,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long acceptedAccountSuperiorAccountId,
                 Long acceptedAccountCreateTimeInSeconds,
                 Long acceptedAccountLastLoginInSeconds,
+                Boolean acceptedAccountInstanceAdmin,
                 Long acceptedAccountContactId,
                 String acceptedAccountFirstName,
                 String acceptedAccountLastName,
@@ -80,11 +81,11 @@ public class Task extends ListResultEntry implements Identifiable {
              acceptedAccountId, acceptedAccountLogin, 
              acceptedAccountSuperiorAccountId, 
              acceptedAccountCreateTimeInSeconds, 
-             acceptedAccountLastLoginInSeconds, 
+             acceptedAccountLastLoginInSeconds, acceptedAccountInstanceAdmin, 
              acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
              acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender,
              // *** skip: author-account;
-             null, null, null, null, null, null, null, null, null, null, null);
+             null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     public Task(long id, 
@@ -105,6 +106,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long acceptedAccountSuperiorAccountId,
                 Long acceptedAccountCreateTimeInSeconds,
                 Long acceptedAccountLastLoginInSeconds,
+                Boolean acceptedAccountInstanceAdmin,
                 Long acceptedAccountContactId,
                 String acceptedAccountFirstName,
                 String acceptedAccountLastName,
@@ -117,6 +119,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long authorAccountSuperiorAccountId,
                 Long authorAccountCreateTimeInSeconds,
                 Long authorAccountLastLoginInSeconds,
+                Boolean authorAccountInstanceAdmin,
                 Long authorAccountContactId,
                 String authorAccountFirstName,
                 String authorAccountLastName,
@@ -146,6 +149,7 @@ public class Task extends ListResultEntry implements Identifiable {
                                               acceptedAccountSuperiorAccountId, 
                                               acceptedAccountCreateTimeInSeconds, 
                                               acceptedAccountLastLoginInSeconds, 
+                                              acceptedAccountInstanceAdmin,
                                               acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
                                               acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender);
         }
@@ -160,6 +164,7 @@ public class Task extends ListResultEntry implements Identifiable {
                                             authorAccountSuperiorAccountId, 
                                             authorAccountCreateTimeInSeconds, 
                                             authorAccountLastLoginInSeconds, 
+                                            authorAccountInstanceAdmin,
                                             authorAccountContactId, authorAccountFirstName, authorAccountLastName, 
                                             authorAccountPosition, authorAccountBirthdayInSeconds, authorAccountGender);
         }

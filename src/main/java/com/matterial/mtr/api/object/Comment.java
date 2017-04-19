@@ -60,6 +60,7 @@ public class Comment extends ListResultEntry implements Identifiable {
             Long superiorAccountId,
             long accountCreateTimeInSeconds,
             Long accountLastLoginInSeconds,
+            boolean instanceAdmin,
             long contactId,
             String firstName,
             String lastName,
@@ -70,7 +71,7 @@ public class Comment extends ListResultEntry implements Identifiable {
         this.createTimeInSeconds = createTimeInSeconds;
         this.text = text;
         this.documentLanguageVersionId = documentLanguageVersionId;
-        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds, accountLastLoginInSeconds, contactId, firstName, lastName, position, birthdayInSeconds, gender);
+        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds, accountLastLoginInSeconds, instanceAdmin, contactId, firstName, lastName, position, birthdayInSeconds, gender);
     }
 
     @Override

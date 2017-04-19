@@ -125,6 +125,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
                              Long superiorAccountId,
                              long accountCreateTimeInSeconds,
                              Long accountLastLoginInSeconds,
+                             Boolean instanceAdmin,
                              long contactId,
                              String firstName,
                              String lastName,
@@ -139,7 +140,8 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.languageVersionVersion = languageVersionVersion;
         this.languageVersionLanguageId = languageVersionLanguageId;
         this.languageVersionLanguageKey = languageVersionLanguageKey;
-        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds, accountLastLoginInSeconds, contactId, firstName, lastName, position, birthdayInSeconds, gender);
+        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds, accountLastLoginInSeconds, instanceAdmin, 
+                                 contactId, firstName, lastName, position, birthdayInSeconds, gender);
     }
 
     
