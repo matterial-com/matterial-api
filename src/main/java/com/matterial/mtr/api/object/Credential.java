@@ -15,14 +15,14 @@ public class Credential implements Serializable {
     
     private String login;
     private String password;
-    private boolean initial;
+    private boolean pwdMustChange;
     
     private List<DataSource> dataSources;
     
-    public Credential(String login, String password, boolean initial, List<DataSource> dataSources) {
+    public Credential(String login, String password, boolean pwdMustChange, List<DataSource> dataSources) {
         this.login = login;
         this.password = password;
-        this.initial = initial;
+        this.pwdMustChange = pwdMustChange;
         this.dataSources = dataSources;
     }
 
@@ -46,12 +46,12 @@ public class Credential implements Serializable {
         this.password = password;
     }
     
-    public boolean isInitial() {
-        return initial;
+    public boolean isPwdMustChange() {
+        return pwdMustChange;
     }
     
-    public void setInitial(boolean initial) {
-        this.initial = initial;
+    public void setPwdMustChange(boolean pwdMustChange) {
+        this.pwdMustChange = pwdMustChange;
     }
     
     public List<DataSource> getDataSources() {
