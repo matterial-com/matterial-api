@@ -17,6 +17,7 @@ public class LoginData implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String sessionId;
+    private boolean pwdMustChange;
     private DataSource currentDataSource;
     private DataSource favouriteDataSource;
     private Permissions permissions;
@@ -32,6 +33,14 @@ public class LoginData implements Serializable {
     
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+    
+    public boolean isPwdMustChange() {
+        return pwdMustChange;
+    }
+    
+    public void setPwdMustChange(boolean pwdMustChange) {
+        this.pwdMustChange = pwdMustChange;
     }
     
     public DataSource getCurrentDataSource() {
