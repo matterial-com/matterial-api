@@ -21,6 +21,28 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     
     private static final long serialVersionUID = 1L;
     
+    public static final String ORDER_BY_ID = "id";
+    public static final String ORDER_BY_VALID = "valid";
+    public static final String ORDER_BY_ARCHVED = "archived";
+    public static final String ORDER_BY_ARCHIVED_BEGIN_IN_SECONDS = "archivedBeginInSeconds";
+    public static final String ORDER_BY_REMOVED = "removed";
+    public static final String ORDER_BY_CLICK_COUNT = "clickCount";
+    public static final String ORDER_BY_VALID_END_IN_SECONDS = "validEndInSeconds";
+    public static final String ORDER_BY_CREATE_TIME_IN_SECONDS = "createTimeInSeconds";
+    public static final String ORDER_BY_VALID_BEGIN_OR_CREATE_TIME = "validBeginOrCreateTime";
+    public static final String ORDER_BY_FIRST_READ_TIME_AND_VALID_BEGIN = "firstReadTimeAndValidBegin";
+    public static final String ORDER_BY_LANGUAGE_VERSION_TITLE = "languageVersionTitle";
+    public static final String ORDER_BY_LANGUAGE_VERSION_LANGUAGE_PRIO = "languageVersionLanguagePrio";
+    public static final String ORDER_BY_LANGUAGE_VERSION_VERSION = "languageVersionVersion";
+    public static final String ORDER_BY_LAST_READ_TIME = "lastReadTime";
+    public static final String ORDER_BY_LANGUAGE_VERSION_LAST_CHANGE_IN_SECONDS = "languageVersionLastChangeInSeconds";
+    public static final String ORDER_BY_LANGUAGE_VERSION_CREATE_TIME_IN_SECONDS = "languageVersionCreateTimeInSeconds";
+    public static final String ORDER_BY_LANGUAGE_VERSION_STATUS = "languageVersionStatus";
+    public static final String ORDER_BY_SUM_RATING = "sumRating";
+    public static final String ORDER_BY_FIRST_READ_TIME_AND_LAST_CHANGE = "firstReadTimeAndLastChange";
+    public static final String ORDER_BY_LAST_WRITE_TIME = "lastWriteTime";
+    
+    
     /**
      * author marked this version as "ready".
      * every "ready" version could not be overwritten, mtr will generate a new version automatically.
