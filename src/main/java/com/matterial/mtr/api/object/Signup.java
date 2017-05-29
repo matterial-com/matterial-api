@@ -12,6 +12,7 @@ public class Signup implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    private String subscriptionEmail;
     private String dataSourceDisplayName;
     private String dataSourceReference;
     private Licence licence;
@@ -20,6 +21,14 @@ public class Signup implements Serializable {
         // *** do nothing;
     }
     
+    public String getSubscriptionEmail() {
+        return subscriptionEmail;
+    }
+    
+    public void setSubscriptionEmail(String subscriptionEmail) {
+        this.subscriptionEmail = subscriptionEmail;
+    }
+
     public String getDataSourceDisplayName() {
         return dataSourceDisplayName;
     }
