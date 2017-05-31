@@ -19,8 +19,10 @@ public class Credential implements Serializable {
     private String tempKey;
     private Long tempKeyValidEndInSeconds;
     private String subscriptionEmail;
-    
+
     private List<DataSource> dataSources;
+    
+    private boolean updatePassword;
     
     public Credential(String login, String password, 
                       String tempKey, Long tempKeyValidEndInSeconds,
@@ -30,6 +32,7 @@ public class Credential implements Serializable {
         this.tempKey = tempKey;
         this.tempKeyValidEndInSeconds = tempKeyValidEndInSeconds;
         this.subscriptionEmail = subscriptionEmail;
+        this.updatePassword = false;
     }
 
     public Credential() {
@@ -85,6 +88,14 @@ public class Credential implements Serializable {
     
     public void setDataSources(List<DataSource> dataSources) {
         this.dataSources = dataSources;
+    }
+    
+    public boolean isUpdatePassword() {
+        return updatePassword;
+    }
+    
+    public void setUpdatePassword(boolean updatePassword) {
+        this.updatePassword = updatePassword;
     }
 
 }
