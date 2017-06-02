@@ -18,6 +18,7 @@ public class LoginData implements Serializable {
     
     private String sessionId;
     private boolean pwdMustChange;
+    private boolean multipleInstanceInstallation;
     private DataSource currentDataSource;
     private DataSource favouriteDataSource;
     private Permissions permissions;
@@ -41,6 +42,14 @@ public class LoginData implements Serializable {
     
     public void setPwdMustChange(boolean pwdMustChange) {
         this.pwdMustChange = pwdMustChange;
+    }
+    
+    public boolean isMultipleInstanceInstallation() {
+        return multipleInstanceInstallation;
+    }
+    
+    public void setMultipleInstanceInstallation(boolean multipleInstanceInstallation) {
+        this.multipleInstanceInstallation = multipleInstanceInstallation;
     }
     
     public DataSource getCurrentDataSource() {
