@@ -50,5 +50,25 @@ public class LicenceUsage implements Serializable {
         this.licence = licence;
     }
     
+    /**
+     * checks if new licence exceeds current values.  
+     */
+    public boolean checkForExceeding(Licence newLicence) {
+        boolean ok = false;
+        // *** get current values;
+        int currentCasSize = this.getCasSize();
+        int currentUser = this.getUser();
+        // *** check licence;
+        if(newLicence != null) {
+            // *** get requested values;
+            int requestedCasSize = newLicence.getCasSize();
+            int requestedUser = newLicence.getUser();
+            if(requestedCasSize >= currentCasSize && 
+               requestedUser >= currentUser) {
+               ok = true; 
+            }
+        }
+        return ok;
+    }
     
 }
