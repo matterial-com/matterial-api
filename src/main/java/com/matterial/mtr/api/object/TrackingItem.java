@@ -8,7 +8,7 @@ import com.matterial.mtr.api.object.meta.Identifiable;
  * <strong>TrackingItem</strong>
  */
 @XmlRootElement
-public class TrackingItem implements Identifiable {
+public class TrackingItem extends ListResultEntry implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 
