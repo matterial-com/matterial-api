@@ -43,7 +43,7 @@ public class Task extends ListResultEntry implements Identifiable {
              // *** assigned-role;
              assignedRoleId, null, null, null, null,
              // *** assigned-account;
-             assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null);
+             assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     public Task(long id, 
@@ -66,6 +66,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long acceptedAccountCreateTimeInSeconds,
                 Long acceptedAccountLastLoginInSeconds,
                 Boolean acceptedAccountInstanceAdmin,
+                Boolean acceptedAccountLimited,
                 Long acceptedAccountContactId,
                 String acceptedAccountFirstName,
                 String acceptedAccountLastName,
@@ -81,11 +82,11 @@ public class Task extends ListResultEntry implements Identifiable {
              acceptedAccountId, acceptedAccountLogin, 
              acceptedAccountSuperiorAccountId, 
              acceptedAccountCreateTimeInSeconds, 
-             acceptedAccountLastLoginInSeconds, acceptedAccountInstanceAdmin, 
+             acceptedAccountLastLoginInSeconds, acceptedAccountInstanceAdmin, acceptedAccountLimited, 
              acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
              acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender,
              // *** skip: author-account;
-             null, null, null, null, null, null, null, null, null, null, null, null);
+             null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     public Task(long id, 
@@ -107,6 +108,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long acceptedAccountCreateTimeInSeconds,
                 Long acceptedAccountLastLoginInSeconds,
                 Boolean acceptedAccountInstanceAdmin,
+                Boolean acceptedAccountLimited,
                 Long acceptedAccountContactId,
                 String acceptedAccountFirstName,
                 String acceptedAccountLastName,
@@ -120,6 +122,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long authorAccountCreateTimeInSeconds,
                 Long authorAccountLastLoginInSeconds,
                 Boolean authorAccountInstanceAdmin,
+                Boolean authorAccountLimited,
                 Long authorAccountContactId,
                 String authorAccountFirstName,
                 String authorAccountLastName,
@@ -150,6 +153,7 @@ public class Task extends ListResultEntry implements Identifiable {
                                               acceptedAccountCreateTimeInSeconds, 
                                               acceptedAccountLastLoginInSeconds, 
                                               acceptedAccountInstanceAdmin,
+                                              acceptedAccountLimited, 
                                               acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
                                               acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender);
         }
@@ -164,7 +168,8 @@ public class Task extends ListResultEntry implements Identifiable {
                                             authorAccountSuperiorAccountId, 
                                             authorAccountCreateTimeInSeconds, 
                                             authorAccountLastLoginInSeconds, 
-                                            authorAccountInstanceAdmin,
+                                            authorAccountInstanceAdmin, 
+                                            authorAccountLimited, 
                                             authorAccountContactId, authorAccountFirstName, authorAccountLastName, 
                                             authorAccountPosition, authorAccountBirthdayInSeconds, authorAccountGender);
         }

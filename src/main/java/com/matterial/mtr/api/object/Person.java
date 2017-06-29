@@ -19,7 +19,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     
     private static final long serialVersionUID = 1L;
     /**
-     * typeNAme to be used in index
+     * typeName to be used in index
      */
     public static final String INDEX_TYPE_NAME  = "person";
     
@@ -29,6 +29,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long accountCreateTimeInSeconds;
     private Long accountLastLoginInSeconds;
     private boolean instanceAdmin;
+    private boolean limited;
     
     private long contactId;
     private String firstName;
@@ -74,6 +75,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
                   Long accountCreateTimeInSeconds, 
                   Long accountLastLoginInSeconds,
                   Boolean instanceAdmin,
+                  Boolean limited,
                   long contactId, 
                   String firstName, 
                   String lastName, 
@@ -87,6 +89,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
         // *** no acount => no instance-admin;
         this.instanceAdmin = instanceAdmin==null?false:instanceAdmin;
+        this.limited = limited==null?false:limited;
         this.contactId = contactId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -159,6 +162,14 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     public void setInstanceAdmin(boolean instanceAdmin) {
         this.instanceAdmin = instanceAdmin;
+    }
+    
+    public boolean isLimited() {
+        return this.limited;
+    }
+
+    public void setLimited(boolean limited) {
+        this.limited = limited;
     }
 
     public long getContactId() {
