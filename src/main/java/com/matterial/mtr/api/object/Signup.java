@@ -13,8 +13,10 @@ public class Signup implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String subscriptionEmail;
+    private String password;
     private String dataSourceDisplayName;
     private String dataSourceReference;
+    private boolean updatePassword;
     private Licence licence;
     
     public Signup() {
@@ -27,6 +29,14 @@ public class Signup implements Serializable {
     
     public void setSubscriptionEmail(String subscriptionEmail) {
         this.subscriptionEmail = subscriptionEmail;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDataSourceDisplayName() {
@@ -43,6 +53,14 @@ public class Signup implements Serializable {
     
     public void setDataSourceReference(String dataSourceReference) {
         this.dataSourceReference = dataSourceReference;
+    }
+    
+    public boolean isUpdatePassword() {
+        return updatePassword;
+    }
+    
+    public void setUpdatePassword(boolean updatePassword) {
+        this.updatePassword = updatePassword;
     }
     
     public Licence getLicence() {
