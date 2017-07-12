@@ -13,7 +13,7 @@ public class DataSource extends ListResultEntry implements Identifiable {
     private static final long serialVersionUID = 1L;
     
     private long id;
-    private boolean active;
+    private Long activeUntilInSeconds;
     private String name;
     private String displayName;
     private String reference;
@@ -23,15 +23,15 @@ public class DataSource extends ListResultEntry implements Identifiable {
     }
     
     public DataSource(String name) {
-        this.active = true;
+        this.activeUntilInSeconds = null;
         this.name = name;
         this.displayName = name;
     }
     
-    public DataSource(long id, boolean active, String name, String displayName, String reference) {
+    public DataSource(long id, Long activeUntilInSeconds, String name, String displayName, String reference) {
         this(name);
         this.id = id;
-        this.active  = active;
+        this.activeUntilInSeconds  = activeUntilInSeconds;
         if(displayName != null) {
             this.displayName = displayName;
         }
@@ -50,12 +50,12 @@ public class DataSource extends ListResultEntry implements Identifiable {
         this.id = id;
     }
 
-    public boolean isActive() {
-        return active;
+    public Long getActiveUntilInSeconds() {
+        return activeUntilInSeconds;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActiveUntilInSeconds(Long activeUntilInSeconds) {
+        this.activeUntilInSeconds = activeUntilInSeconds;
     }
     
     public String getName() {
@@ -87,8 +87,8 @@ public class DataSource extends ListResultEntry implements Identifiable {
         StringBuilder buffer = new StringBuilder();
         buffer.append("id:");
         buffer.append(this.getId());
-        buffer.append(", active:");
-        buffer.append(this.isActive());
+        buffer.append(", activeUntilInSeconds:");
+        buffer.append(this.getActiveUntilInSeconds());
         buffer.append(", name:");
         buffer.append(this.getName());
         buffer.append(", displayName:");
