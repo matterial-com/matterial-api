@@ -41,7 +41,7 @@ public class Task extends ListResultEntry implements Identifiable {
         this(id, creationDateInSeconds, description, dueDateInSeconds, 
              documentLanguageVersionId, taskStatusId, 
              // *** assigned-role;
-             assignedRoleId, null, null, null, null,
+             assignedRoleId, null, null, null, null, null, null, null,
              // *** assigned-account;
              assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
@@ -58,6 +58,9 @@ public class Task extends ListResultEntry implements Identifiable {
                 String assignedRoleName, 
                 String assignedRoleDescription, 
                 Long assignedRoleBitmask,
+                Boolean assignedRoleNotRemovable,
+                Boolean assignedRoleInitiallyAssignedToAccount,
+                Boolean assignedRoleInitiallyAssignedToDocument,
                 // *** assigned-account;
                 Long acceptedAccountId,
                 String acceptedAccountLogin,
@@ -78,6 +81,7 @@ public class Task extends ListResultEntry implements Identifiable {
              // *** assigned-role;
              assignedRoleId, assignedRoleEntityTypeId, 
              assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
+             assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, assignedRoleInitiallyAssignedToDocument,
              // *** accepted-account;
              acceptedAccountId, acceptedAccountLogin, 
              acceptedAccountSuperiorAccountId, 
@@ -101,6 +105,9 @@ public class Task extends ListResultEntry implements Identifiable {
                 String assignedRoleName, 
                 String assignedRoleDescription, 
                 Long assignedRoleBitmask,
+                Boolean assignedRoleNotRemovable,
+                Boolean assignedRoleInitiallyAssignedToAccount,
+                Boolean assignedRoleInitiallyAssignedToDocument,
                 // *** accepted-account;
                 Long acceptedAccountId,
                 String acceptedAccountLogin,
@@ -137,9 +144,14 @@ public class Task extends ListResultEntry implements Identifiable {
         this.taskStatusId = taskStatusId;
         // *** assigned-role;
         if(assignedRoleId != null && assignedRoleId > 0L && 
-           assignedRoleEntityTypeId != null && assignedRoleBitmask != null) {
+           assignedRoleEntityTypeId != null && assignedRoleBitmask != null && 
+           assignedRoleNotRemovable != null && 
+           assignedRoleInitiallyAssignedToAccount != null && 
+           assignedRoleInitiallyAssignedToDocument != null) {
             this.assignedRole = new Role(assignedRoleId, assignedRoleEntityTypeId, 
-                                         assignedRoleName, assignedRoleDescription, assignedRoleBitmask);
+                                         assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
+                                         assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, 
+                                         assignedRoleInitiallyAssignedToDocument);
         }
         else if(assignedRoleId != null && assignedRoleId > 0L) {
             this.assignedRole = new Role();

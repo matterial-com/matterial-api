@@ -25,8 +25,20 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
         // *** do nothing;
     }
     
-    public RoleRight(long roleId, long roleEntityTypeId, String roleName, String roleDescription, long roleBitmask, long type) {
-        this(new Role(roleId, roleEntityTypeId, roleName, roleDescription, roleBitmask), type);
+    public RoleRight(long roleId, 
+                     long roleEntityTypeId, 
+                     String roleName, 
+                     String roleDescription, 
+                     long roleBitmask, 
+                     long type) {
+        this(new Role(roleId, 
+                      roleEntityTypeId, 
+                      roleName, 
+                      roleDescription, 
+                      roleBitmask,
+                      false,
+                      false,
+                      false), type);
     }
     
     public RoleRight(Role role, long type) {

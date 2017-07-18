@@ -24,6 +24,10 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     private String name;
     private String description;
     private long bitmask;
+    private boolean notRemovable;
+    private boolean initiallyAssignedToAccount;
+    private boolean initiallyAssignedToDocument;
+    
     private Permissions permissions;
     
     /** this will only be set if role is of type 'personal' */
@@ -35,12 +39,16 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
         this.permissions = new Permissions();
     }
     
-    public Role(long id, long entityTypeId, String name, String description, long bitmask) {
+    public Role(long id, long entityTypeId, String name, String description, long bitmask, 
+                boolean notRemovable, boolean initiallyAssignedToAccount, boolean initiallyAssignedToDocument) {
         this();
         this.id = id;
         this.entityTypeId = entityTypeId;
         this.name = name;
         this.description = description;
+        this.notRemovable = notRemovable;
+        this.initiallyAssignedToAccount = initiallyAssignedToAccount;
+        this.initiallyAssignedToDocument = initiallyAssignedToDocument;
         // *** this also sets the "permissions"-object;
         this.setBitmask(bitmask);
     }
@@ -91,6 +99,30 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
 
     public Permissions getPermissions() {
         return permissions;
+    }
+    
+    public boolean isNotRemovable() {
+        return this.notRemovable;
+    }
+
+    public void setNotRemovable(boolean notRemovable) {
+        this.notRemovable = notRemovable;
+    }
+
+    public boolean isInitiallyAssignedToAccount() {
+        return this.initiallyAssignedToAccount;
+    }
+
+    public void setInitiallyAssignedToAccount(boolean initiallyAssignedToAccount) {
+        this.initiallyAssignedToAccount = initiallyAssignedToAccount;
+    }
+
+    public boolean isInitiallyAssignedToDocument() {
+        return this.initiallyAssignedToDocument;
+    }
+
+    public void setInitiallyAssignedToDocument(boolean initiallyAssignedToDocument) {
+        this.initiallyAssignedToDocument = initiallyAssignedToDocument;
     }
 
     public void setPermissions(Permissions permissions) {
