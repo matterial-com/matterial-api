@@ -38,7 +38,7 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
                       roleBitmask,
                       false,
                       false,
-                      false), type);
+                      0), type);
     }
     
     public RoleRight(Role role, long type) {

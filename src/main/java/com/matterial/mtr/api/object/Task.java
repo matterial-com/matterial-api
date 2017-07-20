@@ -60,7 +60,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long assignedRoleBitmask,
                 Boolean assignedRoleNotRemovable,
                 Boolean assignedRoleInitiallyAssignedToAccount,
-                Boolean assignedRoleInitiallyAssignedToDocument,
+                Long assignedRoleInitiallyAssignedTypeToDocument,
                 // *** assigned-account;
                 Long acceptedAccountId,
                 String acceptedAccountLogin,
@@ -81,7 +81,7 @@ public class Task extends ListResultEntry implements Identifiable {
              // *** assigned-role;
              assignedRoleId, assignedRoleEntityTypeId, 
              assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
-             assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, assignedRoleInitiallyAssignedToDocument,
+             assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, assignedRoleInitiallyAssignedTypeToDocument,
              // *** accepted-account;
              acceptedAccountId, acceptedAccountLogin, 
              acceptedAccountSuperiorAccountId, 
@@ -107,7 +107,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long assignedRoleBitmask,
                 Boolean assignedRoleNotRemovable,
                 Boolean assignedRoleInitiallyAssignedToAccount,
-                Boolean assignedRoleInitiallyAssignedToDocument,
+                Long assignedRoleInitiallyAssignedTypeToDocument,
                 // *** accepted-account;
                 Long acceptedAccountId,
                 String acceptedAccountLogin,
@@ -147,11 +147,11 @@ public class Task extends ListResultEntry implements Identifiable {
            assignedRoleEntityTypeId != null && assignedRoleBitmask != null && 
            assignedRoleNotRemovable != null && 
            assignedRoleInitiallyAssignedToAccount != null && 
-           assignedRoleInitiallyAssignedToDocument != null) {
+           assignedRoleInitiallyAssignedTypeToDocument != null) {
             this.assignedRole = new Role(assignedRoleId, assignedRoleEntityTypeId, 
                                          assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
                                          assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, 
-                                         assignedRoleInitiallyAssignedToDocument);
+                                         assignedRoleInitiallyAssignedTypeToDocument);
         }
         else if(assignedRoleId != null && assignedRoleId > 0L) {
             this.assignedRole = new Role();

@@ -1,6 +1,8 @@
 package com.matterial.mtr.api.object;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,7 @@ public class LoginData implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String sessionId;
+    private long sessionDataTimeout;
     private boolean pwdMustChange;
     private boolean multipleInstanceInstallation;
     private Licence licence;
@@ -29,12 +32,32 @@ public class LoginData implements Serializable {
     private Map<String, Object> accountSettings;
     private Map<String, String> clientPreferences;
 
+    /**
+     * constructor.
+     */
+    public LoginData() {
+        this.updateSessionDataTimeout();
+    }
+    
+    public void updateSessionDataTimeout() {
+        // *** set timeout to 30 minutes later;
+        this.sessionDataTimeout = LocalDateTime.now().plusMinutes(30).toEpochSecond(ZoneOffset.UTC);
+    }
+    
     public String getSessionId() {
         return sessionId;
     }
     
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+    
+    public long getSessionDataTimeout() {
+        return sessionDataTimeout;
+    }
+    
+    public void setSessionDataTimeout(long sessionDataTimeout) {
+        this.sessionDataTimeout = sessionDataTimeout;
     }
     
     public boolean isPwdMustChange() {

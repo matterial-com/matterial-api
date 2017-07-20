@@ -26,7 +26,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     private long bitmask;
     private boolean notRemovable;
     private boolean initiallyAssignedToAccount;
-    private boolean initiallyAssignedToDocument;
+    private long initiallyAssignedTypeToDocument;
     
     private Permissions permissions;
     
@@ -40,7 +40,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     }
     
     public Role(long id, long entityTypeId, String name, String description, long bitmask, 
-                boolean notRemovable, boolean initiallyAssignedToAccount, boolean initiallyAssignedToDocument) {
+                boolean notRemovable, boolean initiallyAssignedToAccount, long initiallyAssignedTypeToDocument) {
         this();
         this.id = id;
         this.entityTypeId = entityTypeId;
@@ -48,7 +48,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
         this.description = description;
         this.notRemovable = notRemovable;
         this.initiallyAssignedToAccount = initiallyAssignedToAccount;
-        this.initiallyAssignedToDocument = initiallyAssignedToDocument;
+        this.initiallyAssignedTypeToDocument = initiallyAssignedTypeToDocument;
         // *** this also sets the "permissions"-object;
         this.setBitmask(bitmask);
     }
@@ -117,12 +117,12 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
         this.initiallyAssignedToAccount = initiallyAssignedToAccount;
     }
 
-    public boolean isInitiallyAssignedToDocument() {
-        return this.initiallyAssignedToDocument;
+    public long getInitiallyAssignedTypeToDocument() {
+        return this.initiallyAssignedTypeToDocument;
     }
 
-    public void setInitiallyAssignedToDocument(boolean initiallyAssignedToDocument) {
-        this.initiallyAssignedToDocument = initiallyAssignedToDocument;
+    public void setInitiallyAssignedTypeToDocument(long initiallyAssignedTypeToDocument) {
+        this.initiallyAssignedTypeToDocument = initiallyAssignedTypeToDocument;
     }
 
     public void setPermissions(Permissions permissions) {
