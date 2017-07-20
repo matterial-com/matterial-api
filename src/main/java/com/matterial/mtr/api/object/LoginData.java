@@ -19,6 +19,7 @@ public class LoginData implements Serializable {
     private String sessionId;
     private boolean pwdMustChange;
     private boolean multipleInstanceInstallation;
+    private Licence licence;
     private DataSource currentDataSource;
     private DataSource favouriteDataSource;
     private Permissions permissions;
@@ -50,6 +51,16 @@ public class LoginData implements Serializable {
     
     public void setMultipleInstanceInstallation(boolean multipleInstanceInstallation) {
         this.multipleInstanceInstallation = multipleInstanceInstallation;
+    }
+    
+    public Licence getLicence() {
+        return this.licence;
+    }
+    
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+        // *** always reset hash;
+        this.licence.setHash(null);
     }
     
     public DataSource getCurrentDataSource() {
