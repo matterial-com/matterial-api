@@ -19,6 +19,7 @@ public class Category implements Identifiable {
     private String description;
     private boolean quick;
     private long typeId;
+    private boolean typePersonal;
     private String casId;
     private String casIdThumbnail;
     private Long fileSize;
@@ -33,15 +34,9 @@ public class Category implements Identifiable {
     
     /**
      * Constructor
-     * 
-     * @param id
-     * @param name
-     * @param description
-     * @param typeId
-     * @param casId 
-     * @param casIdThumbnail
      */
-    public Category(long id, String name, String description, boolean quick, long typeId, 
+    public Category(long id, String name, String description, boolean quick, 
+                    long typeId, boolean typePersonal,
                     String casId, String casIdThumbnail,
                     Long fileSize, Long fileSizeThumbnail) {
         this.id = id;
@@ -49,6 +44,7 @@ public class Category implements Identifiable {
         this.description = description;
         this.quick = quick;
         this.typeId = typeId;
+        this.typePersonal = typePersonal;
         this.casId = casId;
         this.casIdThumbnail = casIdThumbnail;
         this.fileSize = fileSize;
@@ -58,7 +54,8 @@ public class Category implements Identifiable {
     /**
      * Constructor (used in native query)
      */
-    public Category(Number id, String name, String description, Object quick, Number typeId, 
+    public Category(Number id, String name, String description, Object quick, 
+                    Number typeId, Number typeAccountId,
                     String casId, String casIdThumbnail,
                     Number fileSize, Number fileSizeThumbnail) {
         this((id!=null)?id.longValue():0L, 
@@ -67,6 +64,7 @@ public class Category implements Identifiable {
              // *** quick: oracle: BigDecimal, all other db: Boolean;
              (quick != null && ((quick instanceof Boolean && (Boolean)quick) || (quick instanceof Number && ((Number)quick).longValue() > 0)) ),
              (typeId!=null)?typeId.longValue():0L, 
+             (typeAccountId != null && typeAccountId.longValue() > 0L),
              casId,
              casIdThumbnail,
              (fileSize!=null)?fileSize.longValue():null,
@@ -113,6 +111,14 @@ public class Category implements Identifiable {
 
     public void setTypeId(long typeId) {
         this.typeId = typeId;
+    }
+    
+    public boolean isTypePersonal() {
+        return typePersonal;
+    }
+
+    public void setTypePersonal(boolean typePersonal) {
+        this.typePersonal = typePersonal;
     }
 
     public String getCasId() {

@@ -72,10 +72,12 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private static final List<String> PARTIAL_UPDATE_KEYSET_FOLLOWERS = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","followers");
     private static final List<String> PARTIAL_UPDATE_KEYSET_MARKED_HELPFUL_BY = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","sumRating","markedAsHelpfulBy");
     private static final List<String> PARTIAL_UPDATE_KEYSET_FIRST_READ_TIME = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","firstReadTimesInSeconds");
+    private static final List<String> PARTIAL_UPDATE_KEYSET_CATEGORIES = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","categoryIds");
     
     private boolean partialUpdateFollowers;
     private boolean partialUpdateMarkedHelpfulBy;
     private boolean partialUpdateFirstReadTime;
+    private boolean partialUpdateCategories;
     
     // *** document-poperties;
     private long id;
@@ -732,10 +734,19 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         this.partialUpdateFirstReadTime = partialUpdateFirstReadTime;
     }
     
+    public boolean isPartialUpdateCategories() {
+        return partialUpdateCategories;
+    }
+    
+    public void setPartialUpdateCategories(boolean partialUpdateCategories) {
+        this.partialUpdateCategories = partialUpdateCategories;
+    }
+    
     public boolean isPartialUpdate() {
         return this.isPartialUpdateFollowers() || 
                this.isPartialUpdateMarkedHelpfulBy() || 
-               this.isPartialUpdateFirstReadTime();
+               this.isPartialUpdateFirstReadTime() || 
+               this.isPartialUpdateCategories();
     }
 
     public void setPartialUpdate(boolean partialUpdate) {
@@ -859,6 +870,9 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         }
         else if(this.isPartialUpdateFirstReadTime()) {
             partialUpdateKeys = PARTIAL_UPDATE_KEYSET_FIRST_READ_TIME;
+        }
+        else if(this.isPartialUpdateCategories()) {
+            partialUpdateKeys = PARTIAL_UPDATE_KEYSET_CATEGORIES;
         }
         else {
             partialUpdateKeys = null;
