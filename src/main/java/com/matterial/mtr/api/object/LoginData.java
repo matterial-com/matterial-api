@@ -36,12 +36,12 @@ public class LoginData implements Serializable {
      * constructor.
      */
     public LoginData() {
-        this.updateSessionDataTimeout();
+        // *** do nothing;
     }
     
-    public void updateSessionDataTimeout() {
+    public void updateSessionDataTimeout(int sessionDataTimeoutInMinutes) {
         // *** set timeout to 30 minutes later;
-        this.sessionDataTimeout = LocalDateTime.now().plusMinutes(30).toEpochSecond(ZoneOffset.UTC);
+        this.sessionDataTimeout = LocalDateTime.now().plusMinutes(sessionDataTimeoutInMinutes).toEpochSecond(ZoneOffset.UTC);
     }
     
     public String getSessionId() {

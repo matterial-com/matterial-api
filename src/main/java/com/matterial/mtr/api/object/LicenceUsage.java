@@ -58,14 +58,18 @@ public class LicenceUsage implements Serializable {
         // *** get current values;
         int currentCasSize = this.getCasSize();
         int currentUser = this.getUser();
+        boolean currentPackageGroup = this.getLicence().isPackageGroup();
         // *** check licence;
         if(newLicence != null) {
             // *** get requested values;
             int requestedCasSize = newLicence.getCasSize();
             int requestedUser = newLicence.getUser();
-            if(requestedCasSize >= currentCasSize && 
-               requestedUser >= currentUser) {
-               ok = true; 
+            boolean requestedPackageGroup = newLicence.isPackageGroup();
+            if(requestedCasSize >= currentCasSize &&
+               requestedUser >= currentUser && 
+               // *** check for groups;
+               (requestedPackageGroup || !currentPackageGroup) ) {
+                ok = true; 
             }
         }
         return ok;
