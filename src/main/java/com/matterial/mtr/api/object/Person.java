@@ -28,7 +28,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long superiorAccountId;
     private Long accountCreateTimeInSeconds;
     private Long accountLastLoginInSeconds;
-    private boolean instanceAdmin;
+    private boolean instanceOwner;
     private boolean limited;
     
     private long contactId;
@@ -74,7 +74,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
                   Long superiorAccountId, 
                   Long accountCreateTimeInSeconds, 
                   Long accountLastLoginInSeconds,
-                  Boolean instanceAdmin,
+                  Boolean instanceOwner,
                   Boolean limited,
                   long contactId, 
                   String firstName, 
@@ -87,8 +87,8 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         this.superiorAccountId = superiorAccountId;
         this.accountCreateTimeInSeconds = accountCreateTimeInSeconds;
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
-        // *** no acount => no instance-admin;
-        this.instanceAdmin = instanceAdmin==null?false:instanceAdmin;
+        // *** no acount => no instance-owner;
+        this.instanceOwner = instanceOwner==null?false:instanceOwner;
         this.limited = limited==null?false:limited;
         this.contactId = contactId;
         this.firstName = firstName;
@@ -156,12 +156,12 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
     }
     
-    public boolean isInstanceAdmin() {
-        return this.instanceAdmin;
+    public boolean isInstanceOwner() {
+        return this.instanceOwner;
     }
 
-    public void setInstanceAdmin(boolean instanceAdmin) {
-        this.instanceAdmin = instanceAdmin;
+    public void setInstanceOwner(boolean instanceOwner) {
+        this.instanceOwner = instanceOwner;
     }
     
     public boolean isLimited() {
@@ -353,7 +353,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         indexMap.put("accountId", this.getAccountId());
         indexMap.put("accountLastLoginInSeconds", this.getAccountLastLoginInSeconds());
         indexMap.put("accountLogin", this.getAccountLogin());
-        indexMap.put("instanceAdmin", this.isInstanceAdmin());
+        indexMap.put("instanceOwner", this.isInstanceOwner());
         indexMap.put("birthdayInSeconds", this.getBirthdayInSeconds());
         
         List<Map<String, Object>> addressMap = new ArrayList<>();

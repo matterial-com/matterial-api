@@ -1,9 +1,6 @@
 package com.matterial.mtr.api.object;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,47 +29,6 @@ public class Permissions implements Serializable {
     public static final long PUBLISH_UNREVIEWED = 1L << 13;
     public static final long EDIT_ADDITIONAL_PROPERTY = 1L << 14;
     public static final long EDIT_GLOBAL_SAVED_SEARCH = 1L << 15;
-    
-    public static final long ADMIN_BITMASK;
-    
-    public static final List<Permission> PERMISSIONS;
-    static {
-        List<Permission> l = new ArrayList<>();
-        
-        // *** standard-user-rights;
-        l.add(new Permission(COMMENT, "permission.COMMENT", "permission.COMMENT_DESCRIPTION"));
-        l.add(new Permission(VIEW_ARCHIVE, "permission.VIEW_ARCHIVE", "permission.VIEW_ARCHIVE_DESCRIPTION"));
-        l.add(new Permission(EDIT_TASK, "permission.EDIT_TASK", "permission.EDIT_TASK_DESCRIPTION"));
-        
-        // *** standard-editor-rights;
-        l.add(new Permission(EDIT_DOCUMENT, "permission.EDIT_DOCUMENT", "permission.EDIT_DOCUMENT_DESCRIPTION"));
-        l.add(new Permission(PUBLISH_UNREVIEWED, "permission.PUBLISH_UNREVIEWED",
-                             "permission.PUBLISH_UNREVIEWED_DESCRIPTION"));
-        l.add(new Permission(EDIT_GALLERY, "permission.EDIT_GALLERY", "permission.EDIT_GALLERY_DESCRIPTION"));
-        l.add(new Permission(EDIT_DOCUMENT_TEMPLATE, "permission.EDIT_DOCUMENT_TEMPLATE",
-                             "permission.EDIT_DOCUMENT_TEMPLATE_DESCRIPTION"));
-        l.add(new Permission(EDIT_CATEGORY, "permission.EDIT_CATEGORY", "permission.EDIT_CATEGORY_DESCRIPTION"));
-        l.add(new Permission(IMMEDIATE_REVIEW, "permission.IMMEDIATE_REVIEW",
-                             "permission.IMMEDIATE_REVIEW_DESCRIPTION"));
-        
-        // *** standard-admin-rights;
-        l.add(new Permission(EDIT_GLOBAL_SAVED_SEARCH, "permission.EDIT_GLOBAL_SAVED_SEARCH", "permission.EDIT_GLOBAL_SAVED_SEARCH_DESCRIPTION"));
-        l.add(new Permission(EDIT_ROLE, "permission.EDIT_ROLE", "permission.EDIT_ROLE_DESCRIPTION"));
-        l.add(new Permission(EDIT_PERSON, "permission.EDIT_PERSON", "permission.EDIT_PERSON_DESCRIPTION"));
-        l.add(new Permission(SHOW_TRASH, "permission.SHOW_TRASH", "permission.SHOW_TRASH_DESCRIPTION"));
-        l.add(new Permission(VIEW_STATISTIC, "permission.VIEW_STATISTICS", "permission.VIEW_STATISTICS_DESCRIPTION"));
-        l.add(new Permission(EDIT_ADDITIONAL_PROPERTY, "permission.EDIT_ADDITIONAL_PROPERTY", "permission.EDIT_ADDITIONAL_PROPERTY_DESCRIPTION"));
-        l.add(new Permission(ADMINISTRATE_ALL, "permission.ADMINISTRATE_ALL",
-                             "permission.ADMINISTRATE_ALL_DESCRIPTION"));
-        
-        long adminBitmask = 0L;
-        for (Permission p : l) {
-            adminBitmask |= p.getBit();
-        }
-        ADMIN_BITMASK = adminBitmask;
-        
-        PERMISSIONS = Collections.unmodifiableList(l);
-    }
     
     /**
      * not related to bitmask;
@@ -125,6 +81,7 @@ public class Permissions implements Serializable {
         this.publishUnreviewed = ((bitmask & (PUBLISH_UNREVIEWED | ADMINISTRATE_ALL)) > 0);
         this.editAdditionalProperty = ((bitmask & (EDIT_ADDITIONAL_PROPERTY | ADMINISTRATE_ALL)) > 0);
         this.editGlobalSavedSearch = ((bitmask & (EDIT_GLOBAL_SAVED_SEARCH | ADMINISTRATE_ALL)) > 0);
+        this.updateBitmask();
     }
     
     /**
@@ -331,7 +288,7 @@ public class Permissions implements Serializable {
      * test-main: checks bitmask;
      */
     public static void main(String[] args) {
-        long bitmask = ADMIN_BITMASK;
+        long bitmask = new Permissions(ADMINISTRATE_ALL).getBitmask();
         if(args != null && args.length > 0) {
             bitmask = Long.parseLong(args[0]);
         }
