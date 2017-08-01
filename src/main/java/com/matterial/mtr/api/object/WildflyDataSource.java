@@ -14,6 +14,7 @@ public class WildflyDataSource implements Serializable {
     
     private String dataSourceDisplayName;
     private String dataSourceReference;
+    private Integer dataSourceActivationDays;
     private String connectionUrl;
     private String driverClass;
     private String driver;
@@ -33,6 +34,7 @@ public class WildflyDataSource implements Serializable {
     
     public WildflyDataSource(String dataSourceDisplayName,
                              String dataSourceReference,
+                             Integer dataSourceActivationDays,
                              String connectionUrl,
                              String driverClass,
                              String driver,
@@ -46,6 +48,7 @@ public class WildflyDataSource implements Serializable {
         this();
         this.dataSourceDisplayName = dataSourceDisplayName;
         this.dataSourceReference = dataSourceReference;
+        this.dataSourceActivationDays = dataSourceActivationDays;
         this.connectionUrl = connectionUrl;
         this.driverClass = driverClass;
         this.driver = driver;
@@ -77,6 +80,14 @@ public class WildflyDataSource implements Serializable {
     
     public void setDataSourceReference(String dataSourceReference) {
         this.dataSourceReference = dataSourceReference;
+    }
+    
+    public Integer getDataSourceActivationDays() {
+        return this.dataSourceActivationDays;
+    }
+    
+    public void setDataSourceActivationDays(Integer dataSourceActivationDays) {
+        this.dataSourceActivationDays = dataSourceActivationDays;
     }
     
     public String getConnectionUrl() {

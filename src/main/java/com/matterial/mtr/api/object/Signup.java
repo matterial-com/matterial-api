@@ -16,6 +16,7 @@ public class Signup implements Serializable {
     private String password;
     private String dataSourceDisplayName;
     private String dataSourceReference;
+    private int dataSourceActivationDays;
     private boolean updatePassword;
     private Licence licence;
     
@@ -53,6 +54,14 @@ public class Signup implements Serializable {
     
     public void setDataSourceReference(String dataSourceReference) {
         this.dataSourceReference = dataSourceReference;
+    }
+    
+    public int getDataSourceActivationDays() {
+        return dataSourceActivationDays;
+    }
+
+    public void setDataSourceActivationDays(int dataSourceActivationDays) {
+        this.dataSourceActivationDays = dataSourceActivationDays;
     }
     
     public boolean isUpdatePassword() {

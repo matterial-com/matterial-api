@@ -25,13 +25,15 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
         // *** do nothing;
     }
     
-    public RoleRight(long roleId, 
+    public RoleRight(long roleId,
+                     long roleClientId,
                      long roleEntityTypeId, 
                      String roleName, 
                      String roleDescription, 
                      long roleBitmask, 
                      long type) {
         this(new Role(roleId, 
+                      roleClientId, 
                       roleEntityTypeId, 
                       roleName, 
                       roleDescription, 
@@ -68,6 +70,7 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
         if(this.getRole() != null) {
             indexMap.put("roleId", this.getRole().getId());
             indexMap.put("roleType", this.getRole().getEntityTypeId());
+            indexMap.put("roleClientId", this.getRole().getClientId());
         }
         indexMap.put("type", this.getType());
         return indexMap;

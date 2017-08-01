@@ -41,7 +41,7 @@ public class Task extends ListResultEntry implements Identifiable {
         this(id, creationDateInSeconds, description, dueDateInSeconds, 
              documentLanguageVersionId, taskStatusId, 
              // *** assigned-role;
-             assignedRoleId, null, null, null, null, null, null, null,
+             assignedRoleId, null, null, null, null, null, null, null, null,
              // *** assigned-account;
              assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
@@ -54,6 +54,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 long taskStatusId, 
                 // *** assigned-role;
                 Long assignedRoleId,
+                Long assignedRoleClientId,
                 Long assignedRoleEntityTypeId, 
                 String assignedRoleName, 
                 String assignedRoleDescription, 
@@ -79,7 +80,7 @@ public class Task extends ListResultEntry implements Identifiable {
         this(id, creationDateInSeconds, description, dueDateInSeconds, 
              documentLanguageVersionId, taskStatusId, 
              // *** assigned-role;
-             assignedRoleId, assignedRoleEntityTypeId, 
+             assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId, 
              assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
              assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, assignedRoleInitiallyAssignedTypeToDocument,
              // *** accepted-account;
@@ -101,6 +102,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 long taskStatusId, 
                 // *** assigned-role;
                 Long assignedRoleId,
+                Long assignedRoleClientId, 
                 Long assignedRoleEntityTypeId, 
                 String assignedRoleName, 
                 String assignedRoleDescription, 
@@ -148,7 +150,7 @@ public class Task extends ListResultEntry implements Identifiable {
            assignedRoleNotRemovable != null && 
            assignedRoleInitiallyAssignedToAccount != null && 
            assignedRoleInitiallyAssignedTypeToDocument != null) {
-            this.assignedRole = new Role(assignedRoleId, assignedRoleEntityTypeId, 
+            this.assignedRole = new Role(assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId, 
                                          assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
                                          assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, 
                                          assignedRoleInitiallyAssignedTypeToDocument);

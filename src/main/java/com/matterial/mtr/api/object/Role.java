@@ -20,6 +20,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     public static final String CLIENT_GATE_DESCR = "roles.clientGate.description";
     
     private long id;
+    private long clientId;
     private long entityTypeId;
     private String name;
     private String description;
@@ -39,10 +40,11 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
         this.permissions = new Permissions();
     }
     
-    public Role(long id, long entityTypeId, String name, String description, long bitmask, 
+    public Role(long id, long clientId, long entityTypeId, String name, String description, long bitmask, 
                 boolean notRemovable, boolean initiallyAssignedToAccount, long initiallyAssignedTypeToDocument) {
         this();
         this.id = id;
+        this.clientId = clientId;
         this.entityTypeId = entityTypeId;
         this.name = name;
         this.description = description;
@@ -61,6 +63,14 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     @Override
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public long getClientId() {
+        return clientId;
+    }
+    
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
     }
     
     public long getEntityTypeId() {
@@ -145,6 +155,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     public Map<String, Object> indexMap() {
         Map<String, Object> indexMap = new HashMap<>();
         indexMap.put("id", this.getId());
+        indexMap.put("clientId", this.getClientId());
         indexMap.put("entityTypeId", this.getEntityTypeId());
         indexMap.put("name", this.getName());
         indexMap.put("description", this.getDescription());
