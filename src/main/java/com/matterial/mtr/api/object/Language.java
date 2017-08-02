@@ -21,7 +21,6 @@ public class Language implements Identifiable {
     public static final long ES = 5L;
     public static final long SV = 6L;
     public static final long ZH = 7L;
-    public static final long EU = 8L;
     
     private long id;
     private String name;
