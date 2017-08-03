@@ -820,7 +820,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         List<Map<String, Object>> authorsMap = new ArrayList<>();
         if(this.getAuthors()!= null){
             this.getAuthors().stream().forEach((authorPerson) -> {
-                authorsMap.add(authorPerson.indexMap());
+                authorsMap.add(authorPerson.indexMapLight());
             });
         }
         indexMap.put("authors", authorsMap);
@@ -828,7 +828,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         List<Map<String, Object>> followersMap = new ArrayList<>();
         if(this.getFollowers()!= null){
             this.getFollowers().stream().forEach((followerPerson) -> {
-                followersMap.add(followerPerson.indexMap());
+                followersMap.add(followerPerson.indexMapLight());
             });
         }
         indexMap.put("followers", followersMap);
@@ -836,7 +836,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         List<Map<String, Object>> markedAsHelpfulByMap = new ArrayList<>();
         if(this.getMarkedAsHelpfulBy()!= null){
             this.getMarkedAsHelpfulBy().stream().forEach((markedAsHelpfulByPerson) -> {
-                markedAsHelpfulByMap.add(markedAsHelpfulByPerson.indexMap());
+                markedAsHelpfulByMap.add(markedAsHelpfulByPerson.indexMapLight());
             });
         }
         indexMap.put("markedAsHelpfulBy", markedAsHelpfulByMap);
@@ -844,7 +844,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         List<Map<String, Object>> responsiblesMap = new ArrayList<>();
         if(this.getResponsibles()!= null){
             this.getResponsibles().stream().forEach((respPerson) -> {
-                responsiblesMap.add(respPerson.indexMap());
+                responsiblesMap.add(respPerson.indexMapLight());
             });
         }
         indexMap.put("responsibles", responsiblesMap);
