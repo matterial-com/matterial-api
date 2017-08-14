@@ -14,15 +14,22 @@ public class LicenceUsage implements Serializable {
     
     private int user;
     private int casSize;
+    private long languageActiveCount;
+    private Long dataSourceActiveUntilInSeconds;
     private Licence licence;
     
     public LicenceUsage() {
         // *** do nothing;
     }
     
-    public LicenceUsage(int user, int casSize, Licence licence) {
+    public LicenceUsage(int user, int casSize, 
+                        Long languageActiveCount, 
+                        Long dataSourceActiveUntilInSeconds,  
+                        Licence licence) {
         this.user = user;
         this.casSize = casSize;
+        this.languageActiveCount = (languageActiveCount==null)?0L:languageActiveCount;
+        this.dataSourceActiveUntilInSeconds = dataSourceActiveUntilInSeconds;
         this.licence = licence;
     }
 
@@ -42,6 +49,22 @@ public class LicenceUsage implements Serializable {
         this.casSize = casSize;
     }
     
+    public long getLanguageActiveCount() {
+        return languageActiveCount;
+    }
+    
+    public void setLanguageActiveCount(long languageActiveCount) {
+        this.languageActiveCount = languageActiveCount;
+    }
+    
+    public Long getDataSourceActiveUntilInSeconds() {
+        return dataSourceActiveUntilInSeconds;
+    }
+
+    public void setDataSourceActiveUntilInSeconds(Long dataSourceActiveUntilInSeconds) {
+        this.dataSourceActiveUntilInSeconds = dataSourceActiveUntilInSeconds;
+    }
+    
     public Licence getLicence() {
         return licence;
     }
@@ -58,6 +81,7 @@ public class LicenceUsage implements Serializable {
         // *** get current values;
         int currentCasSize = this.getCasSize();
         int currentUser = this.getUser();
+        long currentLanguageActiveCount = this.getLanguageActiveCount();
         boolean currentPackageGroup = this.getLicence().isPackageGroup();
         // *** check licence;
         if(newLicence != null) {
@@ -65,10 +89,13 @@ public class LicenceUsage implements Serializable {
             int requestedCasSize = newLicence.getCasSize();
             int requestedUser = newLicence.getUser();
             boolean requestedPackageGroup = newLicence.isPackageGroup();
+            boolean requestedPackageMultiLanguage = newLicence.isPackageMultiLanguage();
             if(requestedCasSize >= currentCasSize &&
                requestedUser >= currentUser && 
                // *** check for groups;
-               (requestedPackageGroup || !currentPackageGroup) ) {
+               (requestedPackageGroup || !currentPackageGroup) && 
+               // *** check for multi-language;
+               (requestedPackageMultiLanguage || (!requestedPackageMultiLanguage && currentLanguageActiveCount == 1L)) ) {
                 ok = true; 
             }
         }

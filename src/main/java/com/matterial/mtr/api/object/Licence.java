@@ -19,12 +19,14 @@ public class Licence implements Serializable {
     public static final long LICENCE_ID_MTR_PACKAGE_GROUP = 3L;
     public static final long LICENCE_ID_MTR_PACKAGE_ROLE = 4L;
     public static final long LICENCE_ID_MTR_PACKAGE_REVIEW = 5L;
+    public static final long LICENCE_ID_MTR_PACKAGE_MULTI_LANGUAGE = 6L;
 
     private static final String MTR_USER = "USER";
     private static final String MTR_CAS_SIZE = "CAS_SIZE";
     private static final String MTR_PACKAGE_GROUP = "PACKAGE_GROUP";
     private static final String MTR_PACKAGE_ROLE = "PACKAGE_ROLE";
     private static final String MTR_PACKAGE_REVIEW = "PACKAGE_REVIEW";
+    private static final String MTR_PACKAGE_MULTI_LANGUAGE = "PACKAGE_MULTI_LANGUAGE";
     
     public static final int MTR_USER_DEFAULT = 1;
     public static final int MTR_CAS_SIZE_DEFAULT = 100;
@@ -36,6 +38,7 @@ public class Licence implements Serializable {
     private boolean packageGroup;
     private boolean packageRole;
     private boolean packageReview;
+    private boolean packageMultiLanguage;
     private String hash;
     
     public Licence() {
@@ -44,6 +47,7 @@ public class Licence implements Serializable {
         this.packageGroup = false;
         this.packageRole = false;
         this.packageReview = false;
+        this.packageMultiLanguage = false;
         this.hash = null;
     }
 
@@ -51,7 +55,8 @@ public class Licence implements Serializable {
                    int casSize, 
                    boolean packageGroup, 
                    boolean packageRole, 
-                   boolean packageReview) {
+                   boolean packageReview, 
+                   boolean packageMultiLanguage) {
         this();
         if(user > 0) {
             this.user = user;
@@ -62,6 +67,7 @@ public class Licence implements Serializable {
         this.packageGroup = packageGroup;
         this.packageRole = packageRole;
         this.packageReview = packageReview;
+        this.packageMultiLanguage = packageMultiLanguage;
     }
 
     public int getUser() {
@@ -102,6 +108,14 @@ public class Licence implements Serializable {
     
     public void setPackageReview(boolean packageReview) {
         this.packageReview = packageReview;
+    }
+    
+    public boolean isPackageMultiLanguage() {
+        return packageMultiLanguage;
+    }
+    
+    public void setPackageMultiLanguage(boolean packageMultiLanguage) {
+        this.packageMultiLanguage = packageMultiLanguage;
     }
 
     public String getHash() {
@@ -151,6 +165,13 @@ public class Licence implements Serializable {
             buffer.append(MTR_PACKAGE_REVIEW);
             buffer.append("-");
             buffer.append(this.isPackageReview());
+        }
+        // *** multi-language;
+        if(this.isPackageMultiLanguage()) {
+            buffer.append("-");
+            buffer.append(MTR_PACKAGE_MULTI_LANGUAGE);
+            buffer.append("-");
+            buffer.append(this.isPackageMultiLanguage());
         }
         return buffer.toString();
     }

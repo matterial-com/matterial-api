@@ -1,6 +1,7 @@
 package com.matterial.mtr.api.object;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,6 +18,7 @@ public class Signup implements Serializable {
     private String dataSourceDisplayName;
     private String dataSourceReference;
     private Integer dataSourceActivationDays;
+    private List<Long> activeLanguageIds;
     private boolean updatePassword;
     private Licence licence;
     
@@ -64,6 +66,14 @@ public class Signup implements Serializable {
         this.dataSourceActivationDays = dataSourceActivationDays;
     }
     
+    public List<Long> getActiveLanguageIds() {
+        return activeLanguageIds;
+    }
+    
+    public void setActiveLanguageIds(List<Long> activeLanguageIds) {
+        this.activeLanguageIds = activeLanguageIds;
+    }
+
     public boolean isUpdatePassword() {
         return updatePassword;
     }
