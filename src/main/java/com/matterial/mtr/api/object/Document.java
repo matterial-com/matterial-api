@@ -124,6 +124,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private Long successorId;
     private Map<Long, Long> firstReadTimesInSeconds;
     private Long lastReadTimeInSeconds;
+    private Map<Long, Long> lastWriteTimesInSeconds;
     private Long lastWriteTimeInSeconds;
     private long roleRelationType;
     private Long sumRating;
@@ -134,7 +135,6 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     
     private List<RoleRight> roleRights;
     private List<Person> responsibles;
-    private List<Person> authors;
     private List<Person> followers;
     private List<Person> markedAsHelpfulBy;
     private List<Attachment> attachments;
@@ -560,6 +560,17 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         this.firstReadTimesInSeconds = firstReadTimesInSeconds;
     }
     
+    public Map<Long, Long> getLastWriteTimesInSeconds() {
+        if(this.lastWriteTimesInSeconds == null) {
+            this.lastWriteTimesInSeconds = new HashMap<>();
+        }
+        return this.lastWriteTimesInSeconds;
+    }
+    
+    public void setLastWriteTimesInSeconds(Map<Long, Long> lastWriteTimesInSeconds) {
+        this.lastWriteTimesInSeconds = lastWriteTimesInSeconds;
+    }
+    
     public Long getLastReadTimeInSeconds() {
         return lastReadTimeInSeconds;
     }
@@ -642,17 +653,6 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     
     public void setResponsibles(List<Person> responsibles) {
         this.responsibles = responsibles;
-    }
-    
-    public List<Person> getAuthors() {
-        if(this.authors == null) {
-            this.authors = new ArrayList<>();
-        }
-        return authors;
-    }
-    
-    public void setAuthors(List<Person> authors) {
-        this.authors = authors;
     }
     
     public List<Person> getFollowers() {
@@ -809,6 +809,17 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         }
         indexMap.put("firstReadTimesInSeconds", firstReadTimesInSecondsMap);
 
+        // *** handling map of lastWriteTimes AKA authors;
+        // *** maps can only be indexed if key is a string;
+        Map<String, Long> lastWriteTimesInSecondsMap = new HashMap<>();
+        for (Long accountId : this.getLastWriteTimesInSeconds().keySet()) {
+            if(accountId != null) {
+                // *** add accountId as string, keep "lastWriteReadTime" as Long;
+                lastWriteTimesInSecondsMap.put(accountId.toString(), this.getLastWriteTimesInSeconds().get(accountId));
+            }
+        }
+        indexMap.put("lastWriteTimesInSeconds", lastWriteTimesInSecondsMap);
+        
         List<Map<String, Object>> roleRightsListMap = new ArrayList<>();
         if(this.getRoleRights() != null){
             this.getRoleRights().stream().forEach((rdr) -> {
@@ -816,14 +827,6 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
             });
         }
         indexMap.put("roleRights", roleRightsListMap);
-        
-        List<Map<String, Object>> authorsMap = new ArrayList<>();
-        if(this.getAuthors()!= null){
-            this.getAuthors().stream().forEach((authorPerson) -> {
-                authorsMap.add(authorPerson.indexMapLight());
-            });
-        }
-        indexMap.put("authors", authorsMap);
         
         List<Map<String, Object>> followersMap = new ArrayList<>();
         if(this.getFollowers()!= null){
