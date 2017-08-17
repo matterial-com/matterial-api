@@ -21,6 +21,7 @@ public class LoginData implements Serializable {
     private String sessionId;
     private long sessionDataTimeout;
     private boolean pwdMustChange;
+    private boolean externallyAuthenticated;
     private boolean multipleInstanceInstallation;
     private Licence licence;
     private DataSource currentDataSource;
@@ -66,6 +67,14 @@ public class LoginData implements Serializable {
     
     public void setPwdMustChange(boolean pwdMustChange) {
         this.pwdMustChange = pwdMustChange;
+    }
+    
+    public boolean isExternallyAuthenticated() {
+        return externallyAuthenticated;
+    }
+    
+    public void setExternallyAuthenticated(boolean externallyAuthenticated) {
+        this.externallyAuthenticated = externallyAuthenticated;
     }
     
     public boolean isMultipleInstanceInstallation() {
