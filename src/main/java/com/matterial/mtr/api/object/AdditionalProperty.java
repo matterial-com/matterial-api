@@ -19,7 +19,29 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     
     public static final int PROPERTY_TYPE_NEWS = 1;
     public static final int PROPERTY_TYPE_URGENT = 2;
-    public static final int PROPERTY_TYPE_WELCOME_PAGE = 3;
+    public static final int PROPERTY_TYPE_HELP_SECTION_DASHBOARD = 3;
+    public static final int PROPERTY_TYPE_HELP_SECTION_DOCUMENT_EDITOR = 4;
+    
+    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_DE = "Neuigkeit";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_DE = "Dokument taucht unter Neuigkeiten auf dem Dashboard auf";
+    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_EN = "News";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_EN = "Document will appear in the news-stream on the dashboard";
+
+    public static final String ADDITIONAL_PROPERTY_NAME_URGENT_DE = "Wichtig";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_URGENT_DE = "Dokument wird Benutzern nach dem Login prominent angeboten, bis sie es gelesen haben";
+    public static final String ADDITIONAL_PROPERTY_NAME_URGENT_EN = "Urgent";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_URGENT_EN = "Document will be suggested prominently after login, until read";
+
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_DE = "Willkommen";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_DE = "Dokument wird neuen Benutzern in der Willkommensbox auf dem Dashboard angeboten, bis sie die Box entfernen";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_EN = "Welcome";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_EN = "Document will be suggested to new users within welcomebox on dashboard, until dismissed";
+
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_DE = "Dokumenteinführung";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_DE = "Dokument wird neuen Benutzern in der Box zur Dokumenterstellung angeboten, bis sie die Box entfernen";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Introducing document";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create knowledge in editor, until dismissed";
+
     
     public static final List<Integer> KNOWN_PROPERTY_TYPES;
     static {
