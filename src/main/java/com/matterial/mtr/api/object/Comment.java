@@ -15,6 +15,7 @@ public class Comment extends ListResultEntry implements Identifiable {
     private long id;
     private long createTimeInSeconds;
     private String text;
+    private String textHtml;
 
     private long documentLanguageVersionId;
     private Person person;
@@ -104,6 +105,14 @@ public class Comment extends ListResultEntry implements Identifiable {
         this.text = text;
     }
 
+    public String getTextHtml() {
+        return textHtml;
+    }
+
+    public void setTextHtml(String textHtml) {
+        this.textHtml = textHtml;
+    }
+
     public long getDocumentLanguageVersionId() {
         return documentLanguageVersionId;
     }
@@ -119,4 +128,5 @@ public class Comment extends ListResultEntry implements Identifiable {
     public void setPerson(Person person) {
         this.person = person;
     }
+
 }
