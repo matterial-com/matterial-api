@@ -760,44 +760,48 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     @Override
     public Map<String, Object> indexMap() {
-
+        // *** creating index-map;
         Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("createTimeInSeconds", this.getCreateTimeInSeconds());
-        indexMap.put("reviewUntilInSeconds", this.getReviewUntilInSeconds());
-        indexMap.put("archivedBeginInSeconds", this.getArchivedBeginInSeconds());
-        indexMap.put("sumRating", this.getSumRating());
-        indexMap.put("categoryIds", this.getCategoryIds());
-        indexMap.put("clickCount", this.getClickCount());
-        indexMap.put("downloadCount", this.getDownloadCount());
+        // *** simple fields;
         indexMap.put("id", this.getId());
-        indexMap.put("removed", this.isRemoved());
-        indexMap.put("archived", this.isArchived());
-        indexMap.put("languageVersionAbstract", this.getLanguageVersionAbstract());
-        indexMap.put("languageVersionCasId", this.getLanguageVersionCasId());
-        indexMap.put("languageVersionCasIdPdf", this.getLanguageVersionCasIdPdf());
-        indexMap.put("languageVersionCasIdThumbnail", this.getLanguageVersionCasIdThumbnail());
-        indexMap.put("languageVersionCasMd5", this.getLanguageVersionCasMd5());
-        indexMap.put("languageVersionCreateTimeInSeconds", this.getLanguageVersionCreateTimeInSeconds());
-        indexMap.put("languageVersionId", this.getLanguageVersionId());
-        indexMap.put("languageVersionLanguageId", this.getLanguageVersionLanguageId());
-        indexMap.put("languageVersionLanguageKey", this.getLanguageVersionLanguageKey());
-        indexMap.put("languageVersionLastChangeInSeconds", this.getLanguageVersionLastChangeInSeconds());
-        indexMap.put("languageVersionMimeType", this.getLanguageVersionMimeType());
-        indexMap.put("languageVersionStatus", this.getLanguageVersionStatus());
-        indexMap.put("languageVersionTitle", this.getLanguageVersionTitle());
-        indexMap.put("languageVersionValidBeginInSeconds", this.getLanguageVersionValidBeginInSeconds());
-        indexMap.put("languageVersionValidEndInSeconds", this.getLanguageVersionValidEndInSeconds());
-        indexMap.put("languageVersionVersion", this.getLanguageVersionVersion());
-        indexMap.put("languageVersionVersionComment", this.getLanguageVersionVersionComment());
-        indexMap.put("removeTimeInSeconds", this.getRemoveTimeInSeconds());
-        indexMap.put("successorId", this.getSuccessorId());
+        indexMap.put("createTimeInSeconds", this.getCreateTimeInSeconds());
         indexMap.put("valid", this.isValid());
         indexMap.put("validBeginInSeconds", this.getValidBeginInSeconds());
         indexMap.put("validEndInSeconds", this.getValidEndInSeconds());
+        indexMap.put("removed", this.isRemoved());
+        indexMap.put("removeTimeInSeconds", this.getRemoveTimeInSeconds());
+        indexMap.put("archived", this.isArchived());
+        indexMap.put("archivedBeginInSeconds", this.getArchivedBeginInSeconds());
+        indexMap.put("categoryIds", this.getCategoryIds());
+        indexMap.put("sumRating", this.getSumRating());
+        indexMap.put("reviewUntilInSeconds", this.getReviewUntilInSeconds());
+        indexMap.put("languageVersionId", this.getLanguageVersionId());
+        indexMap.put("languageVersionAbstract", this.getLanguageVersionAbstract());
+        indexMap.put("languageVersionTitle", this.getLanguageVersionTitle());
+        indexMap.put("languageVersionVersion", this.getLanguageVersionVersion());
+        indexMap.put("languageVersionCreateTimeInSeconds", this.getLanguageVersionCreateTimeInSeconds());
+        indexMap.put("languageVersionLastChangeInSeconds", this.getLanguageVersionLastChangeInSeconds());
+        indexMap.put("languageVersionValidBeginInSeconds", this.getLanguageVersionValidBeginInSeconds());
+        indexMap.put("languageVersionValidEndInSeconds", this.getLanguageVersionValidEndInSeconds());
+        indexMap.put("languageVersionLanguageId", this.getLanguageVersionLanguageId());
+        indexMap.put("languageVersionLanguageKey", this.getLanguageVersionLanguageKey());
+        indexMap.put("languageVersionMimeType", this.getLanguageVersionMimeType());
+        indexMap.put("languageVersionStatus", this.getLanguageVersionStatus());
         indexMap.put("languageVersionCurrentlyInProcessing", this.isLanguageVersionCurrentlyInProcessing());
         indexMap.put("languageVersionReady", this.isLanguageVersionReady());
         indexMap.put("languageVersionReviewed", this.isLanguageVersionReviewed());
         indexMap.put("languageVersionReviewRequested", this.isLanguageVersionReviewRequested());
+        // *** currently unused;
+        //indexMap.put("clickCount", this.getClickCount());
+        //indexMap.put("downloadCount", this.getDownloadCount());
+        //indexMap.put("successorId", this.getSuccessorId());
+        //indexMap.put("languageVersionVersionComment", this.getLanguageVersionVersionComment());
+        // *** not neccessary;
+        //indexMap.put("languageVersionCasId", this.getLanguageVersionCasId());
+        //indexMap.put("languageVersionCasIdPdf", this.getLanguageVersionCasIdPdf());
+        //indexMap.put("languageVersionCasIdThumbnail", this.getLanguageVersionCasIdThumbnail());
+        //indexMap.put("languageVersionCasMd5", this.getLanguageVersionCasMd5());
+        
         // *** handling map of firstReadTimes;
         // *** maps can only be indexed if key is a string;
         Map<String, Long> firstReadTimesInSecondsMap = new HashMap<>();
@@ -820,6 +824,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         }
         indexMap.put("lastWriteTimesInSeconds", lastWriteTimesInSecondsMap);
         
+        // *** roleRights;
         List<Map<String, Object>> roleRightsListMap = new ArrayList<>();
         if(this.getRoleRights() != null){
             this.getRoleRights().stream().forEach((rdr) -> {
@@ -828,38 +833,43 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         }
         indexMap.put("roleRights", roleRightsListMap);
         
+        // *** follower;
         List<Map<String, Object>> followersMap = new ArrayList<>();
-        if(this.getFollowers()!= null){
+        if(this.getFollowers() != null){
             this.getFollowers().stream().forEach((followerPerson) -> {
                 followersMap.add(followerPerson.indexMapLight());
             });
         }
         indexMap.put("followers", followersMap);
         
+        // *** helpful;
         List<Map<String, Object>> markedAsHelpfulByMap = new ArrayList<>();
-        if(this.getMarkedAsHelpfulBy()!= null){
+        if(this.getMarkedAsHelpfulBy() != null){
             this.getMarkedAsHelpfulBy().stream().forEach((markedAsHelpfulByPerson) -> {
                 markedAsHelpfulByMap.add(markedAsHelpfulByPerson.indexMapLight());
             });
         }
         indexMap.put("markedAsHelpfulBy", markedAsHelpfulByMap);
         
+        // *** responsible;
         List<Map<String, Object>> responsiblesMap = new ArrayList<>();
-        if(this.getResponsibles()!= null){
+        if(this.getResponsibles() != null){
             this.getResponsibles().stream().forEach((respPerson) -> {
                 responsiblesMap.add(respPerson.indexMapLight());
             });
         }
         indexMap.put("responsibles", responsiblesMap);
         
+        // *** additional-property;
         List<Long> apList = new ArrayList<>();
-        if(this.getAdditionalProperties()!= null){
+        if(this.getAdditionalProperties() != null){
             this.getAdditionalProperties().stream().forEach((ap) -> {
                 apList.add(ap.getId());
             });
         }
         indexMap.put("additionalProperties", apList);
 
+        // *** extension-values;
         this.getExtensionValues().stream().forEach((ev) -> {
             indexMap.put(ev.getKey(), ev.getValue());
         });

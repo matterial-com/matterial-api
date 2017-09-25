@@ -7,7 +7,7 @@ package com.matterial.mtr.api.object.meta;
 public interface Indexable extends IndexableChild {
     
     public enum Language {
-        en,de,fr,it,es,sv,zh,eu
+        de,en,fr,it,es,sv //,zh
     }
 
     /**
