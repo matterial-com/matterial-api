@@ -901,7 +901,16 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     @Override
     public Language indexLanguage() {
-        return Language.valueOf(this.getLanguageVersionLanguageKey());
+        // ** fallback en;
+        Language lang = Language.en;
+        try {
+            lang = Language.valueOf(this.getLanguageVersionLanguageKey());
+        }
+        catch(Exception e) {
+            // *** do nothing;
+            lang = Language.en;
+        }
+        return lang;
     }
 
     @Override
