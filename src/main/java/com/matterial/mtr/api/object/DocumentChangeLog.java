@@ -36,6 +36,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     public static final long DLV_REVIEW_REQUEST_DECLINED = 1L << 21;
     public static final long DLV_REVIEW_REQUESTED = 1L << 22;
     public static final long DLV_EXTENSION_VALUE = 1L << 23;
+    public static final long DLV_PUBLISHED = 1L << 24;
     
     private long id;
     // *** person;
@@ -74,6 +75,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private boolean dlvReviewRequestDeclined;
     private boolean dlvReviewRequested;
     private boolean dlvExtensionValue;
+    private boolean dlvPublished;
     
     
     public DocumentChangeLog() {
@@ -107,6 +109,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvReviewRequestDeclined = ((bitmask & DLV_REVIEW_REQUEST_DECLINED) > 0);
         this.dlvReviewRequested = ((bitmask & DLV_REVIEW_REQUESTED) > 0);
         this.dlvExtensionValue = ((bitmask & DLV_EXTENSION_VALUE) > 0);
+        this.dlvPublished = ((bitmask & DLV_PUBLISHED) > 0);
     }
     
     /**
@@ -222,6 +225,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if (this.dlvExtensionValue) {
             bitmask |= DLV_EXTENSION_VALUE;
+        }
+        if (this.dlvPublished) {
+            bitmask |= DLV_PUBLISHED;
         }
         this.setAction(bitmask);
     }
@@ -484,11 +490,19 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvExtensionValue = dlvExtensionValue;
     }
     
+    public boolean isDlvPublished() {
+        return dlvPublished;
+    }
+    
+    public void setDlvPublished(boolean dlvPublished) {
+        this.dlvPublished = dlvPublished;
+    }
+    
     /**
      * test-main: checks bitmask;
      */
     public static void main(String[] args) {
-        long bitmask = 0;
+        long bitmask = 0L;
         if(args != null && args.length > 0) {
             bitmask = Long.parseLong(args[0]);
         }
@@ -563,6 +577,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if((bitmask & DLV_EXTENSION_VALUE) > 0) {
             System.err.println("DLV_EXTENSION_VALUE");
+        }
+        if((bitmask & DLV_PUBLISHED) > 0) {
+            System.err.println("DLV_PUBLISHED");
         }
     }
 
