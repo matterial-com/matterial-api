@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,7 +17,7 @@ public class DocumentChangeLogMap implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private long totalHits;
-    private Map<Long, List<DocumentChangeLog>> map;
+    private LinkedHashMap<Long, List<DocumentChangeLog>> map;
 
     public DocumentChangeLogMap() {
         this.totalHits = -1L;
@@ -40,15 +40,23 @@ public class DocumentChangeLogMap implements Serializable {
         this.totalHits = totalHits;
     }
     
-    public Map<Long, List<DocumentChangeLog>> getMap() {
+    public LinkedHashMap<Long, List<DocumentChangeLog>> getMap() {
         if(this.map == null) {
             this.map = new LinkedHashMap<>();
         }
         return this.map;
     }
     
-    public void setMap(Map<Long, List<DocumentChangeLog>> map) {
+    public void setMap(LinkedHashMap<Long, List<DocumentChangeLog>> map) {
         this.map = map;
+    }
+    
+    public Set<Long> getKeys() {
+        return this.getMap().keySet();
+    }
+    
+    public void setKeys(Set<Long> keys) {
+        // *** do nothing;
     }
     
 }
