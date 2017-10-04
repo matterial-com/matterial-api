@@ -31,7 +31,7 @@ public class Licence implements Serializable {
     public static final int MTR_USER_DEFAULT = 1;
     public static final int MTR_CAS_SIZE_DEFAULT = 100;
 
-    public static final int MB = (1024*1024);
+    public static final long MB = (1024L*1024L);
 
     private int user;
     private int casSize;
