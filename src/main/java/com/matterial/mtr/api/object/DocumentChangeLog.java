@@ -25,6 +25,8 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     public static final long DOC_TRASHED_TRUE = 1L << 11;
     public static final long DOC_TRASHED_FALSE = 1L << 12;
     public static final long DOC_ADDITIONAL_PROPERTY = 1L << 13;
+    public static final long DOC_LANGUAGE_REMOVED = 1L << 25;
+    public static final long DOC_VERSION_REMOVED = 1L << 26;
     
     public static final long DLV_TITLE = 1L << 14;
     public static final long DLV_ABSTRACT = 1L << 15;
@@ -65,6 +67,8 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private boolean docTrashedTrue;
     private boolean docTrashedFalse;
     private boolean docAdditionalProperty;
+    private boolean docLanguageRemoved;
+    private boolean docVersionRemoved;
     private boolean dlvTitle;
     private boolean dlvAbstract;
     private boolean dlvValidBegin;
@@ -98,6 +102,8 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.docTrashedTrue = ((bitmask & DOC_TRASHED_TRUE) > 0);
         this.docTrashedFalse = ((bitmask & DOC_TRASHED_FALSE) > 0);
         this.docAdditionalProperty = ((bitmask & DOC_ADDITIONAL_PROPERTY) > 0);
+        this.docLanguageRemoved = ((bitmask & DOC_LANGUAGE_REMOVED) > 0);
+        this.docVersionRemoved = ((bitmask & DOC_VERSION_REMOVED) > 0);
         // *** dlv;
         this.dlvTitle = ((bitmask & DLV_TITLE) > 0);
         this.dlvAbstract = ((bitmask & DLV_ABSTRACT) > 0);
@@ -194,6 +200,12 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if (this.docAdditionalProperty) {
             bitmask |= DOC_ADDITIONAL_PROPERTY;
+        }
+        if (this.docLanguageRemoved) {
+            bitmask |= DOC_LANGUAGE_REMOVED;
+        }
+        if (this.docVersionRemoved) {
+            bitmask |= DOC_VERSION_REMOVED;
         }
         // *** dlv;
         if (this.dlvTitle) {
@@ -410,6 +422,22 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.docAdditionalProperty = docAdditionalProperty;
     }
     
+    public boolean isDocLanguageRemoved() {
+        return docLanguageRemoved;
+    }
+    
+    public void setDocLanguageRemoved(boolean docLanguageRemoved) {
+        this.docLanguageRemoved = docLanguageRemoved;
+    }
+    
+    public boolean isDocVersionRemoved() {
+        return docVersionRemoved;
+    }
+    
+    public void setDocVersionRemoved(boolean docVersionRemoved) {
+        this.docVersionRemoved = docVersionRemoved;
+    }
+    
     public boolean isDlvTitle() {
         return dlvTitle;
     }
@@ -547,6 +575,12 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if((bitmask & DOC_ADDITIONAL_PROPERTY) > 0) {
             System.err.println("DOC_ADDITIONAL_PROPERTY");
+        }
+        if((bitmask & DOC_LANGUAGE_REMOVED) > 0) {
+            System.err.println("DOC_LANGUAGE_REMOVED");
+        }
+        if((bitmask & DOC_VERSION_REMOVED) > 0) {
+            System.err.println("DOC_VERSION_REMOVED");
         }
         if((bitmask & DLV_TITLE) > 0) {
             System.err.println("DLV_TITLE");
