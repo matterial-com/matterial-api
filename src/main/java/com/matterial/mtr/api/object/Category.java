@@ -24,6 +24,7 @@ public class Category implements Identifiable {
     private String casIdThumbnail;
     private Long fileSize;
     private Long fileSizeThumbnail;
+    private Long usageCount;
 
     /**
      * Empty Constructor
@@ -38,7 +39,8 @@ public class Category implements Identifiable {
     public Category(long id, String name, String description, boolean quick, 
                     long typeId, boolean typePersonal,
                     String casId, String casIdThumbnail,
-                    Long fileSize, Long fileSizeThumbnail) {
+                    Long fileSize, Long fileSizeThumbnail,
+                    Long usageCount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,6 +51,7 @@ public class Category implements Identifiable {
         this.casIdThumbnail = casIdThumbnail;
         this.fileSize = fileSize;
         this.fileSizeThumbnail = fileSizeThumbnail;
+        this.usageCount = usageCount;
     }
     
     /**
@@ -57,7 +60,8 @@ public class Category implements Identifiable {
     public Category(Number id, String name, String description, Object quick, 
                     Number typeId, Number typeAccountId,
                     String casId, String casIdThumbnail,
-                    Number fileSize, Number fileSizeThumbnail) {
+                    Number fileSize, Number fileSizeThumbnail,
+                    Number usageCount) {
         this((id!=null)?id.longValue():0L, 
              name, 
              description, 
@@ -68,7 +72,8 @@ public class Category implements Identifiable {
              casId,
              casIdThumbnail,
              (fileSize!=null)?fileSize.longValue():null,
-             (fileSizeThumbnail!=null)?fileSizeThumbnail.longValue():null);
+             (fileSizeThumbnail!=null)?fileSizeThumbnail.longValue():null,
+             (usageCount!=null)?usageCount.longValue():null);
     }
     
     @Override
@@ -151,6 +156,14 @@ public class Category implements Identifiable {
 
     public void setFileSizeThumbnail(Long fileSizeThumbnail) {
         this.fileSizeThumbnail = fileSizeThumbnail;
+    }
+    
+    public Long getUsageCount() {
+        return usageCount;
+    }
+
+    public void setUsageCount(Long usageCount) {
+        this.usageCount = usageCount;
     }
     
 }
