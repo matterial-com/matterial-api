@@ -19,6 +19,7 @@ public class Category implements Identifiable {
     private String description;
     private boolean quick;
     private long typeId;
+    private boolean typeTag;
     private boolean typePersonal;
     private String casId;
     private String casIdThumbnail;
@@ -37,7 +38,7 @@ public class Category implements Identifiable {
      * Constructor
      */
     public Category(long id, String name, String description, boolean quick, 
-                    long typeId, boolean typePersonal,
+                    long typeId, boolean typeTag, boolean typePersonal,
                     String casId, String casIdThumbnail,
                     Long fileSize, Long fileSizeThumbnail,
                     Long usageCount) {
@@ -46,6 +47,7 @@ public class Category implements Identifiable {
         this.description = description;
         this.quick = quick;
         this.typeId = typeId;
+        this.typeTag = typeTag;
         this.typePersonal = typePersonal;
         this.casId = casId;
         this.casIdThumbnail = casIdThumbnail;
@@ -58,7 +60,7 @@ public class Category implements Identifiable {
      * Constructor (used in native query)
      */
     public Category(Number id, String name, String description, Object quick, 
-                    Number typeId, Number typeAccountId,
+                    Number typeId, Object typeTag, Number typeAccountId,
                     String casId, String casIdThumbnail,
                     Number fileSize, Number fileSizeThumbnail,
                     Number usageCount) {
@@ -68,6 +70,8 @@ public class Category implements Identifiable {
              // *** quick: oracle: BigDecimal, all other db: Boolean;
              (quick != null && ((quick instanceof Boolean && (Boolean)quick) || (quick instanceof Number && ((Number)quick).longValue() > 0)) ),
              (typeId!=null)?typeId.longValue():0L, 
+             // *** typeTag: oracle: BigDecimal, all other db: Boolean;
+             (typeTag != null && ((typeTag instanceof Boolean && (Boolean)typeTag) || (typeTag instanceof Number && ((Number)typeTag).longValue() > 0)) ),
              (typeAccountId != null && typeAccountId.longValue() > 0L),
              casId,
              casIdThumbnail,
@@ -116,6 +120,14 @@ public class Category implements Identifiable {
 
     public void setTypeId(long typeId) {
         this.typeId = typeId;
+    }
+    
+    public boolean isTypeTag() {
+        return this.typeTag;
+    }
+
+    public void setTypeTag(boolean typeTag) {
+        this.typeTag = typeTag;
     }
     
     public boolean isTypePersonal() {
