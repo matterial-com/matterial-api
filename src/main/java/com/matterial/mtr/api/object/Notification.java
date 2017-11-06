@@ -14,20 +14,19 @@ public class Notification implements Serializable {
     
     private long instanceId;
     private long clientId;
-    private long documentId;
     private String message;
+    private String type;
     
     public Notification() {
-        // *** do nothing;
+        this.type = this.getClass().getSimpleName();
     }
     
     public Notification(long instanceId, 
                         long clientId, 
-                        long documentId, 
                         String message) {
+        this();
         this.instanceId = instanceId;
         this.clientId = clientId;
-        this.documentId = documentId;
         this.message = message;
     }
 
@@ -47,20 +46,20 @@ public class Notification implements Serializable {
         this.clientId = clientId;
     }
     
-    public long getDocumentId() {
-        return documentId;
-    }
-    
-    public void setDocumentId(long documentId) {
-        this.documentId = documentId;
-    }
-    
     public String getMessage() {
         return message;
     }
     
     public void setMessage(String message) {
         this.message = message;
+    }
+    
+    public String getType() {
+        return this.type;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
     }
     
 }

@@ -13,10 +13,13 @@ public class CategoryType implements Identifiable {
     
     private static final long serialVersionUID = 1L;
     
+    public static final String NAME_TAG = "Tag";
+    
     private long id;
     private String name;
     private String description;
     private boolean quick;
+    private boolean tag;
     private boolean personal;    
 
     /**
@@ -34,23 +37,26 @@ public class CategoryType implements Identifiable {
      * @param description
      * @param accountId
      */
-    public CategoryType(long id, String name, String description, boolean quick, boolean personal) {
+    public CategoryType(long id, String name, String description, boolean quick, boolean tag, boolean personal) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quick = quick;
+        this.tag = tag;
         this.personal = personal;
     }
     
     /**
      * Constructor (used in native query)
      */
-    public CategoryType(Number id, String name, String description, Object quick, Number accountId) {
+    public CategoryType(Number id, String name, String description, Object quick, Object tag, Number accountId) {
         this((id!=null)?id.longValue():0L, 
              name, 
              description, 
              // *** quick: oracle: BigDecimal, all other db: Boolean;
              (quick != null && ((quick instanceof Boolean && (Boolean)quick) || (quick instanceof Number && ((Number)quick).longValue() > 0)) ),
+             // *** tag: oracle: BigDecimal, all other db: Boolean;
+             (tag != null && ((tag instanceof Boolean && (Boolean)tag) || (tag instanceof Number && ((Number)tag).longValue() > 0)) ),
              (accountId != null && accountId.longValue() > 0L));
     }
 
@@ -86,6 +92,14 @@ public class CategoryType implements Identifiable {
 
     public void setQuick(boolean quick) {
         this.quick = quick;
+    }
+    
+    public boolean isTag() {
+        return this.tag;
+    }
+
+    public void setTag(boolean tag) {
+        this.tag = tag;
     }
     
     public boolean isPersonal() {

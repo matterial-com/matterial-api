@@ -19,11 +19,13 @@ public class Category implements Identifiable {
     private String description;
     private boolean quick;
     private long typeId;
+    private boolean typeTag;
     private boolean typePersonal;
     private String casId;
     private String casIdThumbnail;
     private Long fileSize;
     private Long fileSizeThumbnail;
+    private Long usageCount;
 
     /**
      * Empty Constructor
@@ -36,39 +38,46 @@ public class Category implements Identifiable {
      * Constructor
      */
     public Category(long id, String name, String description, boolean quick, 
-                    long typeId, boolean typePersonal,
+                    long typeId, boolean typeTag, boolean typePersonal,
                     String casId, String casIdThumbnail,
-                    Long fileSize, Long fileSizeThumbnail) {
+                    Long fileSize, Long fileSizeThumbnail,
+                    Long usageCount) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quick = quick;
         this.typeId = typeId;
+        this.typeTag = typeTag;
         this.typePersonal = typePersonal;
         this.casId = casId;
         this.casIdThumbnail = casIdThumbnail;
         this.fileSize = fileSize;
         this.fileSizeThumbnail = fileSizeThumbnail;
+        this.usageCount = usageCount;
     }
     
     /**
      * Constructor (used in native query)
      */
     public Category(Number id, String name, String description, Object quick, 
-                    Number typeId, Number typeAccountId,
+                    Number typeId, Object typeTag, Number typeAccountId,
                     String casId, String casIdThumbnail,
-                    Number fileSize, Number fileSizeThumbnail) {
+                    Number fileSize, Number fileSizeThumbnail,
+                    Number usageCount) {
         this((id!=null)?id.longValue():0L, 
              name, 
              description, 
              // *** quick: oracle: BigDecimal, all other db: Boolean;
              (quick != null && ((quick instanceof Boolean && (Boolean)quick) || (quick instanceof Number && ((Number)quick).longValue() > 0)) ),
              (typeId!=null)?typeId.longValue():0L, 
+             // *** typeTag: oracle: BigDecimal, all other db: Boolean;
+             (typeTag != null && ((typeTag instanceof Boolean && (Boolean)typeTag) || (typeTag instanceof Number && ((Number)typeTag).longValue() > 0)) ),
              (typeAccountId != null && typeAccountId.longValue() > 0L),
              casId,
              casIdThumbnail,
              (fileSize!=null)?fileSize.longValue():null,
-             (fileSizeThumbnail!=null)?fileSizeThumbnail.longValue():null);
+             (fileSizeThumbnail!=null)?fileSizeThumbnail.longValue():null,
+             (usageCount!=null)?usageCount.longValue():null);
     }
     
     @Override
@@ -113,6 +122,14 @@ public class Category implements Identifiable {
         this.typeId = typeId;
     }
     
+    public boolean isTypeTag() {
+        return this.typeTag;
+    }
+
+    public void setTypeTag(boolean typeTag) {
+        this.typeTag = typeTag;
+    }
+    
     public boolean isTypePersonal() {
         return typePersonal;
     }
@@ -151,6 +168,14 @@ public class Category implements Identifiable {
 
     public void setFileSizeThumbnail(Long fileSizeThumbnail) {
         this.fileSizeThumbnail = fileSizeThumbnail;
+    }
+    
+    public Long getUsageCount() {
+        return usageCount;
+    }
+
+    public void setUsageCount(Long usageCount) {
+        this.usageCount = usageCount;
     }
     
 }

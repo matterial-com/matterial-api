@@ -29,6 +29,7 @@ public class Permissions implements Serializable {
     public static final long PUBLISH_UNREVIEWED = 1L << 13;
     public static final long EDIT_ADDITIONAL_PROPERTY = 1L << 14;
     public static final long EDIT_GLOBAL_SAVED_SEARCH = 1L << 15;
+    public static final long EDIT_CATEGORY_TYPE_TAG = 1L << 16;
     
     /**
      * not related to bitmask;
@@ -52,6 +53,7 @@ public class Permissions implements Serializable {
     private boolean publishUnreviewed;
     private boolean editAdditionalProperty;
     private boolean editGlobalSavedSearch;
+    private boolean editCategoryTypeTag;
     
     public Permissions() {
         // *** do nothing;
@@ -81,6 +83,7 @@ public class Permissions implements Serializable {
         this.publishUnreviewed = ((bitmask & (PUBLISH_UNREVIEWED | ADMINISTRATE_ALL)) > 0);
         this.editAdditionalProperty = ((bitmask & (EDIT_ADDITIONAL_PROPERTY | ADMINISTRATE_ALL)) > 0);
         this.editGlobalSavedSearch = ((bitmask & (EDIT_GLOBAL_SAVED_SEARCH | ADMINISTRATE_ALL)) > 0);
+        this.editCategoryTypeTag = ((bitmask & (EDIT_CATEGORY_TYPE_TAG | ADMINISTRATE_ALL)) > 0);
         this.updateBitmask();
     }
     
@@ -136,6 +139,9 @@ public class Permissions implements Serializable {
         }
         if (this.editGlobalSavedSearch) {
             bitmask |= EDIT_GLOBAL_SAVED_SEARCH;
+        }
+        if (this.editCategoryTypeTag) {
+            bitmask |= EDIT_CATEGORY_TYPE_TAG;
         }
         this.setBitmask(bitmask);
     }
@@ -284,6 +290,14 @@ public class Permissions implements Serializable {
         this.editGlobalSavedSearch = editGlobalSavedSearch;
     }
     
+    public boolean isEditCategoryTypeTag() {
+        return editCategoryTypeTag;
+    }
+    
+    public void setEditCategoryTypeTag(boolean editCategoryTypeTag) {
+        this.editCategoryTypeTag = editCategoryTypeTag;
+    }
+    
     /**
      * test-main: checks bitmask;
      */
@@ -343,6 +357,9 @@ public class Permissions implements Serializable {
         if((bitmask & EDIT_GLOBAL_SAVED_SEARCH) > 0) {
             System.err.println("EDIT_GLOBAL_SAVED_SEARCH");
         }
+        if((bitmask & EDIT_CATEGORY_TYPE_TAG) > 0) {
+            System.err.println("EDIT_CATEGORY_TYPE_TAG");
+        }
         
         System.err.println();
         System.err.println("AdminBitmask: " + 
@@ -362,12 +379,14 @@ public class Permissions implements Serializable {
                  IMMEDIATE_REVIEW | 
                  PUBLISH_UNREVIEWED | 
                  EDIT_ADDITIONAL_PROPERTY |
-                 EDIT_GLOBAL_SAVED_SEARCH));
+                 EDIT_GLOBAL_SAVED_SEARCH | 
+                 EDIT_CATEGORY_TYPE_TAG));
         
         System.err.println("StandardRoleBitmask: " + 
                 (COMMENT |
                  VIEW_ARCHIVE |
-                 EDIT_TASK));
+                 EDIT_TASK |
+                 EDIT_CATEGORY_TYPE_TAG));
         
         System.err.println("EditorRoleBitmask: " + 
                 (EDIT_DOCUMENT | 

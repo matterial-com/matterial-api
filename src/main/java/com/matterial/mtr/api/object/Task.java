@@ -20,6 +20,7 @@ public class Task extends ListResultEntry implements Identifiable {
     private Long documentId; 
     private Long documentLanguageVersionId;
     private String documentLanguageVersionTitle;
+    private String documentLanguageVersionLanguageKey;
     private long taskStatusId;
     
     private Role assignedRole;
@@ -37,13 +38,14 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long documentId, 
                 Long documentLanguageVersionId,
                 String documentLanguageVersionTitle,
+                String documentLanguageVersionLanguageKey,
                 long taskStatusId, 
                 // *** assigned-role;
                 Long assignedRoleId,
                 // *** assigned-account;
                 Long assignedAccountId) {
         this(id, creationDateInSeconds, description, dueDateInSeconds, 
-             documentId, documentLanguageVersionId, documentLanguageVersionTitle, taskStatusId, 
+             documentId, documentLanguageVersionId, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId, 
              // *** assigned-role;
              assignedRoleId, null, null, null, null, null, null, null, null,
              // *** assigned-account;
@@ -57,6 +59,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long documentId, 
                 Long documentLanguageVersionId,
                 String documentLanguageVersionTitle,
+                String documentLanguageVersionLanguageKey,
                 long taskStatusId, 
                 // *** assigned-role;
                 Long assignedRoleId,
@@ -84,7 +87,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long acceptedAccountBirthdayInSeconds,
                 Integer acceptedAccountGender) {
         this(id, creationDateInSeconds, description, dueDateInSeconds, 
-             documentId, documentLanguageVersionId, documentLanguageVersionTitle, taskStatusId, 
+             documentId, documentLanguageVersionId, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId, 
              // *** assigned-role;
              assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId, 
              assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
@@ -107,6 +110,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long documentId,
                 Long documentLanguageVersionId,
                 String documentLanguageVersionTitle,
+                String documentLanguageVersionLanguageKey,
                 long taskStatusId, 
                 // *** assigned-role;
                 Long assignedRoleId,
@@ -153,6 +157,7 @@ public class Task extends ListResultEntry implements Identifiable {
         this.documentId = documentId;
         this.documentLanguageVersionId = documentLanguageVersionId;
         this.documentLanguageVersionTitle = documentLanguageVersionTitle;
+        this.documentLanguageVersionLanguageKey = documentLanguageVersionLanguageKey;
         this.taskStatusId = taskStatusId;
         // *** assigned-role;
         if(assignedRoleId != null && assignedRoleId > 0L && 
@@ -259,6 +264,14 @@ public class Task extends ListResultEntry implements Identifiable {
 
     public void setDocumentLanguageVersionTitle(String documentLanguageVersionTitle) {
         this.documentLanguageVersionTitle = documentLanguageVersionTitle;
+    }
+    
+    public String getDocumentLanguageVersionLanguageKey() {
+        return documentLanguageVersionLanguageKey;
+    }
+
+    public void setDocumentLanguageVersionLanguageKey(String documentLanguageVersionLanguageKey) {
+        this.documentLanguageVersionLanguageKey = documentLanguageVersionLanguageKey;
     }
 
     public long getTaskStatusId() {
