@@ -19,11 +19,9 @@ public class CategoryNotification extends Notification {
         // *** do nothing;
     }
     
-    public CategoryNotification(long instanceId, 
-                                long clientId, 
-                                long categoryTypeId,
+    public CategoryNotification(long categoryTypeId,
                                 long categoryId) {
-        super(instanceId, clientId, CATEGORY_STORE);
+        super(CATEGORY_STORE);
         this.categoryTypeId = categoryTypeId;
         this.categoryId = categoryId;
     }

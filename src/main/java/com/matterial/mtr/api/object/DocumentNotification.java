@@ -16,11 +16,9 @@ public class DocumentNotification extends Notification {
         // *** do nothing;
     }
     
-    public DocumentNotification(long instanceId, 
-                                long clientId, 
-                                String message,
+    public DocumentNotification(String message,
                                 long documentId) {
-        super(instanceId, clientId, message);
+        super(message);
         this.documentId = documentId;
     }
     
