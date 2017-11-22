@@ -16,7 +16,8 @@ import javax.xml.bind.annotation.XmlSeeAlso;
              Person.class, 
              DocumentChangeLog.class, 
              DataSource.class, 
-             TrackingItem.class})
+             TrackingItem.class,
+             SimpleValue.class})
 public class ListResultEntry implements Serializable {
 
     private static final long serialVersionUID = 1L;
