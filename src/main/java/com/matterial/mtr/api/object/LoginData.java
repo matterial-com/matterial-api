@@ -21,6 +21,7 @@ public class LoginData implements Serializable {
     private String sessionId;
     private long sessionDataTimeout;
     private boolean pwdMustChange;
+    private boolean pwdExists;
     private boolean externallyAuthenticated;
     private boolean multipleInstanceInstallation;
     private Licence licence;
@@ -46,7 +47,7 @@ public class LoginData implements Serializable {
     }
     
     public String getSessionId() {
-        return sessionId;
+        return this.sessionId;
     }
     
     public void setSessionId(String sessionId) {
@@ -54,7 +55,7 @@ public class LoginData implements Serializable {
     }
     
     public long getSessionDataTimeout() {
-        return sessionDataTimeout;
+        return this.sessionDataTimeout;
     }
     
     public void setSessionDataTimeout(long sessionDataTimeout) {
@@ -62,15 +63,23 @@ public class LoginData implements Serializable {
     }
     
     public boolean isPwdMustChange() {
-        return pwdMustChange;
+        return this.pwdMustChange;
     }
     
     public void setPwdMustChange(boolean pwdMustChange) {
         this.pwdMustChange = pwdMustChange;
     }
+
+    public boolean isPwdExists() {
+        return this.pwdExists;
+    }
+    
+    public void setPwdExists(boolean pwdExists) {
+        this.pwdExists = pwdExists;
+    }
     
     public boolean isExternallyAuthenticated() {
-        return externallyAuthenticated;
+        return this.externallyAuthenticated;
     }
     
     public void setExternallyAuthenticated(boolean externallyAuthenticated) {
@@ -78,7 +87,7 @@ public class LoginData implements Serializable {
     }
     
     public boolean isMultipleInstanceInstallation() {
-        return multipleInstanceInstallation;
+        return this.multipleInstanceInstallation;
     }
     
     public void setMultipleInstanceInstallation(boolean multipleInstanceInstallation) {
@@ -96,7 +105,7 @@ public class LoginData implements Serializable {
     }
     
     public DataSource getCurrentDataSource() {
-        return currentDataSource;
+        return this.currentDataSource;
     }
     
     public void setCurrentDataSource(DataSource currentDataSource) {
@@ -104,7 +113,7 @@ public class LoginData implements Serializable {
     }
     
     public DataSource getFavouriteDataSource() {
-        return favouriteDataSource;
+        return this.favouriteDataSource;
     }
     
     public void setFavouriteDataSource(DataSource favouriteDataSource) {
@@ -112,7 +121,7 @@ public class LoginData implements Serializable {
     }
     
     public Permissions getPermissions() {
-        return permissions;
+        return this.permissions;
     }
     
     public void setPermissions(Permissions permissions) {
@@ -120,7 +129,7 @@ public class LoginData implements Serializable {
     }
     
     public Person getPerson() {
-        return person;
+        return this.person;
     }
     
     public void setPerson(Person person) {
@@ -128,7 +137,7 @@ public class LoginData implements Serializable {
     }
     
     public Client getClient() {
-        return client;
+        return this.client;
     }
     
     public void setClient(Client client) {
@@ -139,7 +148,7 @@ public class LoginData implements Serializable {
         if(this.availableDataSources == null) {
             this.availableDataSources = new ArrayList<>();
         }
-        return availableDataSources;
+        return this.availableDataSources;
     }
     
     public void setAvailableDataSources(List<DataSource> availableDataSources) {
@@ -150,7 +159,7 @@ public class LoginData implements Serializable {
         if(this.accountSettings == null) {
             this.accountSettings = new HashMap<>();
         }
-        return accountSettings;
+        return this.accountSettings;
     }
     
     public void setAccountSettings(Map<String, Object> accountSettings) {
@@ -161,7 +170,7 @@ public class LoginData implements Serializable {
         if(this.clientPreferences == null) {
             this.clientPreferences = new HashMap<>();
         }
-        return clientPreferences;
+        return this.clientPreferences;
     }
     
     public void setClientPreferences(Map<String, String> clientPreferences) {
