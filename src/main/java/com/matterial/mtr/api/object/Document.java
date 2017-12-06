@@ -24,7 +24,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String INDEX_FIELD_ID = "id";
     public static final String INDEX_FIELD_CREATE_TIME_IN_SECONDS = "createTimeInSeconds";
     public static final String INDEX_FIELD_VALID = "valid";
-    public static final String INDEX_FIELD_VALID_BEGING_IN_SECONDS = "validBeginInSeconds";
+    public static final String INDEX_FIELD_VALID_BEGIN_IN_SECONDS = "validBeginInSeconds";
     public static final String INDEX_FIELD_VALID_END_IN_SECONDS = "validEndInSeconds";
     public static final String INDEX_FIELD_REMOVED = "removed";
     public static final String INDEX_FIELD_REMOVE_TIME_IN_SECONDS = "removeTimeInSeconds";
@@ -803,7 +803,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         indexMap.put(INDEX_FIELD_ID, this.getId());
         indexMap.put(INDEX_FIELD_CREATE_TIME_IN_SECONDS, this.getCreateTimeInSeconds());
         indexMap.put(INDEX_FIELD_VALID, this.isValid());
-        indexMap.put(INDEX_FIELD_VALID_BEGING_IN_SECONDS, this.getValidBeginInSeconds());
+        indexMap.put(INDEX_FIELD_VALID_BEGIN_IN_SECONDS, this.getValidBeginInSeconds());
         indexMap.put(INDEX_FIELD_VALID_END_IN_SECONDS, this.getValidEndInSeconds());
         indexMap.put(INDEX_FIELD_REMOVED, this.isRemoved());
         indexMap.put(INDEX_FIELD_REMOVE_TIME_IN_SECONDS, this.getRemoveTimeInSeconds());
