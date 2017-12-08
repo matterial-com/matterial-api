@@ -14,10 +14,9 @@ public class Credential implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    private long id;
     private String login;
     private String password;
-    private String tempKey;
-    private Long tempKeyValidEndInSeconds;
     private String subscriptionEmail;
 
     private List<DataSource> dataSources;
@@ -25,18 +24,30 @@ public class Credential implements Serializable {
     private boolean updatePassword;
     
     public Credential(String login, String password, 
-                      String tempKey, Long tempKeyValidEndInSeconds,
                       String subscriptionEmail) {
+        this(0L, login, password, subscriptionEmail);
+    }
+    
+    public Credential(long id,
+                      String login, String password, 
+                      String subscriptionEmail) {
+        this.id = id;
         this.login = login;
         this.password = password;
-        this.tempKey = tempKey;
-        this.tempKeyValidEndInSeconds = tempKeyValidEndInSeconds;
         this.subscriptionEmail = subscriptionEmail;
         this.updatePassword = false;
     }
 
     public Credential() {
         // *** do nothing;
+    }
+    
+    public long getId() {
+        return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
     }
     
     public String getLogin() {
@@ -53,22 +64,6 @@ public class Credential implements Serializable {
     
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public String getTempKey() {
-        return this.tempKey;
-    }
-
-    public void setTempKey(String tempKey) {
-        this.tempKey = tempKey;
-    }
-
-    public Long getTempKeyValidEndInSeconds() {
-        return tempKeyValidEndInSeconds;
-    }
-
-    public void setTempKeyValidEndInSeconds(Long tempKeyValidEndInSeconds) {
-        this.tempKeyValidEndInSeconds = tempKeyValidEndInSeconds;
     }
     
     public String getSubscriptionEmail() {

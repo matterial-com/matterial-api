@@ -1,6 +1,7 @@
 package com.matterial.mtr.api.object;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,6 +39,9 @@ public class ListResult<T extends ListResultEntry> implements Serializable {
     }
     
     public List<T> getResults() {
+        if(this.results == null) {
+            this.results = new ArrayList<>();
+        }
         return results;
     }
     
