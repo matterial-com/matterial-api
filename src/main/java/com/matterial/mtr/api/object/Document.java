@@ -175,6 +175,8 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private List<Person> followers;
     private List<Person> markedAsHelpfulBy;
     private List<Attachment> attachments;
+    private List<Attachment> languageAttachments;
+    private List<Attachment> documentAttachments;
     private List<AdditionalProperty> additionalProperties;
     private List<ExtensionValue> extensionValues;
 
@@ -723,6 +725,28 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
+    }
+
+    public List<Attachment> getLanguageAttachments() {
+        if(this.languageAttachments == null) {
+            this.languageAttachments = new ArrayList<>();
+        }
+        return languageAttachments;
+    }
+
+    public void setLanguageAttachments(List<Attachment> languageAttachments) {
+        this.languageAttachments = languageAttachments;
+    }
+
+    public List<Attachment> getDocumentAttachments() {
+        if(this.documentAttachments == null) {
+            this.documentAttachments = new ArrayList<>();
+        }
+        return documentAttachments;
+    }
+
+    public void setDocumentAttachments(List<Attachment> documentAttachments) {
+        this.documentAttachments = documentAttachments;
     }
 
     public List<AdditionalProperty> getAdditionalProperties() {
