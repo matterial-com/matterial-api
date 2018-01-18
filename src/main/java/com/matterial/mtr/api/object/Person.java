@@ -339,11 +339,11 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     /**
      * Return a minimal/light indexMap only
-     * @return
      */
     public Map<String, Object> indexMapLight() {
         Map<String, Object> indexMap = new HashMap<>();
         indexMap.put("accountId", this.getAccountId());
+        indexMap.put("contactId", this.getContactId());
         return indexMap;
     }
 
