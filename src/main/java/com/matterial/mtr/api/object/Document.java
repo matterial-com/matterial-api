@@ -28,11 +28,21 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
      * officially not allowed within windows-filenames: \/:"*?<>|
      */
     private static final Pattern PATTERN_FILE_NAME = Pattern.compile("[^\\w\\.\\-&\\[\\]!§$%&()={}~#\\+,@ ]", Pattern.UNICODE_CHARACTER_CLASS);
+    private static final Pattern PATTERN_FILE_NAME_SUFFIX = Pattern.compile("\\.[^.]+$", Pattern.UNICODE_CHARACTER_CLASS);
 
     public static String fileNameCleaned(String fileName) {
         String fileNameCleaned = null;
         if(fileName != null) {
             fileNameCleaned = PATTERN_FILE_NAME.matcher(fileName).replaceAll("_");
+        }
+        return fileNameCleaned;
+    }
+
+    public static String fileNameCleanedWithoutSuffix(String fileName) {
+        String fileNameCleaned = null;
+        if(fileName != null) {
+            fileNameCleaned = Document.fileNameCleaned(fileName);
+            fileNameCleaned = Document.PATTERN_FILE_NAME_SUFFIX.matcher(fileNameCleaned).replaceAll("");
         }
         return fileNameCleaned;
     }
