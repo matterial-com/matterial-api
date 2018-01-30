@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -20,6 +21,21 @@ import com.matterial.mtr.api.object.meta.Indexable;
 public class Document extends ListResultEntry implements Identifiable, Indexable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * usage:
+     * PATTERN_FILE_NAME.matcher(name).replaceAll("_");
+     * officially not allowed within windows-filenames: \/:"*?<>|
+     */
+    private static final Pattern PATTERN_FILE_NAME = Pattern.compile("[^\\w\\.\\-&\\[\\]!§$%&()={}~#\\+,@ ]", Pattern.UNICODE_CHARACTER_CLASS);
+
+    public static String fileNameCleaned(String fileName) {
+        String fileNameCleaned = null;
+        if(fileName != null) {
+            fileNameCleaned = PATTERN_FILE_NAME.matcher(fileName).replaceAll("_");
+        }
+        return fileNameCleaned;
+    }
 
     public static final String INDEX_FIELD_ID = "id";
     public static final String INDEX_FIELD_CREATE_TIME_IN_SECONDS = "createTimeInSeconds";
