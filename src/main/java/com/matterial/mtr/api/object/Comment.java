@@ -1,5 +1,7 @@
 package com.matterial.mtr.api.object;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
@@ -20,10 +22,13 @@ public class Comment extends ListResultEntry implements Identifiable {
     private long documentLanguageVersionId;
     private Person person;
 
+    private List<Long> mentionedAccountIds;
+
     /**
      * Empty Constructor
      */
     public Comment() {
+        // *** do nothing;
     }
 
     /**
@@ -73,9 +78,9 @@ public class Comment extends ListResultEntry implements Identifiable {
         this.createTimeInSeconds = createTimeInSeconds;
         this.text = text;
         this.documentLanguageVersionId = documentLanguageVersionId;
-        this.person = new Person(accountId, accountLogin, superiorAccountId, 
-                                 accountCreateTimeInSeconds, accountLastLoginInSeconds, 
-                                 instanceAdmin, limited, 
+        this.person = new Person(accountId, accountLogin, superiorAccountId,
+                                 accountCreateTimeInSeconds, accountLastLoginInSeconds,
+                                 instanceAdmin, limited,
                                  contactId, firstName, lastName, position, birthdayInSeconds, gender);
     }
 
@@ -127,6 +132,14 @@ public class Comment extends ListResultEntry implements Identifiable {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<Long> getMentionedAccountIds() {
+        return mentionedAccountIds;
+    }
+
+    public void setMentionedAccountIds(List<Long> mentionedAccountIds) {
+        this.mentionedAccountIds = mentionedAccountIds;
     }
 
 }
