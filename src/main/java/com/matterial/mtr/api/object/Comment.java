@@ -19,7 +19,11 @@ public class Comment extends ListResultEntry implements Identifiable {
     private String text;
     private String textHtml;
 
+    private long documentId;
     private long documentLanguageVersionId;
+    private int documentLanguageVersionVersion;
+    private String documentLanguageVersionTitle;
+    private String documentLanguageVersionLanguageKey;
     private Person person;
 
     private List<Long> mentionedAccountIds;
@@ -33,14 +37,16 @@ public class Comment extends ListResultEntry implements Identifiable {
 
     /**
      * Constructor
-     *
-     * @param id
-     * @param createTimeInSeconds
-     * @param text
-     * @param documentLanguageVersionId
-     * @param person
      */
-    public Comment(long id, long createTimeInSeconds, String text, long documentLanguageVersionId, Person person) {
+    public Comment(long id,
+                   long createTimeInSeconds,
+                   String text,
+                   long documentId,
+                   long documentLanguageVersionId,
+                   int documentLanguageVersionVersion,
+                   String documentLanguageVersionTitle,
+                   String documentLanguageVersionLanguageKey,
+                   Person person) {
         this.id = id;
         this.createTimeInSeconds = createTimeInSeconds;
         this.text = text;
@@ -50,38 +56,40 @@ public class Comment extends ListResultEntry implements Identifiable {
 
     /**
      * Constructor (implicit Person construction)
-     *
-     * @param id
-     * @param createTimeInSeconds
-     * @param text
-     * @param documentLanguageVersionId
-     * @param person
      */
     public Comment(long id,
-            long createTimeInSeconds,
-            String text,
-            long documentLanguageVersionId,
-            Long accountId,
-            String accountLogin,
-            Long superiorAccountId,
-            long accountCreateTimeInSeconds,
-            Long accountLastLoginInSeconds,
-            boolean instanceAdmin,
-            boolean limited,
-            long contactId,
-            String firstName,
-            String lastName,
-            String position,
-            Long birthdayInSeconds,
-            Integer gender) {
-        this.id = id;
-        this.createTimeInSeconds = createTimeInSeconds;
-        this.text = text;
-        this.documentLanguageVersionId = documentLanguageVersionId;
-        this.person = new Person(accountId, accountLogin, superiorAccountId,
-                                 accountCreateTimeInSeconds, accountLastLoginInSeconds,
-                                 instanceAdmin, limited,
-                                 contactId, firstName, lastName, position, birthdayInSeconds, gender);
+                   long createTimeInSeconds,
+                   String text,
+                   long documentId,
+                   long documentLanguageVersionId,
+                   int documentLanguageVersionVersion,
+                   String documentLanguageVersionTitle,
+                   String documentLanguageVersionLanguageKey,
+                   Long accountId,
+                   String accountLogin,
+                   Long superiorAccountId,
+                   long accountCreateTimeInSeconds,
+                   Long accountLastLoginInSeconds,
+                   boolean instanceAdmin,
+                   boolean limited,
+                   long contactId,
+                   String firstName,
+                   String lastName,
+                   String position,
+                   Long birthdayInSeconds,
+                   Integer gender) {
+        this(id,
+             createTimeInSeconds,
+             text,
+             documentId,
+             documentLanguageVersionId,
+             documentLanguageVersionVersion,
+             documentLanguageVersionTitle,
+             documentLanguageVersionLanguageKey,
+             new Person(accountId, accountLogin, superiorAccountId,
+                        accountCreateTimeInSeconds, accountLastLoginInSeconds,
+                        instanceAdmin, limited,
+                        contactId, firstName, lastName, position, birthdayInSeconds, gender));
     }
 
     @Override
@@ -118,12 +126,44 @@ public class Comment extends ListResultEntry implements Identifiable {
         this.textHtml = textHtml;
     }
 
+    public long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(long documentId) {
+        this.documentId = documentId;
+    }
+
     public long getDocumentLanguageVersionId() {
         return documentLanguageVersionId;
     }
 
     public void setDocumentLanguageVersionId(long documentLanguageVersionId) {
         this.documentLanguageVersionId = documentLanguageVersionId;
+    }
+
+    public int getDocumentLanguageVersionVersion() {
+        return documentLanguageVersionVersion;
+    }
+
+    public void setDocumentLanguageVersionVersion(int documentLanguageVersionVersion) {
+        this.documentLanguageVersionVersion = documentLanguageVersionVersion;
+    }
+
+    public String getDocumentLanguageVersionTitle() {
+        return documentLanguageVersionTitle;
+    }
+
+    public void setDocumentLanguageVersionTitle(String documentLanguageVersionTitle) {
+        this.documentLanguageVersionTitle = documentLanguageVersionTitle;
+    }
+
+    public String getDocumentLanguageVersionLanguageKey() {
+        return documentLanguageVersionLanguageKey;
+    }
+
+    public void setDocumentLanguageVersionLanguageKey(String documentLanguageVersionLanguageKey) {
+        this.documentLanguageVersionLanguageKey = documentLanguageVersionLanguageKey;
     }
 
     public Person getPerson() {
