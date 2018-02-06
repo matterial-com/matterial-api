@@ -104,6 +104,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String ORDER_BY_SUM_RATING = "sumRating";
     public static final String ORDER_BY_FIRST_READ_TIME_AND_LAST_CHANGE = "firstReadTimeAndLastChange";
     public static final String ORDER_BY_LAST_WRITE_TIME = "lastWriteTime";
+    public static final String ORDER_BY_MENTIONED_IN_COMMENT = "mentionedInComment";
 
     /**
      * author marked this version as "ready".
@@ -192,6 +193,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private long roleRelationType;
     private Long sumRating;
     private boolean reviewRight;
+    private boolean mentionedInCommentUnread;
 
     private Set<Long> categoryIds;
     private Set<Long> relatedDocumentIds;
@@ -223,7 +225,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
                     Long languageVersionValidEndInSeconds, String languageVersionMimeType,
                     long languageVersionLanguageId, String languageVersionLanguageKey, Long successorId,
                     Long firstReadTimeInSeconds, Long lastReadTimeInSeconds, Number lastWriteTimeInSeconds,
-                    Number roleRelationType, Number sumRating, Number countOfRelatedReviewRoles, Number accountId) {
+                    Number roleRelationType, Number sumRating, Number countOfRelatedReviewRoles, Number commentCreateTimeInSeconds, Number accountId) {
         this.setId(id);
         this.editorType = editorType;
         this.createTimeInSeconds = createTimeInSeconds;
@@ -285,6 +287,13 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
             countOfRelatedReviewRoles.longValue() > 0) {
             this.reviewRight = true;
         }
+        if(commentCreateTimeInSeconds != null &&
+           commentCreateTimeInSeconds.longValue() > 0L &&
+           (this.lastReadTimeInSeconds == null ||
+            commentCreateTimeInSeconds.longValue() > this.lastReadTimeInSeconds)) {
+            this.mentionedInCommentUnread = true;
+        }
+
     }
 
     public Document(long id, long languageVersionId) {
@@ -674,6 +683,14 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     public void setReviewRight(boolean reviewRight) {
         this.reviewRight = reviewRight;
+    }
+
+    public boolean isMentionedInCommentUnread() {
+        return mentionedInCommentUnread;
+    }
+
+    public void setMentionedInCommentUnread(boolean mentionedInCommentUnread) {
+        this.mentionedInCommentUnread = mentionedInCommentUnread;
     }
 
     public Set<Long> getCategoryIds() {
