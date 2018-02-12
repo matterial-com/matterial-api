@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -20,6 +21,31 @@ import com.matterial.mtr.api.object.meta.Indexable;
 public class Document extends ListResultEntry implements Identifiable, Indexable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * usage:
+     * PATTERN_FILE_NAME.matcher(name).replaceAll("_");
+     * officially not allowed within windows-filenames: \/:"*?<>|
+     */
+    private static final Pattern PATTERN_FILE_NAME = Pattern.compile("[^\\w\\.\\-&\\[\\]!§$%&()={}~#\\+,@ ]", Pattern.UNICODE_CHARACTER_CLASS);
+    private static final Pattern PATTERN_FILE_NAME_SUFFIX = Pattern.compile("\\.[^.]+$", Pattern.UNICODE_CHARACTER_CLASS);
+
+    public static String fileNameCleaned(String fileName) {
+        String fileNameCleaned = null;
+        if(fileName != null) {
+            fileNameCleaned = PATTERN_FILE_NAME.matcher(fileName).replaceAll("_");
+        }
+        return fileNameCleaned;
+    }
+
+    public static String fileNameCleanedWithoutSuffix(String fileName) {
+        String fileNameCleaned = null;
+        if(fileName != null) {
+            fileNameCleaned = Document.fileNameCleaned(fileName);
+            fileNameCleaned = Document.PATTERN_FILE_NAME_SUFFIX.matcher(fileNameCleaned).replaceAll("");
+        }
+        return fileNameCleaned;
+    }
 
     public static final String INDEX_FIELD_ID = "id";
     public static final String INDEX_FIELD_CREATE_TIME_IN_SECONDS = "createTimeInSeconds";
@@ -78,6 +104,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String ORDER_BY_SUM_RATING = "sumRating";
     public static final String ORDER_BY_FIRST_READ_TIME_AND_LAST_CHANGE = "firstReadTimeAndLastChange";
     public static final String ORDER_BY_LAST_WRITE_TIME = "lastWriteTime";
+    public static final String ORDER_BY_MENTIONED_IN_COMMENT = "mentionedInComment";
 
     /**
      * author marked this version as "ready".
@@ -166,6 +193,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private long roleRelationType;
     private Long sumRating;
     private boolean reviewRight;
+    private boolean mentionedInCommentUnread;
 
     private Set<Long> categoryIds;
     private Set<Long> relatedDocumentIds;
@@ -175,6 +203,8 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private List<Person> followers;
     private List<Person> markedAsHelpfulBy;
     private List<Attachment> attachments;
+    private List<Attachment> languageAttachments;
+    private List<Attachment> documentAttachments;
     private List<AdditionalProperty> additionalProperties;
     private List<ExtensionValue> extensionValues;
 
@@ -195,7 +225,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
                     Long languageVersionValidEndInSeconds, String languageVersionMimeType,
                     long languageVersionLanguageId, String languageVersionLanguageKey, Long successorId,
                     Long firstReadTimeInSeconds, Long lastReadTimeInSeconds, Number lastWriteTimeInSeconds,
-                    Number roleRelationType, Number sumRating, Number countOfRelatedReviewRoles, Number accountId) {
+                    Number roleRelationType, Number sumRating, Number countOfRelatedReviewRoles, Number commentCreateTimeInSeconds, Number accountId) {
         this.setId(id);
         this.editorType = editorType;
         this.createTimeInSeconds = createTimeInSeconds;
@@ -257,6 +287,13 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
             countOfRelatedReviewRoles.longValue() > 0) {
             this.reviewRight = true;
         }
+        if(commentCreateTimeInSeconds != null &&
+           commentCreateTimeInSeconds.longValue() > 0L &&
+           (this.lastReadTimeInSeconds == null ||
+            commentCreateTimeInSeconds.longValue() > this.lastReadTimeInSeconds)) {
+            this.mentionedInCommentUnread = true;
+        }
+
     }
 
     public Document(long id, long languageVersionId) {
@@ -648,6 +685,14 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         this.reviewRight = reviewRight;
     }
 
+    public boolean isMentionedInCommentUnread() {
+        return mentionedInCommentUnread;
+    }
+
+    public void setMentionedInCommentUnread(boolean mentionedInCommentUnread) {
+        this.mentionedInCommentUnread = mentionedInCommentUnread;
+    }
+
     public Set<Long> getCategoryIds() {
         if(this.categoryIds == null) {
             this.categoryIds = new HashSet<>();
@@ -723,6 +768,28 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
+    }
+
+    public List<Attachment> getLanguageAttachments() {
+        if(this.languageAttachments == null) {
+            this.languageAttachments = new ArrayList<>();
+        }
+        return languageAttachments;
+    }
+
+    public void setLanguageAttachments(List<Attachment> languageAttachments) {
+        this.languageAttachments = languageAttachments;
+    }
+
+    public List<Attachment> getDocumentAttachments() {
+        if(this.documentAttachments == null) {
+            this.documentAttachments = new ArrayList<>();
+        }
+        return documentAttachments;
+    }
+
+    public void setDocumentAttachments(List<Attachment> documentAttachments) {
+        this.documentAttachments = documentAttachments;
     }
 
     public List<AdditionalProperty> getAdditionalProperties() {

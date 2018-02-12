@@ -9,64 +9,67 @@ import com.matterial.mtr.api.object.meta.Identifiable;
  */
 @XmlRootElement
 public class Task extends ListResultEntry implements Identifiable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private long id;
     private long creationDateInSeconds;
     private String description;
     private Long dueDateInSeconds;
 
-    private Long documentId; 
+    private Long documentId;
     private Long documentLanguageVersionId;
+    private Integer documentLanguageVersionVersion;
     private String documentLanguageVersionTitle;
     private String documentLanguageVersionLanguageKey;
     private long taskStatusId;
-    
+
     private Role assignedRole;
     private Person acceptedAccount;
     private Person authorAccount;
-    
+
     public Task() {
         // *** do nothing;
     }
-    
-    public Task(long id, 
+
+    public Task(long id,
                 long creationDateInSeconds,
-                String description, 
+                String description,
                 Long dueDateInSeconds,
-                Long documentId, 
+                Long documentId,
                 Long documentLanguageVersionId,
+                Integer documentLanguageVersionVersion,
                 String documentLanguageVersionTitle,
                 String documentLanguageVersionLanguageKey,
-                long taskStatusId, 
+                long taskStatusId,
                 // *** assigned-role;
                 Long assignedRoleId,
                 // *** assigned-account;
                 Long assignedAccountId) {
-        this(id, creationDateInSeconds, description, dueDateInSeconds, 
-             documentId, documentLanguageVersionId, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId, 
+        this(id, creationDateInSeconds, description, dueDateInSeconds,
+             documentId, documentLanguageVersionId, documentLanguageVersionVersion, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId,
              // *** assigned-role;
              assignedRoleId, null, null, null, null, null, null, null, null,
              // *** assigned-account;
              assignedAccountId, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
-    
-    public Task(long id, 
+
+    public Task(long id,
                 long creationDateInSeconds,
-                String description, 
-                Long dueDateInSeconds, 
-                Long documentId, 
+                String description,
+                Long dueDateInSeconds,
+                Long documentId,
                 Long documentLanguageVersionId,
+                Integer documentLanguageVersionVersion,
                 String documentLanguageVersionTitle,
                 String documentLanguageVersionLanguageKey,
-                long taskStatusId, 
+                long taskStatusId,
                 // *** assigned-role;
                 Long assignedRoleId,
                 Long assignedRoleClientId,
-                Long assignedRoleEntityTypeId, 
-                String assignedRoleName, 
-                String assignedRoleDescription, 
+                Long assignedRoleEntityTypeId,
+                String assignedRoleName,
+                String assignedRoleDescription,
                 Long assignedRoleBitmask,
                 Boolean assignedRoleNotRemovable,
                 Boolean assignedRoleInitiallyAssignedToAccount,
@@ -86,38 +89,39 @@ public class Task extends ListResultEntry implements Identifiable {
                 String acceptedAccountPosition,
                 Long acceptedAccountBirthdayInSeconds,
                 Integer acceptedAccountGender) {
-        this(id, creationDateInSeconds, description, dueDateInSeconds, 
-             documentId, documentLanguageVersionId, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId, 
+        this(id, creationDateInSeconds, description, dueDateInSeconds,
+             documentId, documentLanguageVersionId, documentLanguageVersionVersion, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId,
              // *** assigned-role;
-             assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId, 
+             assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId,
              assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
              assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, assignedRoleInitiallyAssignedTypeToDocument,
              // *** accepted-account;
-             acceptedAccountId, acceptedAccountLogin, 
-             acceptedAccountSuperiorAccountId, 
-             acceptedAccountCreateTimeInSeconds, 
-             acceptedAccountLastLoginInSeconds, acceptedAccountInstanceAdmin, acceptedAccountLimited, 
-             acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
+             acceptedAccountId, acceptedAccountLogin,
+             acceptedAccountSuperiorAccountId,
+             acceptedAccountCreateTimeInSeconds,
+             acceptedAccountLastLoginInSeconds, acceptedAccountInstanceAdmin, acceptedAccountLimited,
+             acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName,
              acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender,
              // *** skip: author-account;
              null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
-    
-    public Task(long id, 
+
+    public Task(long id,
                 long creationDateInSeconds,
-                String description, 
-                Long dueDateInSeconds, 
+                String description,
+                Long dueDateInSeconds,
                 Long documentId,
                 Long documentLanguageVersionId,
+                Integer documentLanguageVersionVersion,
                 String documentLanguageVersionTitle,
                 String documentLanguageVersionLanguageKey,
-                long taskStatusId, 
+                long taskStatusId,
                 // *** assigned-role;
                 Long assignedRoleId,
-                Long assignedRoleClientId, 
-                Long assignedRoleEntityTypeId, 
-                String assignedRoleName, 
-                String assignedRoleDescription, 
+                Long assignedRoleClientId,
+                Long assignedRoleEntityTypeId,
+                String assignedRoleName,
+                String assignedRoleDescription,
                 Long assignedRoleBitmask,
                 Boolean assignedRoleNotRemovable,
                 Boolean assignedRoleInitiallyAssignedToAccount,
@@ -156,18 +160,19 @@ public class Task extends ListResultEntry implements Identifiable {
         this.dueDateInSeconds = dueDateInSeconds;
         this.documentId = documentId;
         this.documentLanguageVersionId = documentLanguageVersionId;
+        this.documentLanguageVersionVersion = documentLanguageVersionVersion;
         this.documentLanguageVersionTitle = documentLanguageVersionTitle;
         this.documentLanguageVersionLanguageKey = documentLanguageVersionLanguageKey;
         this.taskStatusId = taskStatusId;
         // *** assigned-role;
-        if(assignedRoleId != null && assignedRoleId > 0L && 
-           assignedRoleEntityTypeId != null && assignedRoleBitmask != null && 
-           assignedRoleNotRemovable != null && 
-           assignedRoleInitiallyAssignedToAccount != null && 
+        if(assignedRoleId != null && assignedRoleId > 0L &&
+           assignedRoleEntityTypeId != null && assignedRoleBitmask != null &&
+           assignedRoleNotRemovable != null &&
+           assignedRoleInitiallyAssignedToAccount != null &&
            assignedRoleInitiallyAssignedTypeToDocument != null) {
-            this.assignedRole = new Role(assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId, 
+            this.assignedRole = new Role(assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId,
                                          assignedRoleName, assignedRoleDescription, assignedRoleBitmask,
-                                         assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount, 
+                                         assignedRoleNotRemovable, assignedRoleInitiallyAssignedToAccount,
                                          assignedRoleInitiallyAssignedTypeToDocument);
         }
         else if(assignedRoleId != null && assignedRoleId > 0L) {
@@ -175,15 +180,15 @@ public class Task extends ListResultEntry implements Identifiable {
             this.assignedRole.setId(assignedRoleId);
         }
         // *** accepted-account;
-        if(acceptedAccountId != null && acceptedAccountId > 0L && 
+        if(acceptedAccountId != null && acceptedAccountId > 0L &&
            acceptedAccountContactId != null) {
-            this.acceptedAccount = new Person(acceptedAccountId, acceptedAccountLogin, 
-                                              acceptedAccountSuperiorAccountId, 
-                                              acceptedAccountCreateTimeInSeconds, 
-                                              acceptedAccountLastLoginInSeconds, 
+            this.acceptedAccount = new Person(acceptedAccountId, acceptedAccountLogin,
+                                              acceptedAccountSuperiorAccountId,
+                                              acceptedAccountCreateTimeInSeconds,
+                                              acceptedAccountLastLoginInSeconds,
                                               acceptedAccountInstanceAdmin,
-                                              acceptedAccountLimited, 
-                                              acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName, 
+                                              acceptedAccountLimited,
+                                              acceptedAccountContactId, acceptedAccountFirstName, acceptedAccountLastName,
                                               acceptedAccountPosition, acceptedAccountBirthdayInSeconds, acceptedAccountGender);
         }
         else if(acceptedAccountId != null && acceptedAccountId > 0L) {
@@ -191,15 +196,15 @@ public class Task extends ListResultEntry implements Identifiable {
             this.acceptedAccount.setAccountId(acceptedAccountId);
         }
         // *** author-account;
-        if(authorAccountId != null && authorAccountId > 0L && 
+        if(authorAccountId != null && authorAccountId > 0L &&
            authorAccountContactId != null) {
-            this.authorAccount = new Person(authorAccountId, authorAccountLogin, 
-                                            authorAccountSuperiorAccountId, 
-                                            authorAccountCreateTimeInSeconds, 
-                                            authorAccountLastLoginInSeconds, 
-                                            authorAccountInstanceAdmin, 
-                                            authorAccountLimited, 
-                                            authorAccountContactId, authorAccountFirstName, authorAccountLastName, 
+            this.authorAccount = new Person(authorAccountId, authorAccountLogin,
+                                            authorAccountSuperiorAccountId,
+                                            authorAccountCreateTimeInSeconds,
+                                            authorAccountLastLoginInSeconds,
+                                            authorAccountInstanceAdmin,
+                                            authorAccountLimited,
+                                            authorAccountContactId, authorAccountFirstName, authorAccountLastName,
                                             authorAccountPosition, authorAccountBirthdayInSeconds, authorAccountGender);
         }
         else if(authorAccountId != null && authorAccountId > 0L) {
@@ -207,7 +212,7 @@ public class Task extends ListResultEntry implements Identifiable {
             this.authorAccount.setAccountId(authorAccountId);
         }
     }
-    
+
     @Override
     public long getId() {
         return id;
@@ -221,11 +226,11 @@ public class Task extends ListResultEntry implements Identifiable {
     public long getCreationDateInSeconds() {
         return creationDateInSeconds;
     }
-    
+
     public void setCreationDateInSeconds(long creationDateInSeconds) {
         this.creationDateInSeconds = creationDateInSeconds;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -258,6 +263,14 @@ public class Task extends ListResultEntry implements Identifiable {
         this.documentLanguageVersionId = documentLanguageVersionId;
     }
 
+    public Integer getDocumentLanguageVersionVersion() {
+        return documentLanguageVersionVersion;
+    }
+
+    public void setDocumentLanguageVersionVersion(Integer documentLanguageVersionVersion) {
+        this.documentLanguageVersionVersion = documentLanguageVersionVersion;
+    }
+
     public String getDocumentLanguageVersionTitle() {
         return documentLanguageVersionTitle;
     }
@@ -265,7 +278,7 @@ public class Task extends ListResultEntry implements Identifiable {
     public void setDocumentLanguageVersionTitle(String documentLanguageVersionTitle) {
         this.documentLanguageVersionTitle = documentLanguageVersionTitle;
     }
-    
+
     public String getDocumentLanguageVersionLanguageKey() {
         return documentLanguageVersionLanguageKey;
     }
@@ -297,7 +310,7 @@ public class Task extends ListResultEntry implements Identifiable {
     public void setAcceptedAccount(Person acceptedAccount) {
         this.acceptedAccount = acceptedAccount;
     }
-    
+
     public Person getAuthorAccount() {
         return authorAccount;
     }

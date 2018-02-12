@@ -16,13 +16,13 @@ import com.matterial.mtr.api.object.meta.Indexable;
  */
 @XmlRootElement
 public class Person extends ListResultEntry implements Identifiable, Indexable{
-    
+
     private static final long serialVersionUID = 1L;
     /**
      * typeName to be used in index
      */
     public static final String INDEX_TYPE_NAME  = "person";
-    
+
     private long accountId;
     private String accountLogin;
     private Long superiorAccountId;
@@ -30,7 +30,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long accountLastLoginInSeconds;
     private boolean instanceOwner;
     private boolean limited;
-    
+
     private long contactId;
     private String firstName;
     private String lastName;
@@ -41,7 +41,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private ContactImage contactImage;
     private Role rolePersonal;
     private Role roleClientGate;
-    
+
     private List<Role> rolesFunctional;
     private List<Role> rolesContent;
     private List<Role> rolesReview;
@@ -49,38 +49,26 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private List<Address> addresses;
     private List<CommunicationData> communicationData;
     private List<ContactImage> contactImages;
-    
+
     public Person() {
         // *** empty;
     }
 
     /**
      * Constructor
-     * @param accountId
-     * @param accountLogin
-     * @param superiorAccountId
-     * @param accountCreateTimeInSeconds
-     * @param accountLastLoginInSeconds
-     * @param instanceAdmin
-     * @param contactId
-     * @param firstName
-     * @param lastName
-     * @param position
-     * @param birthdayInSeconds
-     * @param gender 
      */
-    public Person(long accountId, 
-                  String accountLogin, 
-                  Long superiorAccountId, 
-                  Long accountCreateTimeInSeconds, 
+    public Person(long accountId,
+                  String accountLogin,
+                  Long superiorAccountId,
+                  Long accountCreateTimeInSeconds,
                   Long accountLastLoginInSeconds,
                   Boolean instanceOwner,
                   Boolean limited,
-                  long contactId, 
-                  String firstName, 
-                  String lastName, 
-                  String position, 
-                  Long birthdayInSeconds, 
+                  long contactId,
+                  String firstName,
+                  String lastName,
+                  String position,
+                  Long birthdayInSeconds,
                   Integer gender) {
         this.accountId = accountId;
         this.accountLogin = accountLogin;
@@ -91,13 +79,16 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         this.instanceOwner = instanceOwner==null?false:instanceOwner;
         this.limited = limited==null?false:limited;
         this.contactId = contactId;
-        this.firstName = firstName;
+        this.firstName = "";
+        if(firstName != null) {
+            this.firstName = firstName;
+        }
         this.lastName = lastName;
         this.position = position;
         this.birthdayInSeconds = birthdayInSeconds;
         this.gender = gender;
     }
-    
+
     public Person(long accountId, long contactId) {
         this.accountId = accountId;
         this.contactId = contactId;
@@ -110,7 +101,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public long getId() {
         return this.getAccountId();
     }
-    
+
     @Override
     public void setId(long id) {
         this.setAccountId(id);
@@ -123,7 +114,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
-    
+
     public String getAccountLogin() {
         return accountLogin;
     }
@@ -155,7 +146,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public void setAccountLastLoginInSeconds(Long accountLastLoginInSeconds) {
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
     }
-    
+
     public boolean isInstanceOwner() {
         return this.instanceOwner;
     }
@@ -163,7 +154,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public void setInstanceOwner(boolean instanceOwner) {
         this.instanceOwner = instanceOwner;
     }
-    
+
     public boolean isLimited() {
         return this.limited;
     }
@@ -219,11 +210,11 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public void setGender(Integer gender) {
         this.gender = gender;
     }
-    
+
     public ContactImage getContactImage() {
         return contactImage;
     }
-    
+
     public void setContactImage(ContactImage contactImage) {
         this.contactImage = contactImage;
     }
@@ -231,52 +222,52 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public Role getRolePersonal() {
         return rolePersonal;
     }
-    
+
     public void setRolePersonal(Role rolePersonal) {
         this.rolePersonal = rolePersonal;
     }
-    
+
     public Role getRoleClientGate() {
         return roleClientGate;
     }
-    
+
     public void setRoleClientGate(Role roleClientGate) {
         this.roleClientGate = roleClientGate;
     }
-    
+
     public List<Role> getRolesFunctional() {
         if(this.rolesFunctional == null) {
             this.rolesFunctional = new ArrayList<>();
         }
         return rolesFunctional;
     }
-    
+
     public void setRolesFunctional(List<Role> rolesFunctional) {
         this.rolesFunctional = rolesFunctional;
     }
-    
+
     public List<Role> getRolesContent() {
         if(this.rolesContent == null) {
             this.rolesContent = new ArrayList<>();
         }
         return rolesContent;
     }
-    
+
     public void setRolesContent(List<Role> rolesContent) {
         this.rolesContent = rolesContent;
     }
-    
+
     public List<Role> getRolesReview() {
         if(this.rolesReview == null) {
             this.rolesReview = new ArrayList<>();
         }
         return rolesReview;
     }
-    
+
     public void setRolesReview(List<Role> rolesReview) {
         this.rolesReview = rolesReview;
     }
-    
+
     public List<Client> getClients() {
         if(this.clients == null) {
             this.clients = new ArrayList<>();
@@ -309,18 +300,18 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public void setCommunicationData(List<CommunicationData> communicationData) {
         this.communicationData = communicationData;
     }
-    
+
     public List<ContactImage> getContactImages() {
         if(this.contactImages == null) {
             this.contactImages = new ArrayList<>();
         }
         return contactImages;
     }
-    
+
     public void setContactImages(List<ContactImage> contactImages) {
         this.contactImages = contactImages;
     }
-    
+
     public void addRole(Role r) {
         if(r != null) {
             if(r.getEntityTypeId() == EntityType.ROLE_CLIENT_GATE) {
@@ -348,11 +339,11 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     /**
      * Return a minimal/light indexMap only
-     * @return 
      */
     public Map<String, Object> indexMapLight() {
         Map<String, Object> indexMap = new HashMap<>();
         indexMap.put("accountId", this.getAccountId());
+        indexMap.put("contactId", this.getContactId());
         return indexMap;
     }
 
@@ -365,7 +356,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         indexMap.put("accountLogin", this.getAccountLogin());
         indexMap.put("instanceOwner", this.isInstanceOwner());
         indexMap.put("birthdayInSeconds", this.getBirthdayInSeconds());
-        
+
         List<Map<String, Object>> addressMap = new ArrayList<>();
         if(this.getAddresses() != null){
             this.getAddresses().stream().forEach((add) -> {
@@ -373,7 +364,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("addresses", addressMap);
-        
+
         List<Map<String, Object>> communicationDataMap = new ArrayList<>();
         if(this.getCommunicationData() != null){
             this.getCommunicationData().stream().forEach((cd) -> {
@@ -381,25 +372,25 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("communicationData", communicationDataMap);
-        
+
         if(this.getContactImage() != null){
             indexMap.put("contactImage", this.getContactImage().indexMap());
         }
-        
+
         indexMap.put("contactId", this.getContactId());
         indexMap.put("firstName", this.getFirstName());
         indexMap.put("gender", this.getGender());
         indexMap.put("lastName", this.getLastName());
         indexMap.put("superiorAccountId", this.getSuperiorAccountId());
         indexMap.put("position", this.getPosition());
-        
+
         if(this.getRolePersonal() != null){
             indexMap.put("rolePersonal", this.getRolePersonal().indexMap());
         }
         if(this.getRoleClientGate() != null){
             indexMap.put("roleClientGate", this.getRoleClientGate().indexMap());
         }
-    
+
         List<Map<String, Object>> rolesFunctionalMap = new ArrayList<>();
         if(this.getRolesFunctional()!= null){
             this.getRolesFunctional().stream().forEach((role) -> {
@@ -407,7 +398,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("rolesFunctional", rolesFunctionalMap);
-    
+
         List<Map<String, Object>> rolesContentMap = new ArrayList<>();
         if(this.getRolesContent()!= null){
             this.getRolesContent().stream().forEach((role) -> {
@@ -415,7 +406,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("rolesContent", rolesContentMap);
-    
+
         List<Map<String, Object>> rolesReviewMap = new ArrayList<>();
         if(this.getRolesReview()!= null){
             this.getRolesReview().stream().forEach((role) -> {
@@ -423,7 +414,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("rolesReview", rolesReviewMap);
-        
+
         List<Map<String, Object>> clientsMap = new ArrayList<>();
         if(this.getClients()!= null){
             this.getClients().stream().forEach((client) -> {
@@ -431,7 +422,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             });
         }
         indexMap.put("clients", clientsMap);
-        
+
         return indexMap;
     }
 
