@@ -9,9 +9,9 @@ import com.matterial.mtr.api.object.meta.Identifiable;
  */
 @XmlRootElement
 public class DocumentChangeLog extends ListResultEntry implements Identifiable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final long DOC_VALID_TRUE = 1L << 1;
     public static final long DOC_VALID_FALSE = 1L << 2;
     public static final long DOC_VALID_BEGIN = 1L << 3;
@@ -27,7 +27,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     public static final long DOC_ADDITIONAL_PROPERTY = 1L << 13;
     public static final long DOC_LANGUAGE_REMOVED = 1L << 25;
     public static final long DOC_VERSION_REMOVED = 1L << 26;
-    
+
     public static final long DLV_TITLE = 1L << 14;
     public static final long DLV_ABSTRACT = 1L << 15;
     public static final long DLV_VALID_BEGIN = 1L << 16;
@@ -39,7 +39,8 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     public static final long DLV_REVIEW_REQUESTED = 1L << 22;
     public static final long DLV_EXTENSION_VALUE = 1L << 23;
     public static final long DLV_PUBLISHED = 1L << 24;
-    
+    public static final long DLV_REVIEW_UNREQUESTED = 1L << 27;
+
     private long id;
     // *** person;
     private Person person;
@@ -53,7 +54,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private Long changeDateInSeconds;
     // *** action-bitmask;
     private long action;
-    
+
     private boolean docValidTrue;
     private boolean docValidFalse;
     private boolean docValidBegin;
@@ -80,12 +81,12 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private boolean dlvReviewRequested;
     private boolean dlvExtensionValue;
     private boolean dlvPublished;
-    
-    
+
+
     public DocumentChangeLog() {
         // *** do nothing;
     }
-    
+
     public DocumentChangeLog(long bitmask) {
         this.action = bitmask;
         // *** doc;
@@ -117,7 +118,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvExtensionValue = ((bitmask & DLV_EXTENSION_VALUE) > 0);
         this.dlvPublished = ((bitmask & DLV_PUBLISHED) > 0);
     }
-    
+
     /**
      * Constructor (implicit Person construction)
      */
@@ -150,12 +151,12 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.languageVersionVersion = languageVersionVersion;
         this.languageVersionLanguageId = languageVersionLanguageId;
         this.languageVersionLanguageKey = languageVersionLanguageKey;
-        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds, 
-                                 accountLastLoginInSeconds, instanceAdmin, limited, 
+        this.person = new Person(accountId, accountLogin, superiorAccountId, accountCreateTimeInSeconds,
+                                 accountLastLoginInSeconds, instanceAdmin, limited,
                                  contactId, firstName, lastName, position, birthdayInSeconds, gender);
     }
 
-    
+
     /**
      * updates the bitmask according to the boolean fields;
      */
@@ -243,289 +244,289 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         this.setAction(bitmask);
     }
-    
+
     @Override
     public long getId() {
         return id;
     }
-    
+
     @Override
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public Person getPerson() {
         return person;
     }
-    
+
     public void setPerson(Person person) {
         this.person = person;
     }
-    
+
     public long getDocumentId() {
         return documentId;
     }
-    
+
     public void setDocumentId(long documentId) {
         this.documentId = documentId;
     }
-    
+
     public Long getLanguageVersionId() {
         return languageVersionId;
     }
-    
+
     public void setLanguageVersionId(Long languageVersionId) {
         this.languageVersionId = languageVersionId;
     }
-    
+
     public Integer getLanguageVersionVersion() {
         return languageVersionVersion;
     }
-    
+
     public void setLanguageVersionVersion(Integer languageVersionVersion) {
         this.languageVersionVersion = languageVersionVersion;
     }
-    
+
     public Long getLanguageVersionLanguageId() {
         return languageVersionLanguageId;
     }
-    
+
     public void setLanguageVersionLanguageId(Long languageVersionLanguageId) {
         this.languageVersionLanguageId = languageVersionLanguageId;
     }
-    
+
     public String getLanguageVersionLanguageKey() {
         return languageVersionLanguageKey;
     }
-    
+
     public void setLanguageVersionLanguageKey(String languageVersionLanguageKey) {
         this.languageVersionLanguageKey = languageVersionLanguageKey;
     }
-    
+
     public Long getChangeDateInSeconds() {
         return changeDateInSeconds;
     }
-    
+
     public void setChangeDateInSeconds(Long changeDateInSeconds) {
         this.changeDateInSeconds = changeDateInSeconds;
     }
-    
+
     public long getAction() {
         return action;
     }
-    
+
     public void setAction(long action) {
         this.action = action;
     }
-    
+
     public boolean isDocValidTrue() {
         return docValidTrue;
     }
-    
+
     public void setDocValidTrue(boolean docValidTrue) {
         this.docValidTrue = docValidTrue;
     }
-    
+
     public boolean isDocValidFalse() {
         return docValidFalse;
     }
-    
+
     public void setDocValidFalse(boolean docValidFalse) {
         this.docValidFalse = docValidFalse;
     }
-    
+
     public boolean isDocValidBegin() {
         return docValidBegin;
     }
-    
+
     public void setDocValidBegin(boolean docValidBegin) {
         this.docValidBegin = docValidBegin;
     }
-    
+
     public boolean isDocValidEnd() {
         return docValidEnd;
     }
-    
+
     public void setDocValidEnd(boolean docValidEnd) {
         this.docValidEnd = docValidEnd;
     }
-    
+
     public boolean isDocArchivedTrue() {
         return docArchivedTrue;
     }
-    
+
     public void setDocArchivedTrue(boolean docArchivedTrue) {
         this.docArchivedTrue = docArchivedTrue;
     }
-    
+
     public boolean isDocArchivedFalse() {
         return docArchivedFalse;
     }
-    
+
     public void setDocArchivedFalse(boolean docArchivedFalse) {
         this.docArchivedFalse = docArchivedFalse;
     }
-    
+
     public boolean isDocArchivedBegin() {
         return docArchivedBegin;
     }
-    
+
     public void setDocArchivedBegin(boolean docArchivedBegin) {
         this.docArchivedBegin = docArchivedBegin;
     }
-    
+
     public boolean isDocCategory() {
         return docCategory;
     }
-    
+
     public void setDocCategory(boolean docCategory) {
         this.docCategory = docCategory;
     }
-    
+
     public boolean isDocPermission() {
         return docPermission;
     }
-    
+
     public void setDocPermission(boolean docPermission) {
         this.docPermission = docPermission;
     }
-    
+
     public boolean isDocReviewUntil() {
         return docReviewUntil;
     }
-    
+
     public void setDocReviewUntil(boolean docReviewUntil) {
         this.docReviewUntil = docReviewUntil;
     }
-    
+
     public boolean isDocTrashedTrue() {
         return docTrashedTrue;
     }
-    
+
     public void setDocTrashedTrue(boolean docTrashedTrue) {
         this.docTrashedTrue = docTrashedTrue;
     }
-    
+
     public boolean isDocTrashedFalse() {
         return docTrashedFalse;
     }
-    
+
     public void setDocTrashedFalse(boolean docTrashedFalse) {
         this.docTrashedFalse = docTrashedFalse;
     }
-    
+
     public boolean isDocAdditionalProperty() {
         return docAdditionalProperty;
     }
-    
+
     public void setDocAdditionalProperty(boolean docAdditionalProperty) {
         this.docAdditionalProperty = docAdditionalProperty;
     }
-    
+
     public boolean isDocLanguageRemoved() {
         return docLanguageRemoved;
     }
-    
+
     public void setDocLanguageRemoved(boolean docLanguageRemoved) {
         this.docLanguageRemoved = docLanguageRemoved;
     }
-    
+
     public boolean isDocVersionRemoved() {
         return docVersionRemoved;
     }
-    
+
     public void setDocVersionRemoved(boolean docVersionRemoved) {
         this.docVersionRemoved = docVersionRemoved;
     }
-    
+
     public boolean isDlvTitle() {
         return dlvTitle;
     }
-    
+
     public void setDlvTitle(boolean dlvTitle) {
         this.dlvTitle = dlvTitle;
     }
-    
+
     public boolean isDlvAbstract() {
         return dlvAbstract;
     }
-    
+
     public void setDlvAbstract(boolean dlvAbstract) {
         this.dlvAbstract = dlvAbstract;
     }
-    
+
     public boolean isDlvValidBegin() {
         return dlvValidBegin;
     }
-    
+
     public void setDlvValidBegin(boolean dlvValidBegin) {
         this.dlvValidBegin = dlvValidBegin;
     }
-    
+
     public boolean isDlvValidEnd() {
         return dlvValidEnd;
     }
-    
+
     public void setDlvValidEnd(boolean dlvValidEnd) {
         this.dlvValidEnd = dlvValidEnd;
     }
-    
+
     public boolean isDlvMainFile() {
         return dlvMainFile;
     }
-    
+
     public void setDlvMainFile(boolean dlvMainFile) {
         this.dlvMainFile = dlvMainFile;
     }
-    
+
     public boolean isDlvAttachment() {
         return dlvAttachment;
     }
-    
+
     public void setDlvAttachment(boolean dlvAttachment) {
         this.dlvAttachment = dlvAttachment;
     }
-    
+
     public boolean isDlvReviewRequestGranted() {
         return dlvReviewRequestGranted;
     }
-    
+
     public void setDlvReviewRequestGranted(boolean dlvReviewRequestGranted) {
         this.dlvReviewRequestGranted = dlvReviewRequestGranted;
     }
-    
+
     public boolean isDlvReviewRequestDeclined() {
         return dlvReviewRequestDeclined;
     }
-    
+
     public void setDlvReviewRequestDeclined(boolean dlvReviewRequestDeclined) {
         this.dlvReviewRequestDeclined = dlvReviewRequestDeclined;
     }
-    
+
     public boolean isDlvReviewRequested() {
         return dlvReviewRequested;
     }
-    
+
     public void setDlvReviewRequested(boolean dlvReviewRequested) {
         this.dlvReviewRequested = dlvReviewRequested;
     }
-    
+
     public boolean isDlvExtensionValue() {
         return dlvExtensionValue;
     }
-    
+
     public void setDlvExtensionValue(boolean dlvExtensionValue) {
         this.dlvExtensionValue = dlvExtensionValue;
     }
-    
+
     public boolean isDlvPublished() {
         return dlvPublished;
     }
-    
+
     public void setDlvPublished(boolean dlvPublished) {
         this.dlvPublished = dlvPublished;
     }
-    
+
     /**
      * test-main: checks bitmask;
      */
@@ -536,7 +537,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         System.err.println("Checking bitmask " + bitmask);
         System.err.println();
-        
+
         if((bitmask & DOC_VALID_TRUE) > 0) {
             System.err.println("DOC_VALID_TRUE");
         }
