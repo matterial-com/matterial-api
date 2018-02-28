@@ -81,6 +81,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private boolean dlvReviewRequested;
     private boolean dlvExtensionValue;
     private boolean dlvPublished;
+    private boolean dlvReviewUnrequested;
 
 
     public DocumentChangeLog() {
@@ -117,6 +118,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvReviewRequested = ((bitmask & DLV_REVIEW_REQUESTED) > 0);
         this.dlvExtensionValue = ((bitmask & DLV_EXTENSION_VALUE) > 0);
         this.dlvPublished = ((bitmask & DLV_PUBLISHED) > 0);
+        this.dlvReviewUnrequested = ((bitmask & DLV_REVIEW_UNREQUESTED) > 0);
     }
 
     /**
@@ -241,6 +243,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if (this.dlvPublished) {
             bitmask |= DLV_PUBLISHED;
+        }
+        if (this.dlvReviewUnrequested) {
+            bitmask |= DLV_REVIEW_UNREQUESTED;
         }
         this.setAction(bitmask);
     }
@@ -527,6 +532,14 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvPublished = dlvPublished;
     }
 
+    public boolean isDlvReviewUnrequested() {
+        return dlvReviewUnrequested;
+    }
+
+    public void setDlvReviewUnrequested(boolean dlvReviewUnrequested) {
+        this.dlvReviewUnrequested = dlvReviewUnrequested;
+    }
+
     /**
      * test-main: checks bitmask;
      */
@@ -615,6 +628,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if((bitmask & DLV_PUBLISHED) > 0) {
             System.err.println("DLV_PUBLISHED");
+        }
+        if((bitmask & DLV_REVIEW_UNREQUESTED) > 0) {
+            System.err.println("DLV_REVIEW_UNREQUESTED");
         }
     }
 
