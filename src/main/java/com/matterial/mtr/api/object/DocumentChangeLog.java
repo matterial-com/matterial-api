@@ -40,6 +40,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     public static final long DLV_EXTENSION_VALUE = 1L << 23;
     public static final long DLV_PUBLISHED = 1L << 24;
     public static final long DLV_REVIEW_UNREQUESTED = 1L << 27;
+    public static final long DLV_UNPUBLISHED = 1L << 28;
 
     private long id;
     // *** person;
@@ -82,6 +83,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
     private boolean dlvExtensionValue;
     private boolean dlvPublished;
     private boolean dlvReviewUnrequested;
+    private boolean dlvUnpublished;
 
 
     public DocumentChangeLog() {
@@ -119,6 +121,7 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvExtensionValue = ((bitmask & DLV_EXTENSION_VALUE) > 0);
         this.dlvPublished = ((bitmask & DLV_PUBLISHED) > 0);
         this.dlvReviewUnrequested = ((bitmask & DLV_REVIEW_UNREQUESTED) > 0);
+        this.dlvUnpublished = ((bitmask & DLV_UNPUBLISHED) > 0);
     }
 
     /**
@@ -246,6 +249,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if (this.dlvReviewUnrequested) {
             bitmask |= DLV_REVIEW_UNREQUESTED;
+        }
+        if (this.dlvUnpublished) {
+            bitmask |= DLV_UNPUBLISHED;
         }
         this.setAction(bitmask);
     }
@@ -540,6 +546,14 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         this.dlvReviewUnrequested = dlvReviewUnrequested;
     }
 
+    public boolean isDlvUnpublished() {
+        return dlvUnpublished;
+    }
+
+    public void setDlvUnpublished(boolean dlvUnpublished) {
+        this.dlvUnpublished = dlvUnpublished;
+    }
+
     /**
      * test-main: checks bitmask;
      */
@@ -631,6 +645,9 @@ public class DocumentChangeLog extends ListResultEntry implements Identifiable {
         }
         if((bitmask & DLV_REVIEW_UNREQUESTED) > 0) {
             System.err.println("DLV_REVIEW_UNREQUESTED");
+        }
+        if((bitmask & DLV_UNPUBLISHED) > 0) {
+            System.err.println("DLV_UNPUBLISHED");
         }
     }
 
