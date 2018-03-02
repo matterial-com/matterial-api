@@ -30,7 +30,7 @@ public class Permissions implements Serializable {
     public static final long EDIT_ADDITIONAL_PROPERTY = 1L << 14;
     public static final long EDIT_GLOBAL_SAVED_SEARCH = 1L << 15;
     public static final long EDIT_CATEGORY_TYPE_TAG = 1L << 16;
-    public static final long EDIT_SNAP = 1L << 17;
+    public static final long CREATE_SNAP = 1L << 17;
 
     /**
      * not related to bitmask;
@@ -55,7 +55,7 @@ public class Permissions implements Serializable {
     private boolean editAdditionalProperty;
     private boolean editGlobalSavedSearch;
     private boolean editCategoryTypeTag;
-    private boolean editSnap;
+    private boolean createSnap;
 
     public Permissions() {
         // *** do nothing;
@@ -86,7 +86,7 @@ public class Permissions implements Serializable {
         this.editAdditionalProperty = ((bitmask & (EDIT_ADDITIONAL_PROPERTY | ADMINISTRATE_ALL)) > 0);
         this.editGlobalSavedSearch = ((bitmask & (EDIT_GLOBAL_SAVED_SEARCH | ADMINISTRATE_ALL)) > 0);
         this.editCategoryTypeTag = ((bitmask & (EDIT_CATEGORY_TYPE_TAG | ADMINISTRATE_ALL)) > 0);
-        this.editSnap = ((bitmask & (EDIT_SNAP | ADMINISTRATE_ALL)) > 0);
+        this.createSnap = ((bitmask & (CREATE_SNAP | ADMINISTRATE_ALL)) > 0);
         this.updateBitmask();
     }
 
@@ -146,8 +146,8 @@ public class Permissions implements Serializable {
         if (this.editCategoryTypeTag) {
             bitmask |= EDIT_CATEGORY_TYPE_TAG;
         }
-        if (this.editSnap) {
-            bitmask |= EDIT_SNAP;
+        if (this.createSnap) {
+            bitmask |= CREATE_SNAP;
         }
         this.setBitmask(bitmask);
     }
@@ -304,12 +304,12 @@ public class Permissions implements Serializable {
         this.editCategoryTypeTag = editCategoryTypeTag;
     }
 
-    public boolean isEditSnap() {
-        return editSnap;
+    public boolean isCreateSnap() {
+        return createSnap;
     }
 
-    public void setEditSnap(boolean editSnap) {
-        this.editSnap = editSnap;
+    public void setCreateSnap(boolean createSnap) {
+        this.createSnap = createSnap;
     }
 
     /**
@@ -374,8 +374,8 @@ public class Permissions implements Serializable {
         if((bitmask & EDIT_CATEGORY_TYPE_TAG) > 0) {
             System.err.println("EDIT_CATEGORY_TYPE_TAG");
         }
-        if((bitmask & EDIT_SNAP) > 0) {
-            System.err.println("EDIT_SNAP");
+        if((bitmask & CREATE_SNAP) > 0) {
+            System.err.println("CREATE_SNAP");
         }
 
         System.err.println();
@@ -398,7 +398,7 @@ public class Permissions implements Serializable {
                  EDIT_ADDITIONAL_PROPERTY |
                  EDIT_GLOBAL_SAVED_SEARCH |
                  EDIT_CATEGORY_TYPE_TAG |
-                 EDIT_SNAP));
+                 CREATE_SNAP));
 
         System.err.println("StandardRoleBitmask: " +
                 (COMMENT |
@@ -413,7 +413,7 @@ public class Permissions implements Serializable {
                  EDIT_DOCUMENT_TEMPLATE |
                  EDIT_CATEGORY |
                  IMMEDIATE_REVIEW |
-                 EDIT_SNAP));
+                 CREATE_SNAP));
 
         Permissions p = new Permissions();
         p.setComment(true);
