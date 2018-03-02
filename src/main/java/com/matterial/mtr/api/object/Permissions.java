@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Permissions implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final long NO_RIGHT_REQUIRED = 0L;           // 0L;
     public static final long ADMINISTRATE_ALL = 1L << 0;       // 1L;
     public static final long EDIT_PERSON = 1L << 1;            // 2L;
@@ -30,7 +30,8 @@ public class Permissions implements Serializable {
     public static final long EDIT_ADDITIONAL_PROPERTY = 1L << 14;
     public static final long EDIT_GLOBAL_SAVED_SEARCH = 1L << 15;
     public static final long EDIT_CATEGORY_TYPE_TAG = 1L << 16;
-    
+    public static final long EDIT_SNAP = 1L << 17;
+
     /**
      * not related to bitmask;
      */
@@ -54,16 +55,17 @@ public class Permissions implements Serializable {
     private boolean editAdditionalProperty;
     private boolean editGlobalSavedSearch;
     private boolean editCategoryTypeTag;
-    
+    private boolean editSnap;
+
     public Permissions() {
         // *** do nothing;
     }
-    
+
     public Permissions(long bitmask, boolean systemAccount) {
         this(bitmask);
         this.systemAccount = systemAccount;
     }
-    
+
     public Permissions(long bitmask) {
         this.systemAccount = false;
         this.bitmask = bitmask;
@@ -84,9 +86,10 @@ public class Permissions implements Serializable {
         this.editAdditionalProperty = ((bitmask & (EDIT_ADDITIONAL_PROPERTY | ADMINISTRATE_ALL)) > 0);
         this.editGlobalSavedSearch = ((bitmask & (EDIT_GLOBAL_SAVED_SEARCH | ADMINISTRATE_ALL)) > 0);
         this.editCategoryTypeTag = ((bitmask & (EDIT_CATEGORY_TYPE_TAG | ADMINISTRATE_ALL)) > 0);
+        this.editSnap = ((bitmask & (EDIT_SNAP | ADMINISTRATE_ALL)) > 0);
         this.updateBitmask();
     }
-    
+
     /**
      * updates the bitmask according to the boolean fields;
      */
@@ -143,13 +146,16 @@ public class Permissions implements Serializable {
         if (this.editCategoryTypeTag) {
             bitmask |= EDIT_CATEGORY_TYPE_TAG;
         }
+        if (this.editSnap) {
+            bitmask |= EDIT_SNAP;
+        }
         this.setBitmask(bitmask);
     }
-    
+
     public boolean isSystemAccount() {
         return systemAccount;
     }
-    
+
     public void setSystemAccount(boolean systemAccount) {
         this.systemAccount = systemAccount;
     }
@@ -157,147 +163,155 @@ public class Permissions implements Serializable {
     public long getBitmask() {
         return bitmask;
     }
-    
+
     public void setBitmask(long bitmask) {
         this.bitmask = bitmask;
     }
-    
+
     public boolean isAdministrateAll() {
         return administrateAll;
     }
-    
+
     public void setAdministrateAll(boolean administrateAll) {
         this.administrateAll = administrateAll;
     }
-    
+
     public boolean isEditPerson() {
         return editPerson;
     }
-    
+
     public void setEditPerson(boolean editPerson) {
         this.editPerson = editPerson;
     }
-    
+
     public boolean isEditDocument() {
         return editDocument;
     }
-    
+
     public void setEditDocument(boolean editDocument) {
         this.editDocument = editDocument;
     }
-    
+
     public boolean isEditDocumentTemplate() {
         return editDocumentTemplate;
     }
-    
+
     public void setEditDocumentTemplate(boolean editDocumentTemplate) {
         this.editDocumentTemplate = editDocumentTemplate;
     }
-    
+
     public boolean isEditRole() {
         return editRole;
     }
-    
+
     public void setEditRole(boolean editRole) {
         this.editRole = editRole;
     }
-    
+
     public boolean isEditCategory() {
         return editCategory;
     }
-    
+
     public void setEditCategory(boolean editCategory) {
         this.editCategory = editCategory;
     }
-    
+
     public boolean isEditTask() {
         return editTask;
     }
-    
+
     public void setEditTask(boolean editTask) {
         this.editTask = editTask;
     }
-    
+
     public boolean isComment() {
         return comment;
     }
-    
+
     public void setComment(boolean comment) {
         this.comment = comment;
     }
-    
+
     public boolean isViewArchive() {
         return viewArchive;
     }
-    
+
     public void setViewArchive(boolean viewArchive) {
         this.viewArchive = viewArchive;
     }
-    
+
     public boolean isViewStatistic() {
         return viewStatistic;
     }
-    
+
     public void setViewStatistic(boolean viewStatistic) {
         this.viewStatistic = viewStatistic;
     }
-    
+
     public boolean isShowTrash() {
         return showTrash;
     }
-    
+
     public void setShowTrash(boolean showTrash) {
         this.showTrash = showTrash;
     }
-    
+
     public boolean isEditGallery() {
         return editGallery;
     }
-    
+
     public void setEditGallery(boolean editGallery) {
         this.editGallery = editGallery;
     }
-    
+
     public boolean isImmediateReview() {
         return immediateReview;
     }
-    
+
     public void setImmediateReview(boolean immediateReview) {
         this.immediateReview = immediateReview;
     }
-    
+
     public boolean isPublishUnreviewed() {
         return publishUnreviewed;
     }
-    
+
     public void setPublishUnreviewed(boolean publishUnreviewed) {
         this.publishUnreviewed = publishUnreviewed;
     }
-    
+
     public boolean isEditAdditionalProperty() {
         return editAdditionalProperty;
     }
-    
+
     public void setEditAdditionalProperty(boolean editAdditionalProperty) {
         this.editAdditionalProperty = editAdditionalProperty;
     }
-    
+
     public boolean isEditGlobalSavedSearch() {
         return editGlobalSavedSearch;
     }
-    
+
     public void setEditGlobalSavedSearch(boolean editGlobalSavedSearch) {
         this.editGlobalSavedSearch = editGlobalSavedSearch;
     }
-    
+
     public boolean isEditCategoryTypeTag() {
         return editCategoryTypeTag;
     }
-    
+
     public void setEditCategoryTypeTag(boolean editCategoryTypeTag) {
         this.editCategoryTypeTag = editCategoryTypeTag;
     }
-    
+
+    public boolean isEditSnap() {
+        return editSnap;
+    }
+
+    public void setEditSnap(boolean editSnap) {
+        this.editSnap = editSnap;
+    }
+
     /**
      * test-main: checks bitmask;
      */
@@ -308,7 +322,7 @@ public class Permissions implements Serializable {
         }
         System.err.println("Checking bitmask " + bitmask);
         System.err.println();
-        
+
         if((bitmask & ADMINISTRATE_ALL) > 0) {
             System.err.println("ADMINISTRATE_ALL");
         }
@@ -360,12 +374,15 @@ public class Permissions implements Serializable {
         if((bitmask & EDIT_CATEGORY_TYPE_TAG) > 0) {
             System.err.println("EDIT_CATEGORY_TYPE_TAG");
         }
-        
+        if((bitmask & EDIT_SNAP) > 0) {
+            System.err.println("EDIT_SNAP");
+        }
+
         System.err.println();
-        System.err.println("AdminBitmask: " + 
-                (ADMINISTRATE_ALL)); 
-        System.err.println("Admin[light]Bitmask: " + 
-                (EDIT_PERSON | 
+        System.err.println("AdminBitmask: " +
+                (ADMINISTRATE_ALL));
+        System.err.println("Admin[light]Bitmask: " +
+                (EDIT_PERSON |
                  EDIT_DOCUMENT |
                  EDIT_DOCUMENT_TEMPLATE |
                  EDIT_ROLE |
@@ -374,27 +391,29 @@ public class Permissions implements Serializable {
                  COMMENT |
                  VIEW_ARCHIVE |
                  VIEW_STATISTIC |
-                 SHOW_TRASH | 
-                 EDIT_GALLERY | 
-                 IMMEDIATE_REVIEW | 
-                 PUBLISH_UNREVIEWED | 
+                 SHOW_TRASH |
+                 EDIT_GALLERY |
+                 IMMEDIATE_REVIEW |
+                 PUBLISH_UNREVIEWED |
                  EDIT_ADDITIONAL_PROPERTY |
-                 EDIT_GLOBAL_SAVED_SEARCH | 
-                 EDIT_CATEGORY_TYPE_TAG));
-        
-        System.err.println("StandardRoleBitmask: " + 
+                 EDIT_GLOBAL_SAVED_SEARCH |
+                 EDIT_CATEGORY_TYPE_TAG |
+                 EDIT_SNAP));
+
+        System.err.println("StandardRoleBitmask: " +
                 (COMMENT |
                  VIEW_ARCHIVE |
                  EDIT_TASK |
                  EDIT_CATEGORY_TYPE_TAG));
-        
-        System.err.println("EditorRoleBitmask: " + 
-                (EDIT_DOCUMENT | 
+
+        System.err.println("EditorRoleBitmask: " +
+                (EDIT_DOCUMENT |
                  PUBLISH_UNREVIEWED |
                  EDIT_GALLERY |
                  EDIT_DOCUMENT_TEMPLATE |
-                 EDIT_CATEGORY | 
-                 IMMEDIATE_REVIEW));
+                 EDIT_CATEGORY |
+                 IMMEDIATE_REVIEW |
+                 EDIT_SNAP));
 
         Permissions p = new Permissions();
         p.setComment(true);
@@ -402,7 +421,7 @@ public class Permissions implements Serializable {
         p.setEditPerson(true);
         p.updateBitmask();
         System.err.println("UPDATED BITMASK: " + p.getBitmask());
-        
+
     }
-    
+
 }
