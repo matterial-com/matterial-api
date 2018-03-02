@@ -14,14 +14,18 @@ import com.matterial.mtr.api.object.meta.Identifiable;
  */
 @XmlRootElement
 public class AdditionalProperty implements Identifiable, Comparable<AdditionalProperty> {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final int PROPERTY_TYPE_NEWS = 1;
     public static final int PROPERTY_TYPE_URGENT = 2;
     public static final int PROPERTY_TYPE_HELP_SECTION_DASHBOARD = 3;
     public static final int PROPERTY_TYPE_HELP_SECTION_DOCUMENT_EDITOR = 4;
-    
+    public static final int PROPERTY_TYPE_SNAP = 5;
+
+    public static final String ADDITIONAL_PROPERTY_I18N_KEY_NAME_PREFIX = "additionalProperty.name.";
+    public static final String ADDITIONAL_PROPERTY_I18N_KEY_DESCRIPTION_PREFIX = "additionalProperty.description.";
+
     public static final String ADDITIONAL_PROPERTY_NAME_NEWS_DE = "Neuigkeit";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_DE = "Dokument taucht unter Neuigkeiten auf dem Dashboard auf";
     public static final String ADDITIONAL_PROPERTY_NAME_NEWS_EN = "News";
@@ -42,14 +46,19 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Introducing document";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create knowledge in editor, until dismissed";
 
-    
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Gedankenblitz";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_DE = "-";
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Snap";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "-";
+
+
     public static final List<Integer> KNOWN_PROPERTY_TYPES;
     static {
         List<Integer> l = new ArrayList<>();
         // *** foreach constant within leading ID_;
         for (Field idField : AdditionalProperty.class.getFields()) {
             try {
-                if(idField.getName().startsWith("PROPERTY_TYPE_") && 
+                if(idField.getName().startsWith("PROPERTY_TYPE_") &&
                    idField.get(null) instanceof Integer) {
                     Integer id = (Integer)idField.get(null);
                     if(id != null && id > 0L) {
@@ -63,35 +72,35 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         }
         KNOWN_PROPERTY_TYPES = Collections.unmodifiableList(l);
     }
-    
+
     private long id;
     private String name;
     private String description;
     private Integer propertyType;
     private Long validBeginInSeconds;
     private Long validEndInSeconds;
-    
+
     public AdditionalProperty() {
         // *** do nothing;
     }
-    
+
     /**
      * Constructor (used in native query)
      */
     public AdditionalProperty(Number id, String name, String description, Number propertyType) {
-       this((id!=null)?id.longValue():0L, name, description, (propertyType!=null)?propertyType.intValue():null); 
+       this((id!=null)?id.longValue():0L, name, description, (propertyType!=null)?propertyType.intValue():null);
     }
-    
-    public AdditionalProperty(long id, 
-                              String name, 
+
+    public AdditionalProperty(long id,
+                              String name,
                               String description,
                               Integer propertyType) {
         this(id, name, description, propertyType, null, null);
     }
 
-    public AdditionalProperty(long id, 
-                              String name, 
-                              String description, 
+    public AdditionalProperty(long id,
+                              String name,
+                              String description,
                               Integer propertyType,
                               Long validBeginInSeconds,
                               Long validEndInSeconds) {
@@ -102,7 +111,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         this.validBeginInSeconds = validBeginInSeconds;
         this.validEndInSeconds = validEndInSeconds;
     }
-    
+
 
     @Override
     public long getId() {
@@ -129,7 +138,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Integer getPropertyType() {
         return propertyType;
     }
@@ -153,7 +162,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public void setValidEndInSeconds(Long validEndInSeconds) {
         this.validEndInSeconds = validEndInSeconds;
     }
-    
+
     @Override
     public int compareTo(AdditionalProperty o) {
         int result = -1;
@@ -161,14 +170,14 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
            // *** valid-begin;
            ((this.getValidBeginInSeconds() == null && o.getValidBeginInSeconds() != null) ||
             (this.getValidBeginInSeconds() == null && o.getValidBeginInSeconds() != null) ||
-            (this.getValidBeginInSeconds() != null && 
-             o.getValidBeginInSeconds() != null && 
+            (this.getValidBeginInSeconds() != null &&
+             o.getValidBeginInSeconds() != null &&
              this.getValidBeginInSeconds().equals(o.getValidBeginInSeconds()) ) )  &&
            // *** valid-end;
            ((this.getValidEndInSeconds() == null && o.getValidEndInSeconds() != null) ||
             (this.getValidEndInSeconds() == null && o.getValidEndInSeconds() != null) ||
-            (this.getValidEndInSeconds() != null && 
-            o.getValidEndInSeconds() != null && 
+            (this.getValidEndInSeconds() != null &&
+            o.getValidEndInSeconds() != null &&
             this.getValidEndInSeconds().equals(o.getValidEndInSeconds()) ) ) ) {
             result = 0;
         }
@@ -218,5 +227,5 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         }
         return true;
     }
-    
+
 }
