@@ -46,7 +46,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Introducing document";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create knowledge in editor, until dismissed";
 
-    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Gedankenblitz";
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Wissensblitz";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_DE = "-";
     public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Snap";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "-";
