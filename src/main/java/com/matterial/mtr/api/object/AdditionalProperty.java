@@ -3,17 +3,20 @@ package com.matterial.mtr.api.object;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
+import com.matterial.mtr.api.object.meta.IndexableChild;
 
 /**
  * Container representing additional properties of documents
  */
 @XmlRootElement
-public class AdditionalProperty implements Identifiable, Comparable<AdditionalProperty> {
+public class AdditionalProperty implements IndexableChild, Identifiable, Comparable<AdditionalProperty> {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,6 +54,10 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Snap";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "-";
 
+    public static final String INDEX_FIELD_ID = "id";
+    public static final String INDEX_FIELD_PROPERTY_TYPE = "propertyType";
+    public static final String INDEX_FIELD_NAME = "name";
+    public static final String INDEX_FIELD_DESCRIPTION = "description";
 
     public static final List<Integer> KNOWN_PROPERTY_TYPES;
     static {
@@ -161,6 +168,27 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
 
     public void setValidEndInSeconds(Long validEndInSeconds) {
         this.validEndInSeconds = validEndInSeconds;
+    }
+
+    /**
+     * get map for search result including name and description.
+     * this one is for replacing indexed aps within document in searchresult to get also i18n-name and -description.
+     */
+    public Map<String, Object> searchResultMap() {
+        Map<String, Object> indexMap = new HashMap<>();
+        indexMap.put(INDEX_FIELD_ID, this.getId());
+        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
+        indexMap.put(INDEX_FIELD_NAME, this.getPropertyType());
+        indexMap.put(INDEX_FIELD_DESCRIPTION, this.getPropertyType());
+        return indexMap;
+    }
+
+    @Override
+    public Map<String, Object> indexMap() {
+        Map<String, Object> indexMap = new HashMap<>();
+        indexMap.put(INDEX_FIELD_ID, this.getId());
+        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
+        return indexMap;
     }
 
     @Override

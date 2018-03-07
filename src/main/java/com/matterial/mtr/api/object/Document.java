@@ -81,8 +81,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String INDEX_FIELD_FOLLOWERS = "followers";
     public static final String INDEX_FIELD_MARKED_AS_HELPFUL_BY = "markedAsHelpfulBy";
     public static final String INDEX_FIELD_RESPONSIBLES = "responsibles";
-    public static final String INDEX_FIELD_ADDITIONAL_PROPERTY_IDS = "additionalPropertyIds";
-    public static final String INDEX_FIELD_ADDITIONAL_PROPERTY_TYPES = "additionalPropertyTypes";
+    public static final String INDEX_FIELD_ADDITIONAL_PROPERTIES = "additionalProperties";
 
     public static final String ORDER_BY_ID = "id";
     public static final String ORDER_BY_VALID = "valid";
@@ -965,18 +964,13 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         indexMap.put(INDEX_FIELD_RESPONSIBLES, responsiblesMap);
 
         // *** additional-property;
-        List<Long> additionalPropertyIds = new ArrayList<>();
-        List<Integer> additionalPropertyTypes = new ArrayList<>();
+        List<Map<String, Object>> additionalPropertyMap = new ArrayList<>();
         if(this.getAdditionalProperties() != null){
             this.getAdditionalProperties().stream().forEach((ap) -> {
-                additionalPropertyIds.add(ap.getId());
-                if(ap.getPropertyType() != null && ap.getPropertyType() > 0) {
-                    additionalPropertyTypes.add(ap.getPropertyType());
-                }
+                additionalPropertyMap.add(ap.indexMap());
             });
         }
-        indexMap.put(INDEX_FIELD_ADDITIONAL_PROPERTY_IDS, additionalPropertyIds);
-        indexMap.put(INDEX_FIELD_ADDITIONAL_PROPERTY_TYPES, additionalPropertyTypes);
+        indexMap.put(INDEX_FIELD_ADDITIONAL_PROPERTIES, additionalPropertyMap);
 
         // *** extension-values;
         this.getExtensionValues().stream().forEach((ev) -> {
