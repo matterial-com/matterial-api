@@ -178,8 +178,8 @@ public class AdditionalProperty implements IndexableChild, Identifiable, Compara
         Map<String, Object> indexMap = new HashMap<>();
         indexMap.put(INDEX_FIELD_ID, this.getId());
         indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
-        indexMap.put(INDEX_FIELD_NAME, this.getPropertyType());
-        indexMap.put(INDEX_FIELD_DESCRIPTION, this.getPropertyType());
+        indexMap.put(INDEX_FIELD_NAME, this.getName());
+        indexMap.put(INDEX_FIELD_DESCRIPTION, this.getDescription());
         return indexMap;
     }
 
