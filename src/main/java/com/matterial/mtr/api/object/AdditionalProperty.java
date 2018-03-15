@@ -51,7 +51,7 @@ public class AdditionalProperty implements IndexableChild, Identifiable, Compara
 
     public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Wissensblitz";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_DE = "Rudimentäres Dokument ohne die kompletten Dokumenteigenschaften, zur schnellen Notiz oder um Wissen bei Personen oder Gruppen anzufordern";
-    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Knowledge Flash";
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Flash";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "Document stub without the complete document attributes, for jotting down a note or requesting knowledge from persons or groups";
 
     public static final String INDEX_FIELD_ID = "id";
