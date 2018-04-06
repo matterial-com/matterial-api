@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonContainer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Person person;
     /** key: instance/datasource, value: list of clients */
     private Map<String, List<PersonClientContainer>> instanceWithPersonClientContainers;
@@ -23,7 +23,7 @@ public class PersonContainer implements Serializable {
     private boolean updateAddress;
     private boolean updateCommunicationData;
     private boolean impersonate;
-    
+
     public PersonContainer() {
         // *** do nothing;
     }
@@ -31,18 +31,18 @@ public class PersonContainer implements Serializable {
     public Person getPerson() {
         return person;
     }
-    
+
     public void setPerson(Person person) {
         this.person = person;
     }
-    
+
     public Map<String, List<PersonClientContainer>> getInstanceWithPersonClientContainers() {
         return instanceWithPersonClientContainers;
     }
-    
+
     public void setInstanceWithPersonClientContainers(Map<String, List<PersonClientContainer>> instanceWithPersonClientContainers) {
         this.instanceWithPersonClientContainers = instanceWithPersonClientContainers;
-    } 
+    }
 
     public List<PersonClientContainer> loadPersonClientContainers(String instance) {
         if(this.instanceWithPersonClientContainers == null) {
@@ -78,7 +78,7 @@ public class PersonContainer implements Serializable {
     public boolean isUpdateCommunicationData() {
         return updateCommunicationData;
     }
-    
+
     public void setUpdateCommunicationData(boolean updateCommunicationData) {
         this.updateCommunicationData = updateCommunicationData;
     }
@@ -86,9 +86,18 @@ public class PersonContainer implements Serializable {
     public boolean isImpersonate() {
         return impersonate;
     }
-    
+
     public void setImpersonate(boolean impersonate) {
         this.impersonate = impersonate;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder buffer = new StringBuilder();
+        if(this.person != null) {
+            buffer.append(this.person.toString());
+        }
+        return buffer.toString();
     }
 
 }

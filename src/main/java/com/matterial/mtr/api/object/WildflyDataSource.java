@@ -9,11 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class WildflyDataSource implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private String dataSourceDisplayName;
     private String dataSourceReference;
+    private String dataSourceServer;
     private Integer dataSourceActivationDays;
     private String connectionUrl;
     private String driverClass;
@@ -24,16 +25,17 @@ public class WildflyDataSource implements Serializable {
     private int minPoolSize;
     private int maxPoolSize;
     private boolean poolPrefill;
-    
-    
+
+
     public WildflyDataSource() {
         this.checkValidConnectionSql = "SELECT 1";
         this.minPoolSize = 5;
         this.maxPoolSize = 15;
     }
-    
+
     public WildflyDataSource(String dataSourceDisplayName,
                              String dataSourceReference,
+                             String dataSourceServer,
                              Integer dataSourceActivationDays,
                              String connectionUrl,
                              String driverClass,
@@ -48,6 +50,7 @@ public class WildflyDataSource implements Serializable {
         this();
         this.dataSourceDisplayName = dataSourceDisplayName;
         this.dataSourceReference = dataSourceReference;
+        this.dataSourceServer = dataSourceServer;
         this.dataSourceActivationDays = dataSourceActivationDays;
         this.connectionUrl = connectionUrl;
         this.driverClass = driverClass;
@@ -65,67 +68,75 @@ public class WildflyDataSource implements Serializable {
         }
         this.poolPrefill = poolPrefill;
     }
-    
+
     public String getDataSourceDisplayName() {
         return dataSourceDisplayName;
     }
-    
+
     public void setDataSourceDisplayName(String dataSourceDisplayName) {
         this.dataSourceDisplayName = dataSourceDisplayName;
     }
-    
+
     public String getDataSourceReference() {
         return dataSourceReference;
     }
-    
+
     public void setDataSourceReference(String dataSourceReference) {
         this.dataSourceReference = dataSourceReference;
     }
-    
+
+    public String getDataSourceServer() {
+        return dataSourceServer;
+    }
+
+    public void setDataSourceServer(String dataSourceServer) {
+        this.dataSourceServer = dataSourceServer;
+    }
+
     public Integer getDataSourceActivationDays() {
         return this.dataSourceActivationDays;
     }
-    
+
     public void setDataSourceActivationDays(Integer dataSourceActivationDays) {
         this.dataSourceActivationDays = dataSourceActivationDays;
     }
-    
+
     public String getConnectionUrl() {
         return connectionUrl;
     }
-    
+
     public void setConnectionUrl(String connectionUrl) {
         this.connectionUrl = connectionUrl;
     }
-    
+
     public String getDriverClass() {
         return driverClass;
     }
-    
+
     public void setDriverClass(String driverClass) {
         this.driverClass = driverClass;
     }
-    
+
     public String getDriver() {
         return driver;
     }
-    
+
     public void setDriver(String driver) {
         this.driver = driver;
     }
-    
+
     public String getUserName() {
         return userName;
     }
-    
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -133,7 +144,7 @@ public class WildflyDataSource implements Serializable {
     public String getCheckValidConnectionSql() {
         return checkValidConnectionSql;
     }
-    
+
     public void setCheckValidConnectionSql(String checkValidConnectionSql) {
         this.checkValidConnectionSql = checkValidConnectionSql;
     }
@@ -145,7 +156,7 @@ public class WildflyDataSource implements Serializable {
     public void setMinPoolSize(int minPoolSize) {
         this.minPoolSize = minPoolSize;
     }
-    
+
     public int getMaxPoolSize() {
         return maxPoolSize;
     }
@@ -157,17 +168,21 @@ public class WildflyDataSource implements Serializable {
     public boolean isPoolPrefill() {
         return poolPrefill;
     }
-    
+
     public void setPoolPrefill(boolean poolPrefill) {
         this.poolPrefill = poolPrefill;
     }
-    
+
     @Override
     public String toString() {
-        return "WildflyDataSource [dataSourceDisplayName=" + dataSourceDisplayName + 
-               ", dataSourceReference=" + dataSourceReference + ", connectionUrl=" + connectionUrl + 
-               ", driverClass=" + driverClass + ", driver=" + driver + 
-               ", userName=" + userName + ", password=***]";
+        return "WildflyDataSource [dataSourceDisplayName=" + dataSourceDisplayName +
+               ", dataSourceReference=" + dataSourceReference +
+               ", dataSourceServer=" + dataSourceServer+
+               ", connectionUrl=" + connectionUrl +
+               ", driverClass=" + driverClass +
+               ", driver=" + driver +
+               ", userName=" + userName +
+               ", password=***]";
     }
 
 }

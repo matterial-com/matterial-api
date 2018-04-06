@@ -440,4 +440,20 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     public String indexAutocompleteInput() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("FirstName: ");
+        buffer.append(this.getFirstName());
+        buffer.append("\n");
+        buffer.append("LastName: ");
+        buffer.append(this.getLastName());
+        buffer.append("\n");
+        buffer.append("AccountLogin: ");
+        buffer.append(this.getAccountLogin());
+        buffer.append("\n");
+        return buffer.toString();
+    }
+
 }

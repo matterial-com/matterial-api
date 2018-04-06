@@ -3,53 +3,69 @@ package com.matterial.mtr.api.object;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
+import com.matterial.mtr.api.object.meta.IndexableChild;
 
 /**
  * Container representing additional properties of documents
  */
 @XmlRootElement
-public class AdditionalProperty implements Identifiable, Comparable<AdditionalProperty> {
-    
+public class AdditionalProperty implements IndexableChild, Identifiable, Comparable<AdditionalProperty> {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final int PROPERTY_TYPE_NEWS = 1;
     public static final int PROPERTY_TYPE_URGENT = 2;
     public static final int PROPERTY_TYPE_HELP_SECTION_DASHBOARD = 3;
     public static final int PROPERTY_TYPE_HELP_SECTION_DOCUMENT_EDITOR = 4;
-    
-    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_DE = "Neuigkeit";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_DE = "Dokument taucht unter Neuigkeiten auf dem Dashboard auf";
-    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_EN = "News";
+    public static final int PROPERTY_TYPE_SNAP = 5;
+
+    public static final String ADDITIONAL_PROPERTY_I18N_KEY_NAME_PREFIX = "additionalProperty.name.";
+    public static final String ADDITIONAL_PROPERTY_I18N_KEY_DESCRIPTION_PREFIX = "additionalProperty.description.";
+
+    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_DE = "Wichtig";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_DE = "Dokument taucht unter Aktuell & wichtig auf dem Dashboard auf";
+    public static final String ADDITIONAL_PROPERTY_NAME_NEWS_EN = "Relevant";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_NEWS_EN = "Document will appear in the news-stream on the dashboard";
 
-    public static final String ADDITIONAL_PROPERTY_NAME_URGENT_DE = "Wichtig";
+    public static final String ADDITIONAL_PROPERTY_NAME_URGENT_DE = "Dringend";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_URGENT_DE = "Dokument wird Benutzern nach dem Login prominent angeboten, bis sie es gelesen haben";
     public static final String ADDITIONAL_PROPERTY_NAME_URGENT_EN = "Urgent";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_URGENT_EN = "Document will be suggested prominently after login, until read";
 
-    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_DE = "Willkommen";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_DE = "Dokument wird neuen Benutzern in der Willkommensbox auf dem Dashboard angeboten, bis sie die Box entfernen";
-    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_EN = "Welcome";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_EN = "Document will be suggested to new users within welcomebox on dashboard, until dismissed";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_DE = "Let’s go";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_DE = "Dokument wird neuen Benutzern in der Let’s go Box auf dem Dashboard angeboten, bis sie die Box entfernen";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DASHBOARD_EN = "Let’s go";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DASHBOARD_EN = "Document will be suggested to new users within let’s go box on dashboard, until dismissed";
 
-    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_DE = "Dokumenteinführung";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_DE = "Schreibtipps";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_DE = "Dokument wird neuen Benutzern in der Box zur Dokumenterstellung angeboten, bis sie die Box entfernen";
-    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Introducing document";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create knowledge in editor, until dismissed";
+    public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Writing tips";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create a document in the editor, until dismissed";
 
-    
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Wissensblitz";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_DE = "Rudimentäres Dokument ohne die kompletten Dokumenteigenschaften, zur schnellen Notiz oder um Wissen bei Personen oder Gruppen anzufordern";
+    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Flash";
+    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "Document stub without the complete document attributes, for jotting down a note or requesting knowledge from persons or groups";
+
+    public static final String INDEX_FIELD_ID = "id";
+    public static final String INDEX_FIELD_PROPERTY_TYPE = "propertyType";
+    public static final String INDEX_FIELD_NAME = "name";
+    public static final String INDEX_FIELD_DESCRIPTION = "description";
+
     public static final List<Integer> KNOWN_PROPERTY_TYPES;
     static {
         List<Integer> l = new ArrayList<>();
         // *** foreach constant within leading ID_;
         for (Field idField : AdditionalProperty.class.getFields()) {
             try {
-                if(idField.getName().startsWith("PROPERTY_TYPE_") && 
+                if(idField.getName().startsWith("PROPERTY_TYPE_") &&
                    idField.get(null) instanceof Integer) {
                     Integer id = (Integer)idField.get(null);
                     if(id != null && id > 0L) {
@@ -63,35 +79,35 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         }
         KNOWN_PROPERTY_TYPES = Collections.unmodifiableList(l);
     }
-    
+
     private long id;
     private String name;
     private String description;
     private Integer propertyType;
     private Long validBeginInSeconds;
     private Long validEndInSeconds;
-    
+
     public AdditionalProperty() {
         // *** do nothing;
     }
-    
+
     /**
      * Constructor (used in native query)
      */
     public AdditionalProperty(Number id, String name, String description, Number propertyType) {
-       this((id!=null)?id.longValue():0L, name, description, (propertyType!=null)?propertyType.intValue():null); 
+       this((id!=null)?id.longValue():0L, name, description, (propertyType!=null)?propertyType.intValue():null);
     }
-    
-    public AdditionalProperty(long id, 
-                              String name, 
+
+    public AdditionalProperty(long id,
+                              String name,
                               String description,
                               Integer propertyType) {
         this(id, name, description, propertyType, null, null);
     }
 
-    public AdditionalProperty(long id, 
-                              String name, 
-                              String description, 
+    public AdditionalProperty(long id,
+                              String name,
+                              String description,
                               Integer propertyType,
                               Long validBeginInSeconds,
                               Long validEndInSeconds) {
@@ -102,7 +118,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         this.validBeginInSeconds = validBeginInSeconds;
         this.validEndInSeconds = validEndInSeconds;
     }
-    
+
 
     @Override
     public long getId() {
@@ -129,7 +145,7 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Integer getPropertyType() {
         return propertyType;
     }
@@ -153,7 +169,28 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
     public void setValidEndInSeconds(Long validEndInSeconds) {
         this.validEndInSeconds = validEndInSeconds;
     }
-    
+
+    /**
+     * get map for search result including name and description.
+     * this one is for replacing indexed aps within document in searchresult to get also i18n-name and -description.
+     */
+    public Map<String, Object> searchResultMap() {
+        Map<String, Object> indexMap = new HashMap<>();
+        indexMap.put(INDEX_FIELD_ID, this.getId());
+        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
+        indexMap.put(INDEX_FIELD_NAME, this.getName());
+        indexMap.put(INDEX_FIELD_DESCRIPTION, this.getDescription());
+        return indexMap;
+    }
+
+    @Override
+    public Map<String, Object> indexMap() {
+        Map<String, Object> indexMap = new HashMap<>();
+        indexMap.put(INDEX_FIELD_ID, this.getId());
+        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
+        return indexMap;
+    }
+
     @Override
     public int compareTo(AdditionalProperty o) {
         int result = -1;
@@ -161,14 +198,14 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
            // *** valid-begin;
            ((this.getValidBeginInSeconds() == null && o.getValidBeginInSeconds() != null) ||
             (this.getValidBeginInSeconds() == null && o.getValidBeginInSeconds() != null) ||
-            (this.getValidBeginInSeconds() != null && 
-             o.getValidBeginInSeconds() != null && 
+            (this.getValidBeginInSeconds() != null &&
+             o.getValidBeginInSeconds() != null &&
              this.getValidBeginInSeconds().equals(o.getValidBeginInSeconds()) ) )  &&
            // *** valid-end;
            ((this.getValidEndInSeconds() == null && o.getValidEndInSeconds() != null) ||
             (this.getValidEndInSeconds() == null && o.getValidEndInSeconds() != null) ||
-            (this.getValidEndInSeconds() != null && 
-            o.getValidEndInSeconds() != null && 
+            (this.getValidEndInSeconds() != null &&
+            o.getValidEndInSeconds() != null &&
             this.getValidEndInSeconds().equals(o.getValidEndInSeconds()) ) ) ) {
             result = 0;
         }
@@ -218,5 +255,5 @@ public class AdditionalProperty implements Identifiable, Comparable<AdditionalPr
         }
         return true;
     }
-    
+
 }
