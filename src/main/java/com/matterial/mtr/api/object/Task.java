@@ -37,6 +37,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 long creationDateInSeconds,
                 String description,
                 Long dueDateInSeconds,
+                boolean snap,
                 Long documentId,
                 Long documentLanguageVersionId,
                 Integer documentLanguageVersionVersion,
@@ -47,7 +48,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 Long assignedRoleId,
                 // *** assigned-account;
                 Long assignedAccountId) {
-        this(id, creationDateInSeconds, description, dueDateInSeconds,
+        this(id, creationDateInSeconds, description, dueDateInSeconds, snap,
              documentId, documentLanguageVersionId, documentLanguageVersionVersion, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId,
              // *** assigned-role;
              assignedRoleId, null, null, null, null, null, null, null, null,
@@ -59,6 +60,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 long creationDateInSeconds,
                 String description,
                 Long dueDateInSeconds,
+                boolean snap,
                 Long documentId,
                 Long documentLanguageVersionId,
                 Integer documentLanguageVersionVersion,
@@ -90,7 +92,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 String acceptedAccountPosition,
                 Long acceptedAccountBirthdayInSeconds,
                 Integer acceptedAccountGender) {
-        this(id, creationDateInSeconds, description, dueDateInSeconds,
+        this(id, creationDateInSeconds, description, dueDateInSeconds, snap,
              documentId, documentLanguageVersionId, documentLanguageVersionVersion, documentLanguageVersionTitle, documentLanguageVersionLanguageKey, taskStatusId,
              // *** assigned-role;
              assignedRoleId, assignedRoleClientId, assignedRoleEntityTypeId,
@@ -111,6 +113,7 @@ public class Task extends ListResultEntry implements Identifiable {
                 long creationDateInSeconds,
                 String description,
                 Long dueDateInSeconds,
+                boolean snap,
                 Long documentId,
                 Long documentLanguageVersionId,
                 Integer documentLanguageVersionVersion,
@@ -159,6 +162,7 @@ public class Task extends ListResultEntry implements Identifiable {
         this.creationDateInSeconds = creationDateInSeconds;
         this.description = description;
         this.dueDateInSeconds = dueDateInSeconds;
+        this.snap = snap;
         this.documentId = documentId;
         this.documentLanguageVersionId = documentLanguageVersionId;
         this.documentLanguageVersionVersion = documentLanguageVersionVersion;
