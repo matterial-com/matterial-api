@@ -24,7 +24,6 @@ public class AdditionalProperty implements IndexableChild, Identifiable, Compara
     public static final int PROPERTY_TYPE_URGENT = 2;
     public static final int PROPERTY_TYPE_HELP_SECTION_DASHBOARD = 3;
     public static final int PROPERTY_TYPE_HELP_SECTION_DOCUMENT_EDITOR = 4;
-    public static final int PROPERTY_TYPE_SNAP = 5;
 
     public static final String ADDITIONAL_PROPERTY_I18N_KEY_NAME_PREFIX = "additionalProperty.name.";
     public static final String ADDITIONAL_PROPERTY_I18N_KEY_DESCRIPTION_PREFIX = "additionalProperty.description.";
@@ -48,11 +47,6 @@ public class AdditionalProperty implements IndexableChild, Identifiable, Compara
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_DE = "Dokument wird neuen Benutzern in der Box zur Dokumenterstellung angeboten, bis sie die Box entfernen";
     public static final String ADDITIONAL_PROPERTY_NAME_HELP_SECTION_DOCUMENT_EDITOR_EN = "Writing tips";
     public static final String ADDITIONAL_PROPERTY_DESCRIPTION_HELP_SECTION_DOCUMENT_EDITOR_EN = "Document will be suggested to new users within box to create a document in the editor, until dismissed";
-
-    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_DE = "Wissensblitz";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_DE = "Rudimentäres Dokument ohne die kompletten Dokumenteigenschaften, zur schnellen Notiz oder um Wissen bei Personen oder Gruppen anzufordern";
-    public static final String ADDITIONAL_PROPERTY_NAME_SNAP_EN = "Flash";
-    public static final String ADDITIONAL_PROPERTY_DESCRIPTION_SNAP_EN = "Document stub without the complete document attributes, for jotting down a note or requesting knowledge from persons or groups";
 
     public static final String INDEX_FIELD_ID = "id";
     public static final String INDEX_FIELD_PROPERTY_TYPE = "propertyType";

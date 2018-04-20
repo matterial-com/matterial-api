@@ -16,6 +16,7 @@ public class Task extends ListResultEntry implements Identifiable {
     private long creationDateInSeconds;
     private String description;
     private Long dueDateInSeconds;
+    private boolean snap;
 
     private Long documentId;
     private Long documentLanguageVersionId;
@@ -245,6 +246,14 @@ public class Task extends ListResultEntry implements Identifiable {
 
     public void setDueDateInSeconds(Long dueDateInSeconds) {
         this.dueDateInSeconds = dueDateInSeconds;
+    }
+
+    public boolean isSnap() {
+        return snap;
+    }
+
+    public void setSnap(boolean snap) {
+        this.snap = snap;
     }
 
     public Long getDocumentId() {
