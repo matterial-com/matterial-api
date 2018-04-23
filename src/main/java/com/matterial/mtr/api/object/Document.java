@@ -58,6 +58,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String INDEX_FIELD_ARCHIVED_BEGIN_IN_SECONDS = "archivedBeginInSeconds";
     public static final String INDEX_FIELD_CATEGORY_IDS = "categoryIds";
     public static final String INDEX_FIELD_SUM_RATING = "sumRating";
+    public static final String INDEX_FIELD_SNAP = "snap";
     public static final String INDEX_FIELD_REVIEW_UNTIL_IN_SECONDS = "reviewUntilInSeconds";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_ID = "languageVersionId";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT = "languageVersionAbstract";
@@ -886,6 +887,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         indexMap.put(INDEX_FIELD_ARCHIVED_BEGIN_IN_SECONDS, this.getArchivedBeginInSeconds());
         indexMap.put(INDEX_FIELD_CATEGORY_IDS, this.getCategoryIds());
         indexMap.put(INDEX_FIELD_SUM_RATING, this.getSumRating());
+        indexMap.put(INDEX_FIELD_SNAP, this.isSnap());
         indexMap.put(INDEX_FIELD_REVIEW_UNTIL_IN_SECONDS, this.getReviewUntilInSeconds());
         indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_ID, this.getLanguageVersionId());
         indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT, this.getLanguageVersionAbstract());
