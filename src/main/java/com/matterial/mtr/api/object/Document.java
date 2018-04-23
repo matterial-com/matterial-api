@@ -193,6 +193,7 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     private Long sumRating;
     private boolean reviewRight;
     private boolean mentionedInCommentUnread;
+    private boolean snap;
 
     private Set<Long> categoryIds;
     private Set<Long> relatedDocumentIds;
@@ -690,6 +691,14 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     public void setMentionedInCommentUnread(boolean mentionedInCommentUnread) {
         this.mentionedInCommentUnread = mentionedInCommentUnread;
+    }
+
+    public boolean isSnap() {
+        return snap;
+    }
+
+    public void setSnap(boolean snap) {
+        this.snap = snap;
     }
 
     public Set<Long> getCategoryIds() {
