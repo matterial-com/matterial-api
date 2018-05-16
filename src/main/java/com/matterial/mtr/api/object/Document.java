@@ -132,15 +132,33 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     public static final String INDEX_TYPE_NAME  = "document";
 
     // list of keys for specific partial index updates
-    private static final List<String> PARTIAL_UPDATE_KEYSET_FOLLOWERS = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","followers");
-    private static final List<String> PARTIAL_UPDATE_KEYSET_MARKED_HELPFUL_BY = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","sumRating","markedAsHelpfulBy");
-    private static final List<String> PARTIAL_UPDATE_KEYSET_FIRST_READ_TIME = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","firstReadTimesInSeconds");
-    private static final List<String> PARTIAL_UPDATE_KEYSET_CATEGORIES = Arrays.asList("id","languageVersionId","languageVersionLanguageKey","categoryIds");
+    private static final List<String> PARTIAL_UPDATE_KEYSET_FOLLOWERS = Arrays.asList(INDEX_FIELD_ID,
+                                                                                      INDEX_FIELD_LANGUAGE_VERSION_ID,
+                                                                                      INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY,
+                                                                                      INDEX_FIELD_FOLLOWERS);
+    private static final List<String> PARTIAL_UPDATE_KEYSET_MARKED_HELPFUL_BY = Arrays.asList(INDEX_FIELD_ID,
+                                                                                              INDEX_FIELD_LANGUAGE_VERSION_ID,
+                                                                                              INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY,
+                                                                                              INDEX_FIELD_SUM_RATING,
+                                                                                              INDEX_FIELD_MARKED_AS_HELPFUL_BY);
+    private static final List<String> PARTIAL_UPDATE_KEYSET_FIRST_READ_TIME = Arrays.asList(INDEX_FIELD_ID,
+                                                                                            INDEX_FIELD_LANGUAGE_VERSION_ID,
+                                                                                            INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY,
+                                                                                            INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS);
+    private static final List<String> PARTIAL_UPDATE_KEYSET_CATEGORIES = Arrays.asList(INDEX_FIELD_ID,
+                                                                                       INDEX_FIELD_LANGUAGE_VERSION_ID,
+                                                                                       INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY,
+                                                                                       INDEX_FIELD_CATEGORY_IDS);
+    private static final List<String> PARTIAL_UPDATE_KEYSET_SNAP_FLAG = Arrays.asList(INDEX_FIELD_ID,
+                                                                                      INDEX_FIELD_LANGUAGE_VERSION_ID,
+                                                                                      INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY,
+                                                                                      INDEX_FIELD_SNAP);
 
     private boolean partialUpdateFollowers;
     private boolean partialUpdateMarkedHelpfulBy;
     private boolean partialUpdateFirstReadTime;
     private boolean partialUpdateCategories;
+    private boolean partialUpdateSnapFlag;
 
     // *** document-poperties;
     private long id;
@@ -855,11 +873,20 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         this.partialUpdateCategories = partialUpdateCategories;
     }
 
+    public boolean isPartialUpdateSnapFlag() {
+        return partialUpdateSnapFlag;
+    }
+
+    public void setPartialUpdateSnapFlag(boolean partialUpdateSnapFlag) {
+        this.partialUpdateSnapFlag = partialUpdateSnapFlag;
+    }
+
     public boolean isPartialUpdate() {
         return this.isPartialUpdateFollowers() ||
                this.isPartialUpdateMarkedHelpfulBy() ||
                this.isPartialUpdateFirstReadTime() ||
-               this.isPartialUpdateCategories();
+               this.isPartialUpdateCategories() ||
+               this.isPartialUpdateSnapFlag();
     }
 
     public void setPartialUpdate(boolean partialUpdate) {
@@ -1000,6 +1027,9 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         }
         else if(this.isPartialUpdateCategories()) {
             partialUpdateKeys = PARTIAL_UPDATE_KEYSET_CATEGORIES;
+        }
+        else if(this.isPartialUpdateSnapFlag()) {
+            partialUpdateKeys = PARTIAL_UPDATE_KEYSET_SNAP_FLAG;
         }
         else {
             partialUpdateKeys = null;
