@@ -1,5 +1,8 @@
 package com.matterial.mtr.api.object;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
@@ -94,21 +97,38 @@ public class DataSource extends ListResultEntry implements Identifiable {
         this.server = server;
     }
 
+    /**
+     * @return true, of currently this datasource is active
+     */
+    public boolean isActive() {
+        return (this.getActiveUntilInSeconds() == null ||
+                this.activeUntilInSeconds > LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
+    }
+
+    /**
+     * dummy implementation, does nothing.
+     */
+    public void setActive() {
+        // *** do nothing;
+    }
+
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();
-        buffer.append("id:");
+        buffer.append("id: ");
         buffer.append(this.getId());
-        buffer.append(", activeUntilInSeconds:");
+        buffer.append(", activeUntilInSeconds: ");
         buffer.append(this.getActiveUntilInSeconds());
-        buffer.append(", name:");
+        buffer.append(", name: ");
         buffer.append(this.getName());
-        buffer.append(", displayName:");
+        buffer.append(", displayName: ");
         buffer.append(this.getDisplayName());
-        buffer.append(", reference:");
+        buffer.append(", reference: ");
         buffer.append(this.getReference());
-        buffer.append(", server:");
+        buffer.append(", server: ");
         buffer.append(this.getServer());
+        buffer.append(", active: ");
+        buffer.append(this.isActive());
         return buffer.toString();
     }
 
