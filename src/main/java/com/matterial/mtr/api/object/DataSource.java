@@ -108,7 +108,7 @@ public class DataSource extends ListResultEntry implements Identifiable {
     /**
      * dummy implementation, does nothing.
      */
-    public void setActive() {
+    public void setActive(boolean active) {
         // *** do nothing;
     }
 
