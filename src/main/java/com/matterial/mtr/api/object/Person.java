@@ -441,6 +441,25 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         return null;
     }
 
+    /**
+     * @return firstName lastName
+     */
+    public String toName() {
+        StringBuilder buffer = new StringBuilder();
+        if(this.getFirstName() != null && !this.getFirstName().trim().isEmpty()) {
+            buffer.append(this.getFirstName().trim());
+            buffer.append(" ");
+        }
+        if(this.getLastName() != null && !this.getLastName().trim().isEmpty()) {
+            buffer.append(this.getLastName().trim());
+        }
+        // *** empty buffer;
+        if(buffer.length() == 0) {
+            buffer.append(this.getAccountLogin());
+        }
+        return buffer.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();
