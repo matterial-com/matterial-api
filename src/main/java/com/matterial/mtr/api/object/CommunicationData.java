@@ -14,14 +14,14 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  */
 @XmlRootElement
 public class CommunicationData implements Identifiable, IndexableChild {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     /** indicates that a commdata was imported from an external system (ldap) */
     public static final int STATUS_BIT_IMPORTED = 1 << 0;          // 1
     /** indicates that an email should be used for any notification */
     public static final int STATUS_BIT_USED_FOR_NOTIFICATION = 1 << 1;    // 2
-    
+
     private long id;
     private long entityTypeId;
     private String value;
@@ -35,14 +35,14 @@ public class CommunicationData implements Identifiable, IndexableChild {
     public CommunicationData() {
         // *** empty;
     }
-    
+
     /**
      * Constructor
      * @param id
      * @param entityTypeId
      * @param value
      * @param description
-     * @param status 
+     * @param status
      */
     public CommunicationData(long id, long entityTypeId, String value, String description, int status) {
         this.id = id;
@@ -52,10 +52,10 @@ public class CommunicationData implements Identifiable, IndexableChild {
         // *** status;
         if((status & STATUS_BIT_IMPORTED) > 0) {
             this.setImported(true);
-        }        
+        }
         if((status & STATUS_BIT_USED_FOR_NOTIFICATION) > 0) {
             this.setUsedForNotification(true);
-        }        
+        }
     }
 
     @Override
@@ -99,7 +99,7 @@ public class CommunicationData implements Identifiable, IndexableChild {
     public void setImported(boolean imported) {
         this.imported = imported;
     }
-    
+
     public boolean isUsedForNotification() {
         return usedForNotification;
     }
@@ -107,13 +107,13 @@ public class CommunicationData implements Identifiable, IndexableChild {
     public void setUsedForNotification(boolean usedForNotification) {
         this.usedForNotification = usedForNotification;
     }
-    
+
     /**
      * @return true, if no attributes are filled
      */
     public boolean empty() {
-        return ((value == null || value.trim().length() == 0) &&
-                (entityTypeId == 0L)); 
+        return ((value == null       || value.trim().length() == 0) &&
+                (description == null || description.trim().length() == 0));
     }
 
     @Override
