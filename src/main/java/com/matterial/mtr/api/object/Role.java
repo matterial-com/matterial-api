@@ -1,6 +1,6 @@
 package com.matterial.mtr.api.object;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,12 +13,12 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  */
 @XmlRootElement
 public class Role extends ListResultEntry implements Identifiable, IndexableChild {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final String CLIENT_GATE_NAME = "roles.roleType.clientGate";
     public static final String CLIENT_GATE_DESCR = "roles.clientGate.description";
-    
+
     private long id;
     private long clientId;
     private long entityTypeId;
@@ -28,19 +28,19 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     private boolean notRemovable;
     private boolean initiallyAssignedToAccount;
     private long initiallyAssignedTypeToDocument;
-    
+
     private Permissions permissions;
-    
+
     /** this will only be set if role is of type 'personal' */
     private Person personalRolePerson;
 
-    
+
     public Role() {
         // *** init permission;
         this.permissions = new Permissions();
     }
-    
-    public Role(long id, long clientId, long entityTypeId, String name, String description, long bitmask, 
+
+    public Role(long id, long clientId, long entityTypeId, String name, String description, long bitmask,
                 boolean notRemovable, boolean initiallyAssignedToAccount, long initiallyAssignedTypeToDocument) {
         this();
         this.id = id;
@@ -54,53 +54,53 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
         // *** this also sets the "permissions"-object;
         this.setBitmask(bitmask);
     }
-    
+
     @Override
     public long getId() {
         return id;
     }
-    
+
     @Override
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public long getClientId() {
         return clientId;
     }
-    
+
     public void setClientId(long clientId) {
         this.clientId = clientId;
     }
-    
+
     public long getEntityTypeId() {
         return entityTypeId;
     }
-    
+
     public void setEntityTypeId(long entityTypeId) {
         this.entityTypeId = entityTypeId;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public long getBitmask() {
         return bitmask;
     }
-    
+
     public void setBitmask(long bitmask) {
         this.bitmask = bitmask;
         // *** sets the permissions;
@@ -110,7 +110,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
     public Permissions getPermissions() {
         return permissions;
     }
-    
+
     public boolean isNotRemovable() {
         return this.notRemovable;
     }
@@ -142,7 +142,7 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
             this.bitmask = this.permissions.getBitmask();
         }
     }
-    
+
     public Person getPersonalRolePerson() {
         return personalRolePerson;
     }
@@ -153,13 +153,12 @@ public class Role extends ListResultEntry implements Identifiable, IndexableChil
 
     @Override
     public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("id", this.getId());
-        indexMap.put("clientId", this.getClientId());
-        indexMap.put("entityTypeId", this.getEntityTypeId());
-        indexMap.put("name", this.getName());
-        indexMap.put("description", this.getDescription());
-        return indexMap;
+        // *** overwritten, to set doNotIndexKeys;
+        return this.indexMap(Arrays.asList("bitmask",
+                                           "notRemovable",
+                                           "initiallyAssignedToAccount",
+                                           "initiallyAssignedTypeToDocument",
+                                           "personalRolePerson"));
     }
 
     @Override

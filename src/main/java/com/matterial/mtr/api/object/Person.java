@@ -1,6 +1,7 @@
 package com.matterial.mtr.api.object;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +16,39 @@ import com.matterial.mtr.api.object.meta.Indexable;
  * Container representing a person
  */
 @XmlRootElement
-public class Person extends ListResultEntry implements Identifiable, Indexable{
+public class Person extends ListResultEntry implements Identifiable, Indexable {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * typeName to be used in index
-     */
-    public static final String INDEX_TYPE_NAME  = "person";
+
+    public static final String INDEX_TYPE_NAME = Person.class.getSimpleName().toLowerCase();
+
+    public static final String INDEX_FIELD_ACCOUNT_ID = "accountId";
+    public static final String INDEX_FIELD_ACCOUNT_LOGIN = "accountLogin";
+    public static final String INDEX_FIELD_SUPERIOR_ACCOUNT_ID = "superiorAccountId";
+    public static final String INDEX_FIELD_ACCOUNT_CREATE_TIME_IN_SECONDS = "accountCreateTimeInSeconds";
+    public static final String INDEX_FIELD_ACCOUNT_LAST_LOGIN_IN_SECONDS = "accountLastLoginInSeconds";
+    public static final String INDEX_FIELD_INSTANCE_OWNER = "instanceOwner";
+    public static final String INDEX_FIELD_LIMITED = "limited";
+
+    public static final String INDEX_FIELD_CONTACT_ID = "contactId";
+    public static final String INDEX_FIELD_FIRST_NAME = "firstName";
+    public static final String INDEX_FIELD_LAST_NAME = "lastName";
+    public static final String INDEX_FIELD_POSITION = "position";
+    public static final String INDEX_FIELD_BIRTHDAY_IN_SECONDS = "birthdayInSeconds";
+    public static final String INDEX_FIELD_GENDER = "gender";
+
+    public static final String INDEX_FIELD_CONTACT_IMAGE = "contactImage";
+    public static final String INDEX_FIELD_ROLE_PERSONAL = "rolePersonal";
+    public static final String INDEX_FIELD_ROLE_CLIENT_GATE = "roleClientGate";
+
+    public static final String INDEX_FIELD_ROLES_FUNCTIONAL = "rolesFunctional";
+    public static final String INDEX_FIELD_ROLES_CONTENT = "rolesContent";
+    public static final String INDEX_FIELD_ROLES_REVIEW = "rolesReview";
+    public static final String INDEX_FIELD_CLIENTS = "clients";
+    public static final String INDEX_FIELD_ADDRESSES = "addresses";
+    public static final String INDEX_FIELD_COMMUNICATION_DATA = "communicationData";
+    public static final String INDEX_FIELD_CONTACT_IMAGES = "contactImages";
+
 
     private long accountId;
     private String accountLogin;
@@ -349,91 +376,13 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     @Override
     public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("accountCreateTimeInSeconds", this.getAccountCreateTimeInSeconds());
-        indexMap.put("accountId", this.getAccountId());
-        indexMap.put("accountLastLoginInSeconds", this.getAccountLastLoginInSeconds());
-        indexMap.put("accountLogin", this.getAccountLogin());
-        indexMap.put("instanceOwner", this.isInstanceOwner());
-        indexMap.put("birthdayInSeconds", this.getBirthdayInSeconds());
-
-        List<Map<String, Object>> addressMap = new ArrayList<>();
-        if(this.getAddresses() != null){
-            this.getAddresses().stream().forEach((add) -> {
-                addressMap.add(add.indexMap());
-            });
-        }
-        indexMap.put("addresses", addressMap);
-
-        List<Map<String, Object>> communicationDataMap = new ArrayList<>();
-        if(this.getCommunicationData() != null){
-            this.getCommunicationData().stream().forEach((cd) -> {
-                communicationDataMap.add(cd.indexMap());
-            });
-        }
-        indexMap.put("communicationData", communicationDataMap);
-
-        if(this.getContactImage() != null){
-            indexMap.put("contactImage", this.getContactImage().indexMap());
-        }
-
-        indexMap.put("contactId", this.getContactId());
-        indexMap.put("firstName", this.getFirstName());
-        indexMap.put("gender", this.getGender());
-        indexMap.put("lastName", this.getLastName());
-        indexMap.put("superiorAccountId", this.getSuperiorAccountId());
-        indexMap.put("position", this.getPosition());
-
-        if(this.getRolePersonal() != null){
-            indexMap.put("rolePersonal", this.getRolePersonal().indexMap());
-        }
-        if(this.getRoleClientGate() != null){
-            indexMap.put("roleClientGate", this.getRoleClientGate().indexMap());
-        }
-
-        List<Map<String, Object>> rolesFunctionalMap = new ArrayList<>();
-        if(this.getRolesFunctional()!= null){
-            this.getRolesFunctional().stream().forEach((role) -> {
-                rolesFunctionalMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesFunctional", rolesFunctionalMap);
-
-        List<Map<String, Object>> rolesContentMap = new ArrayList<>();
-        if(this.getRolesContent()!= null){
-            this.getRolesContent().stream().forEach((role) -> {
-                rolesContentMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesContent", rolesContentMap);
-
-        List<Map<String, Object>> rolesReviewMap = new ArrayList<>();
-        if(this.getRolesReview()!= null){
-            this.getRolesReview().stream().forEach((role) -> {
-                rolesReviewMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesReview", rolesReviewMap);
-
-        List<Map<String, Object>> clientsMap = new ArrayList<>();
-        if(this.getClients()!= null){
-            this.getClients().stream().forEach((client) -> {
-                clientsMap.add(client.indexMap());
-            });
-        }
-        indexMap.put("clients", clientsMap);
-
-        return indexMap;
+        // *** overwritten, to set doNotIndexKeys;
+        return this.indexMap(Arrays.asList("contactImages"));
     }
 
     @Override
     public Indexable.Language indexLanguage() {
         return null;
-    }
-
-    @Override
-    public String indexTypeName() {
-        return INDEX_TYPE_NAME;
     }
 
     @Override
@@ -458,6 +407,11 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
             buffer.append(this.getAccountLogin());
         }
         return buffer.toString();
+    }
+
+    @Override
+    public String indexTypeName() {
+        return INDEX_TYPE_NAME;
     }
 
     @Override

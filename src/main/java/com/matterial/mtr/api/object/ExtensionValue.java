@@ -1,5 +1,6 @@
 package com.matterial.mtr.api.object;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,15 +8,16 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
+import com.matterial.mtr.api.object.meta.IndexableChild;
 
 /**
  * <strong>ExtensionValue</strong>
  */
 @XmlRootElement
-public class ExtensionValue implements Identifiable, Comparable<ExtensionValue> {
-    
+public class ExtensionValue implements IndexableChild, Identifiable, Comparable<ExtensionValue> {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final int TYPE_FLAG_STRING = 1;
     public static final int TYPE_FLAG_INTEGER = 2;
     public static final int TYPE_FLAG_DOUBLE = 3;
@@ -28,7 +30,7 @@ public class ExtensionValue implements Identifiable, Comparable<ExtensionValue> 
     public static final String TYPE_DOUBLE = "double";
     public static final String TYPE_DATETIME = "date";
     public static final String TYPE_BOOLEAN = "boolean";
-    
+
     public static final Map<String, Integer> TYPE_MAPPING;
     static {
         Map<String, Integer> m = new HashMap<>();
@@ -39,23 +41,23 @@ public class ExtensionValue implements Identifiable, Comparable<ExtensionValue> 
         m.put(TYPE_BOOLEAN, TYPE_FLAG_BOOLEAN);
         TYPE_MAPPING = Collections.unmodifiableMap(m);
     }
-    
+
     private long id;
     private String key;
     private int type;
     private Object value;
-    
+
     public ExtensionValue() {
         // *** do nothing;
     }
-    
+
     public ExtensionValue(long id, String key, int type, String value) {
         this.id = id;
         this.key = key;
         this.type = type;
         this.value = value;
     }
-    
+
     @Override
     public long getId() {
         return id;
@@ -65,41 +67,41 @@ public class ExtensionValue implements Identifiable, Comparable<ExtensionValue> 
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public String getKey() {
         return key;
     }
-    
+
     public void setKey(String key) {
         this.key = key;
     }
-    
+
     public int getType() {
         return type;
     }
-    
+
     public void setType(int type) {
         this.type = type;
     }
-    
+
     public Object getValue() {
         return value;
     }
-    
+
     public void setValue(Object value) {
         this.value = value;
     }
-    
+
     @Override
     public int compareTo(ExtensionValue o) {
         int result = -1;
-        if( this.getId() == o.getId() && 
+        if( this.getId() == o.getId() &&
             this.getType() == o.getType() &&
-            this.getKey() != null && 
+            this.getKey() != null &&
             o.getKey() != null &&
             this.getValue() != null &&
             o.getValue() != null &&
-            this.getKey().equals(o.getKey()) && 
+            this.getKey().equals(o.getKey()) &&
             this.getValue().equals(o.getValue())){
             result = 0;
         }
@@ -149,5 +151,21 @@ public class ExtensionValue implements Identifiable, Comparable<ExtensionValue> 
         }
         return true;
     }
-    
+
+    @Override
+    public Map<String, Object> indexMap() {
+        // *** creating index-map;
+        Map<String, Object> indexMap = this.indexMap(Arrays.asList("value"));
+        // *** special handling for value, which is an object (object will not be handled by super-class);
+        indexMap.put("value", this.getValue());
+        return indexMap;
+    }
+
+    @Override
+    public void initFromIndexMap(Map<String, Object> indexMap) {
+        this.initFromIndexMapDefault(indexMap);
+        // *** special handling for value, which is an object (object will not be handled by super-class);
+        this.setValue(indexMap.get("value"));
+    }
+
 }

@@ -2,8 +2,8 @@ package com.matterial.mtr.api.object;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,25 +164,10 @@ public class AdditionalProperty implements IndexableChild, Identifiable, Compara
         this.validEndInSeconds = validEndInSeconds;
     }
 
-    /**
-     * get map for search result including name and description.
-     * this one is for replacing indexed aps within document in searchresult to get also i18n-name and -description.
-     */
-    public Map<String, Object> searchResultMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put(INDEX_FIELD_ID, this.getId());
-        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
-        indexMap.put(INDEX_FIELD_NAME, this.getName());
-        indexMap.put(INDEX_FIELD_DESCRIPTION, this.getDescription());
-        return indexMap;
-    }
-
     @Override
     public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put(INDEX_FIELD_ID, this.getId());
-        indexMap.put(INDEX_FIELD_PROPERTY_TYPE, this.getPropertyType());
-        return indexMap;
+        // *** overwritten, to set doNotIndexKeys;
+        return this.indexMap(Arrays.asList("name", "description"));
     }
 
     @Override

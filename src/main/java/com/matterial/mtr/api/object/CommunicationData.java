@@ -1,8 +1,5 @@
 package com.matterial.mtr.api.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
@@ -116,15 +113,4 @@ public class CommunicationData implements Identifiable, IndexableChild {
                 (description == null || description.trim().length() == 0));
     }
 
-    @Override
-    public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("id", this.getId());
-        indexMap.put("entityTypeId", this.getEntityTypeId());
-        indexMap.put("value", this.getValue());
-        indexMap.put("description", this.getDescription());
-        indexMap.put("imported", this.isImported());
-        indexMap.put("usedForNotification", this.isUsedForNotification());
-        return indexMap;
-    }
 }

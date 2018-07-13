@@ -2,6 +2,7 @@ package com.matterial.mtr.api.object;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,42 +48,73 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
         return fileNameCleaned;
     }
 
+    public static final String INDEX_TYPE_NAME = Document.class.getSimpleName().toLowerCase();
+
+    // *** document-poperties;
     public static final String INDEX_FIELD_ID = "id";
+    public static final String INDEX_EDITOR_TYPE = "editorType";
     public static final String INDEX_FIELD_CREATE_TIME_IN_SECONDS = "createTimeInSeconds";
+    public static final String INDEX_FIELD_CLICK_COUNT = "clickCount";
     public static final String INDEX_FIELD_VALID = "valid";
     public static final String INDEX_FIELD_VALID_BEGIN_IN_SECONDS = "validBeginInSeconds";
     public static final String INDEX_FIELD_VALID_END_IN_SECONDS = "validEndInSeconds";
     public static final String INDEX_FIELD_REMOVED = "removed";
-    public static final String INDEX_FIELD_REMOVE_TIME_IN_SECONDS = "removeTimeInSeconds";
     public static final String INDEX_FIELD_ARCHIVED = "archived";
     public static final String INDEX_FIELD_ARCHIVED_BEGIN_IN_SECONDS = "archivedBeginInSeconds";
-    public static final String INDEX_FIELD_CATEGORY_IDS = "categoryIds";
-    public static final String INDEX_FIELD_SUM_RATING = "sumRating";
-    public static final String INDEX_FIELD_SNAP = "snap";
     public static final String INDEX_FIELD_REVIEW_UNTIL_IN_SECONDS = "reviewUntilInSeconds";
+    public static final String INDEX_FIELD_REMOVE_TIME_IN_SECONDS = "removeTimeInSeconds";
+    public static final String INDEX_FIELD_DOWNLOAD_COUNT = "downloadCount";
+    public static final String INDEX_FIELD_TEMPLATE = "template";
+    // *** document-language-version-properties;
     public static final String INDEX_FIELD_LANGUAGE_VERSION_ID = "languageVersionId";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT = "languageVersionAbstract";
-    public static final String INDEX_FIELD_LANGUAGE_VERSIONS_TITLE = "languageVersionTitle";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_VERSION = "languageVersionVersion";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_CREATE_TIME_IN_SECONDS = "languageVersionCreateTimeInSeconds";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_LAST_CHANGE_IN_SECONDS = "languageVersionLastChangeInSeconds";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_VALID_BEGIN_IN_SECONDS = "languageVersionValidBeginInSeconds";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_VALID_END_IN_SECONDS = "languageVersionValidEndInSeconds";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_ID = "languageVersionLanguageId";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY = "languageVersionLanguageKey";
-    public static final String INDEX_FIELD_LANGUAGE_VERSION_MIME_TYPE = "languageVersionMimeType";
+    public static final String INDEX_FIELD_LANGUAGE_VERSIONS_TITLE = "languageVersionTitle";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT = "languageVersionAbstract";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_VERSION_COMMENT = "languageVersionVersionComment";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_STATUS = "languageVersionStatus";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_CURRENTLY_IN_PROCESSING = "languageVersionCurrentlyInProcessing";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_READY = "languageVersionReady";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_REVIEWED = "languageVersionReviewed";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_REVIEW_REQUESTED = "languageVersionReviewRequested";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_NOTIFY_ON_REVIEW = "languageVersionNotifyOnReview";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_CAS_ID = "languageVersionCasId";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_CAS_ID_PDF = "languageVersionCasIdPdf";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_CAS_ID_THUMBNAIL = "languageVersionCasIdThumbnail";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_CAS_MD5 = "languageVersionCasMd5";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE = "languageVersionFileSize";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_PDF = "languageVersionFileSizePdf";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_THUMBNAIL = "languageVersionFileSizeThumbnail";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_CREATE_TIME_IN_SECONDS = "languageVersionCreateTimeInSeconds";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_LAST_CHANGE_IN_SECONDS = "languageVersionLastChangeInSeconds";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_VALID_BEGIN_IN_SECONDS = "languageVersionValidBeginInSeconds";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_VALID_END_IN_SECONDS = "languageVersionValidEndInSeconds";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_MIME_TYPE = "languageVersionMimeType";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_ID = "languageVersionLanguageId";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY = "languageVersionLanguageKey";
+    // *** special fields;
+    public static final String INDEX_FIELD_SUCCESSOR_ID = "successorId";
     public static final String INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS = "firstReadTimesInSeconds";
+    public static final String INDEX_FIELD_LAST_READ_TIME_IN_SECONDS = "lastReadTimeInSeconds";
     public static final String INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS = "lastWriteTimesInSeconds";
+    public static final String INDEX_FIELD_LAST_WRITE_TIME_IN_SECONDS = "lastWriteTimeInSeconds";
+    public static final String INDEX_FIELD_ROLE_RELATION_TYPE = "roleRelationType";
+    public static final String INDEX_FIELD_SUM_RATING = "sumRating";
+    public static final String INDEX_FIELD_REVIEW_RIGHT = "reviewRight";
+    public static final String INDEX_FIELD_MENTIONED_IN_COMMENT_UNREAD = "mentionedInCommentUnread";
+    public static final String INDEX_FIELD_SNAP = "snap";
+    // *** lists;
+    public static final String INDEX_FIELD_CATEGORY_IDS = "categoryIds";
+    public static final String INDEX_FIELD_RELATED_DOCUMENT_IDS = "relatedDocumentIds";
+    // *** related objects;
     public static final String INDEX_FIELD_ROLE_RIGHTS = "roleRights";
+    public static final String INDEX_FIELD_RESPONSIBLES = "responsibles";
     public static final String INDEX_FIELD_FOLLOWERS = "followers";
     public static final String INDEX_FIELD_MARKED_AS_HELPFUL_BY = "markedAsHelpfulBy";
-    public static final String INDEX_FIELD_RESPONSIBLES = "responsibles";
+    public static final String INDEX_FIELD_ATTACHMENTS = "attachments";
+    public static final String INDEX_FIELD_LANGUAGE_ATTACHMENTS = "languageAttachments";
+    public static final String INDEX_FIELD_DOCUMENT_ATTACHMENTS = "documentAttachments";
     public static final String INDEX_FIELD_ADDITIONAL_PROPERTIES = "additionalProperties";
+    public static final String INDEX_FIELD_EXTENSION_VALUES = "extensionValues";
 
     public static final String ORDER_BY_ID = "id";
     public static final String ORDER_BY_VALID = "valid";
@@ -125,11 +157,6 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
 
     public static final int EDITOR_TYPE_MARKDOWN = 0;
     public static final int EDITOR_TYPE_WYSIWYG = 1;
-
-    /**
-     * typeName to be used in index
-     */
-    public static final String INDEX_TYPE_NAME  = "document";
 
     // list of keys for specific partial index updates
     private static final List<String> PARTIAL_UPDATE_KEYSET_FOLLOWERS = Arrays.asList(INDEX_FIELD_ID,
@@ -901,119 +928,83 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     @Override
     public Map<String, Object> indexMap() {
         // *** creating index-map;
-        Map<String, Object> indexMap = new HashMap<>();
-        // *** simple fields;
-        indexMap.put(INDEX_FIELD_ID, this.getId());
-        indexMap.put(INDEX_FIELD_CREATE_TIME_IN_SECONDS, this.getCreateTimeInSeconds());
-        indexMap.put(INDEX_FIELD_VALID, this.isValid());
-        indexMap.put(INDEX_FIELD_VALID_BEGIN_IN_SECONDS, this.getValidBeginInSeconds());
-        indexMap.put(INDEX_FIELD_VALID_END_IN_SECONDS, this.getValidEndInSeconds());
-        indexMap.put(INDEX_FIELD_REMOVED, this.isRemoved());
-        indexMap.put(INDEX_FIELD_REMOVE_TIME_IN_SECONDS, this.getRemoveTimeInSeconds());
-        indexMap.put(INDEX_FIELD_ARCHIVED, this.isArchived());
-        indexMap.put(INDEX_FIELD_ARCHIVED_BEGIN_IN_SECONDS, this.getArchivedBeginInSeconds());
+        Map<String, Object> indexMap = this.indexMap(Arrays.asList(// *** currently unused;
+                                                                   INDEX_FIELD_CLICK_COUNT,
+                                                                   INDEX_FIELD_DOWNLOAD_COUNT,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_NOTIFY_ON_REVIEW,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_VERSION_COMMENT,
+                                                                   INDEX_FIELD_SUCCESSOR_ID,
+                                                                   INDEX_FIELD_RELATED_DOCUMENT_IDS,
+                                                                   // *** not neccessary;
+                                                                   INDEX_FIELD_LAST_READ_TIME_IN_SECONDS,
+                                                                   INDEX_FIELD_LAST_WRITE_TIME_IN_SECONDS,
+                                                                   INDEX_FIELD_ROLE_RELATION_TYPE,
+                                                                   INDEX_FIELD_REVIEW_RIGHT,
+                                                                   INDEX_FIELD_MENTIONED_IN_COMMENT_UNREAD,
+                                                                   INDEX_FIELD_ATTACHMENTS,
+                                                                   INDEX_FIELD_LANGUAGE_ATTACHMENTS,
+                                                                   INDEX_FIELD_DOCUMENT_ATTACHMENTS,
+                                                                   INDEX_EDITOR_TYPE,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_CAS_ID,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_CAS_ID_PDF,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_CAS_ID_THUMBNAIL,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_CAS_MD5,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_PDF,
+                                                                   INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_THUMBNAIL,
+                                                                   // *** special handling:
+                                                                   INDEX_FIELD_CATEGORY_IDS,
+                                                                   INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS,
+                                                                   INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS,
+                                                                   // *** using indexMapLight();
+                                                                   INDEX_FIELD_RESPONSIBLES,
+                                                                   INDEX_FIELD_FOLLOWERS,
+                                                                   INDEX_FIELD_MARKED_AS_HELPFUL_BY));
+        // *** list of ids;
         indexMap.put(INDEX_FIELD_CATEGORY_IDS, this.getCategoryIds());
-        indexMap.put(INDEX_FIELD_SUM_RATING, this.getSumRating());
-        indexMap.put(INDEX_FIELD_SNAP, this.isSnap());
-        indexMap.put(INDEX_FIELD_REVIEW_UNTIL_IN_SECONDS, this.getReviewUntilInSeconds());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_ID, this.getLanguageVersionId());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT, this.getLanguageVersionAbstract());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSIONS_TITLE, this.getLanguageVersionTitle());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_VERSION, this.getLanguageVersionVersion());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_CREATE_TIME_IN_SECONDS, this.getLanguageVersionCreateTimeInSeconds());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_LAST_CHANGE_IN_SECONDS, this.getLanguageVersionLastChangeInSeconds());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_VALID_BEGIN_IN_SECONDS, this.getLanguageVersionValidBeginInSeconds());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_VALID_END_IN_SECONDS, this.getLanguageVersionValidEndInSeconds());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_ID, this.getLanguageVersionLanguageId());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_LANGUAGE_KEY, this.getLanguageVersionLanguageKey());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_MIME_TYPE, this.getLanguageVersionMimeType());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_STATUS, this.getLanguageVersionStatus());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_CURRENTLY_IN_PROCESSING, this.isLanguageVersionCurrentlyInProcessing());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_READY, this.isLanguageVersionReady());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_REVIEWED, this.isLanguageVersionReviewed());
-        indexMap.put(INDEX_FIELD_LANGUAGE_VERSION_REVIEW_REQUESTED, this.isLanguageVersionReviewRequested());
-        // *** currently unused;
-        //indexMap.put("clickCount", this.getClickCount());
-        //indexMap.put("downloadCount", this.getDownloadCount());
-        //indexMap.put("successorId", this.getSuccessorId());
-        //indexMap.put("languageVersionVersionComment", this.getLanguageVersionVersionComment());
-        // *** not neccessary;
-        //indexMap.put("languageVersionCasId", this.getLanguageVersionCasId());
-        //indexMap.put("languageVersionCasIdPdf", this.getLanguageVersionCasIdPdf());
-        //indexMap.put("languageVersionCasIdThumbnail", this.getLanguageVersionCasIdThumbnail());
-        //indexMap.put("languageVersionCasMd5", this.getLanguageVersionCasMd5());
 
         // *** handling map of firstReadTimes;
         // *** maps can only be indexed if key is a string;
-        Map<String, Long> firstReadTimesInSecondsMap = new HashMap<>();
+        Map<String, Long> firstReadTimesInSeconds = new HashMap<>();
         for (Long accountId : this.getFirstReadTimesInSeconds().keySet()) {
             if(accountId != null) {
                 // *** add accountId as string, keep "firstReadTime" as Long;
-                firstReadTimesInSecondsMap.put(accountId.toString(), this.getFirstReadTimesInSeconds().get(accountId));
+                firstReadTimesInSeconds.put(accountId.toString(), this.getFirstReadTimesInSeconds().get(accountId));
             }
         }
-        indexMap.put(INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS, firstReadTimesInSecondsMap);
+        indexMap.put(INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS, firstReadTimesInSeconds);
 
         // *** handling map of lastWriteTimes AKA authors;
         // *** maps can only be indexed if key is a string;
-        Map<String, Long> lastWriteTimesInSecondsMap = new HashMap<>();
+        Map<String, Long> lastWriteTimesInSeconds = new HashMap<>();
         for (Long accountId : this.getLastWriteTimesInSeconds().keySet()) {
             if(accountId != null) {
                 // *** add accountId as string, keep "lastWriteReadTime" as Long;
-                lastWriteTimesInSecondsMap.put(accountId.toString(), this.getLastWriteTimesInSeconds().get(accountId));
+                lastWriteTimesInSeconds.put(accountId.toString(), this.getLastWriteTimesInSeconds().get(accountId));
             }
         }
-        indexMap.put(INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS, lastWriteTimesInSecondsMap);
-
-        // *** roleRights;
-        List<Map<String, Object>> roleRightsListMap = new ArrayList<>();
-        if(this.getRoleRights() != null){
-            this.getRoleRights().stream().forEach((rdr) -> {
-                roleRightsListMap.add(rdr.indexMap());
-            });
-        }
-        indexMap.put(INDEX_FIELD_ROLE_RIGHTS, roleRightsListMap);
+        indexMap.put(INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS, lastWriteTimesInSeconds);
 
         // *** follower;
-        List<Map<String, Object>> followersMap = new ArrayList<>();
-        if(this.getFollowers() != null){
-            this.getFollowers().stream().forEach((followerPerson) -> {
-                followersMap.add(followerPerson.indexMapLight());
-            });
-        }
-        indexMap.put(INDEX_FIELD_FOLLOWERS, followersMap);
+        List<Map<String, Object>> followers = new ArrayList<>();
+        this.getFollowers().stream().forEach((followerPerson) -> {
+            followers.add(followerPerson.indexMapLight());
+        });
+        indexMap.put(INDEX_FIELD_FOLLOWERS, followers);
 
         // *** helpful;
-        List<Map<String, Object>> markedAsHelpfulByMap = new ArrayList<>();
-        if(this.getMarkedAsHelpfulBy() != null){
-            this.getMarkedAsHelpfulBy().stream().forEach((markedAsHelpfulByPerson) -> {
-                markedAsHelpfulByMap.add(markedAsHelpfulByPerson.indexMapLight());
-            });
-        }
-        indexMap.put(INDEX_FIELD_MARKED_AS_HELPFUL_BY, markedAsHelpfulByMap);
+        List<Map<String, Object>> markedAsHelpfulBy = new ArrayList<>();
+        this.getMarkedAsHelpfulBy().stream().forEach((markedAsHelpfulByPerson) -> {
+            markedAsHelpfulBy.add(markedAsHelpfulByPerson.indexMapLight());
+        });
+        indexMap.put(INDEX_FIELD_MARKED_AS_HELPFUL_BY, markedAsHelpfulBy);
 
         // *** responsible;
-        List<Map<String, Object>> responsiblesMap = new ArrayList<>();
-        if(this.getResponsibles() != null){
-            this.getResponsibles().stream().forEach((respPerson) -> {
-                responsiblesMap.add(respPerson.indexMapLight());
-            });
-        }
-        indexMap.put(INDEX_FIELD_RESPONSIBLES, responsiblesMap);
-
-        // *** additional-property;
-        List<Map<String, Object>> additionalPropertyMap = new ArrayList<>();
-        if(this.getAdditionalProperties() != null){
-            this.getAdditionalProperties().stream().forEach((ap) -> {
-                additionalPropertyMap.add(ap.indexMap());
-            });
-        }
-        indexMap.put(INDEX_FIELD_ADDITIONAL_PROPERTIES, additionalPropertyMap);
-
-        // *** extension-values;
-        this.getExtensionValues().stream().forEach((ev) -> {
-            indexMap.put(ev.getKey(), ev.getValue());
+        List<Map<String, Object>> responsibles = new ArrayList<>();
+        this.getResponsibles().stream().forEach((respPerson) -> {
+            responsibles.add(respPerson.indexMapLight());
         });
+        indexMap.put(INDEX_FIELD_RESPONSIBLES, responsibles);
 
         final List<String> partialUpdateKeys;
         if(this.isPartialUpdateFollowers()) {
@@ -1044,6 +1035,70 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     }
 
     @Override
+    public void initFromIndexMap(Map<String, Object> indexMap) {
+        this.initFromIndexMapDefault(indexMap);
+        // *** special handlings;
+        // *** categoryIds;
+        Object oCategoryIds = indexMap.get(INDEX_FIELD_CATEGORY_IDS);
+        if(oCategoryIds != null && oCategoryIds instanceof Collection) {
+            Collection<?> categoryIds = (Collection<?>)oCategoryIds;
+            for (Object categoryId : categoryIds) {
+                if(categoryId != null && categoryId instanceof Number) {
+                    this.getCategoryIds().add(((Number)categoryId).longValue());
+                }
+            }
+        }
+        // *** firstReadTimes;
+        Object oFirstReadTimes = indexMap.get(INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS);
+        if(oFirstReadTimes != null && oFirstReadTimes instanceof Map) {
+            Map<?, ?> firstReadTimes = (Map<?, ?>)oFirstReadTimes;
+            for(Object key : firstReadTimes.keySet()) {
+                Long accountId = null;
+                Long firstReadTime = null;
+                if(key != null && key instanceof String) {
+                    try {
+                        accountId = Long.parseLong((String)key);
+                    }
+                    catch(NumberFormatException e) {
+                        // *** do nothing;
+                    }
+                }
+                if(accountId != null) {
+                    Object oFirstReadTime = firstReadTimes.get(key);
+                    if(oFirstReadTime != null && oFirstReadTime instanceof Number) {
+                        firstReadTime = ((Number)oFirstReadTime).longValue();
+                        this.getFirstReadTimesInSeconds().put(accountId, firstReadTime);
+                    }
+                }
+            }
+        }
+        // *** lastWriteTimes;
+        Object oLastWriteTimes = indexMap.get(INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS);
+        if(oLastWriteTimes != null && oLastWriteTimes instanceof Map) {
+            Map<?, ?> lastWriteTimes = (Map<?, ?>)oLastWriteTimes;
+            for(Object key : lastWriteTimes.keySet()) {
+                Long accountId = null;
+                Long lastWriteTime = null;
+                if(key != null && key instanceof String) {
+                    try {
+                        accountId = Long.parseLong((String)key);
+                    }
+                    catch(NumberFormatException e) {
+                        // *** do nothing;
+                    }
+                }
+                if(accountId != null) {
+                    Object oLastWriteTime = lastWriteTimes.get(key);
+                    if(oLastWriteTime != null && oLastWriteTime instanceof Number) {
+                        lastWriteTime = ((Number)oLastWriteTime).longValue();
+                        this.getLastWriteTimesInSeconds().put(accountId, lastWriteTime);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
     public Language indexLanguage() {
         // ** fallback en;
         Language lang = Language.en;
@@ -1058,15 +1113,15 @@ public class Document extends ListResultEntry implements Identifiable, Indexable
     }
 
     @Override
-    public String indexTypeName() {
-        return INDEX_TYPE_NAME;
-    }
-
-    @Override
     public String indexAutocompleteInput() {
         return  this.getLanguageVersionTitle()
                 +" "+
                 (this.getLanguageVersionAbstract() != null ? this.getLanguageVersionAbstract() : "");
+    }
+
+    @Override
+    public String indexTypeName() {
+        return INDEX_TYPE_NAME;
     }
 
 }
