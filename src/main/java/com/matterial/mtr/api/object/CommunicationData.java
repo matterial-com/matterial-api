@@ -7,10 +7,9 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
 
 /**
  * Container representing CommunicationData
- * @author Philipp
  */
 @XmlRootElement
-public class CommunicationData implements Identifiable, IndexableChild {
+public class CommunicationData extends IndexableChild implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

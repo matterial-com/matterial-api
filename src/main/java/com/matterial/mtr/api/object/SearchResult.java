@@ -6,13 +6,11 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.matterial.mtr.api.object.meta.Indexable;
-
 /**
  * Container class representing a search result
  */
 @XmlRootElement
-public class SearchResult<T extends Indexable> extends ListResult<SearchResultEntry<T>> {
+public class SearchResult extends ListResult<SearchResultEntry> {
 
     private static final long serialVersionUID = 1L;
 

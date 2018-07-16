@@ -19,7 +19,7 @@ import com.matterial.mtr.api.object.meta.Indexable;
  * Container representing documents
  */
 @XmlRootElement
-public class Document extends ListResultEntry implements Identifiable, Indexable {
+public class Document extends Indexable implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

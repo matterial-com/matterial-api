@@ -8,7 +8,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing a right of a role for a document
  */
 @XmlRootElement
-public class RoleRight implements IndexableChild, Comparable<RoleRight> {
+public class RoleRight extends IndexableChild implements Comparable<RoleRight> {
 
     private static final long serialVersionUID = 1L;
 

@@ -12,7 +12,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing a role
  */
 @XmlRootElement
-public class Role extends ListResultEntry implements Identifiable, IndexableChild {
+public class Role extends IndexableChild implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

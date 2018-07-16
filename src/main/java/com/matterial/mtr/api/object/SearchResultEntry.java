@@ -8,18 +8,19 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.matterial.mtr.api.object.meta.Indexable;
+
 /**
  * Container class representing a single entry in a search result
  */
 @XmlRootElement
-// *** can not set generic to <T extends Indexable>, because of JAXB marshalling to XML will fail!
-public class SearchResultEntry<T> extends ListResultEntry {
+public class SearchResultEntry extends ListResultEntry {
 
     private static final long serialVersionUID = 1L;
 
     private String type;
     private String id;
-    private T source;
+    private Indexable source;
     private Map<String, Highlights> highlights;
     private float score;
 
@@ -33,7 +34,7 @@ public class SearchResultEntry<T> extends ListResultEntry {
     /**
      * constructor
      */
-    public SearchResultEntry(String type, String id, T source, float score) {
+    public SearchResultEntry(String type, String id, Indexable source, float score) {
         this.type = type;
         this.id = id;
         this.source = source;
@@ -56,11 +57,11 @@ public class SearchResultEntry<T> extends ListResultEntry {
         this.id = id;
     }
 
-    public T getSource() {
+    public Indexable getSource() {
         return this.source;
     }
 
-    public void setSource(T source) {
+    public void setSource(Indexable source) {
         this.source = source;
     }
 

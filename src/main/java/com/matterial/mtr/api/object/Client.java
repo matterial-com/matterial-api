@@ -9,7 +9,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * <strong>Client</strong>
  */
 @XmlRootElement
-public class Client implements Identifiable, IndexableChild {
+public class Client extends IndexableChild implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

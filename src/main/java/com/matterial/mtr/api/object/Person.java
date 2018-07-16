@@ -16,7 +16,7 @@ import com.matterial.mtr.api.object.meta.Indexable;
  * Container representing a person
  */
 @XmlRootElement
-public class Person extends ListResultEntry implements Identifiable, Indexable {
+public class Person extends Indexable implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

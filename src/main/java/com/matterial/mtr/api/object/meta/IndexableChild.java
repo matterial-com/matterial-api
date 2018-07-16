@@ -1,6 +1,5 @@
 package com.matterial.mtr.api.object.meta;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,10 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.matterial.mtr.api.object.ListResultEntry;
+
 /**
  * Interface for classes to be indexable by the EmbeddedSearchServer
  */
-public interface IndexableChild extends Serializable {
+public abstract class IndexableChild extends ListResultEntry {
+
+    private static final long serialVersionUID = 1L;
 
     public static final String INDEX_KEY_AUTOCOMPLETE = "autocomplete";
 
@@ -22,7 +25,7 @@ public interface IndexableChild extends Serializable {
      *
      * @return Map of key:String and value:Object
      */
-    public default Map<String, Object> indexMap() {
+    public Map<String, Object> indexMap() {
         return this.indexMap(null);
     }
 
@@ -32,7 +35,7 @@ public interface IndexableChild extends Serializable {
      *
      * @return Map of key:String and value:Object
      */
-    public default Map<String, Object> indexMap(List<String> doNotIndexKeys) {
+    public Map<String, Object> indexMap(List<String> doNotIndexKeys) {
         Map<String, Object> indexMap = new HashMap<>();
         // *** for each declared method;
         for (Method m : this.getClass().getDeclaredMethods()) {
@@ -94,7 +97,7 @@ public interface IndexableChild extends Serializable {
      * Init object with data from indexMap.
      * Default implementation uses reflection to fill the object.
      */
-    public default void initFromIndexMap(Map<String, Object> indexMap) {
+    public void initFromIndexMap(Map<String, Object> indexMap) {
         this.initFromIndexMapDefault(indexMap);
     }
 
@@ -102,7 +105,7 @@ public interface IndexableChild extends Serializable {
      * Init object with data from indexMap.
      * Default implementation uses reflection to fill the object.
      */
-    public default void initFromIndexMapDefault(Map<String, Object> indexMap) {
+    public void initFromIndexMapDefault(Map<String, Object> indexMap) {
         if(indexMap != null) {
             // *** for each entry;
             for(String key : indexMap.keySet()) {
@@ -136,7 +139,7 @@ public interface IndexableChild extends Serializable {
     /**
      * helper method.
      */
-    public default Field _field(String key) {
+    private Field _field(String key) {
         Field f = null;
         try {
             f = this.getClass().getDeclaredField(key);
@@ -150,7 +153,7 @@ public interface IndexableChild extends Serializable {
     /**
      * helper method.
      */
-    public default Method _method(String key) {
+    private Method _method(String key) {
         // *** lowercase the first letter;
         char c[] = key.toCharArray();
         c[0] -= 32; // c[0] = Character.toUpperCase(c[0]);
@@ -170,7 +173,7 @@ public interface IndexableChild extends Serializable {
      * helper method.
      */
     @SuppressWarnings("unchecked")
-    public default void _handleListOfMaps(String key, List<?> listOfMaps) {
+    private void _handleListOfMaps(String key, List<?> listOfMaps) {
         Method m = this._method(key);
         if(m != null) {
             try {
@@ -210,7 +213,7 @@ public interface IndexableChild extends Serializable {
      * helper method.
      */
     @SuppressWarnings("unchecked")
-    public default void _handleMap(String key, Map<?, ?> map) {
+    private void _handleMap(String key, Map<?, ?> map) {
         Field f = this._field(key);
         if(f != null) {
             try {
@@ -230,7 +233,7 @@ public interface IndexableChild extends Serializable {
     /**
      * helper method.
      */
-    public default void _putValueIntoField(Field f, Object value) {
+    private void _putValueIntoField(Field f, Object value) {
         try {
             if(f != null) {
                 // *** access private field;

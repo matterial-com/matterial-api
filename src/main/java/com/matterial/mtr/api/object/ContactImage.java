@@ -9,7 +9,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing ContactImages
  */
 @XmlRootElement
-public class ContactImage implements Identifiable, IndexableChild {
+public class ContactImage extends IndexableChild implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

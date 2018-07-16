@@ -1,10 +1,12 @@
 package com.matterial.mtr.api.object.meta;
 
-
 /**
  * Interface for classes to be indexable by the EmbeddedSearchServer
  */
-public interface Indexable extends IndexableChild {
+//*** Indexable has to be a class (no interface), because of JAXB marshalling to XML will fail!
+public abstract class Indexable extends IndexableChild {
+
+    private static final long serialVersionUID = 1L;
 
     public enum Language {
         de,en,fr,it,es,sv //,zh
@@ -12,27 +14,23 @@ public interface Indexable extends IndexableChild {
 
     /**
      * Get id (unique for this type)
-     * @return String
      */
-    public String indexId();
+    public abstract String indexId();
 
     /**
      * Get langauage that should be used for index analysis
-     * @return Indexable.Language
      */
-    public Language indexLanguage();
+    public abstract Language indexLanguage();
 
     /**
      * Get the typeName to be used for indexing
-     * @return String
      */
-    public String indexTypeName();
+    public abstract String indexTypeName();
 
     /**
      * Textual information to be used for autocomplete<br/>
      * Be aware of memory consumption
-     * @return String
      */
-    public String indexAutocompleteInput();
+    public abstract String indexAutocompleteInput();
 
 }

@@ -9,7 +9,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing an address
  */
 @XmlRootElement
-public class Address implements Identifiable, IndexableChild {
+public class Address extends IndexableChild implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 

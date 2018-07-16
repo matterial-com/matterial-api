@@ -16,7 +16,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing additional properties of documents
  */
 @XmlRootElement
-public class AdditionalProperty implements IndexableChild, Identifiable, Comparable<AdditionalProperty> {
+public class AdditionalProperty extends IndexableChild implements Identifiable, Comparable<AdditionalProperty> {
 
     private static final long serialVersionUID = 1L;
 

@@ -14,7 +14,7 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * <strong>ExtensionValue</strong>
  */
 @XmlRootElement
-public class ExtensionValue implements IndexableChild, Identifiable, Comparable<ExtensionValue> {
+public class ExtensionValue extends IndexableChild implements Identifiable, Comparable<ExtensionValue> {
 
     private static final long serialVersionUID = 1L;
 
