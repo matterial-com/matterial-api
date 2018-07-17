@@ -10,6 +10,7 @@ import com.matterial.mtr.api.object.Client;
 import com.matterial.mtr.api.object.CommunicationData;
 import com.matterial.mtr.api.object.ContactImage;
 import com.matterial.mtr.api.object.Document;
+import com.matterial.mtr.api.object.ExtensionValue;
 import com.matterial.mtr.api.object.Person;
 import com.matterial.mtr.api.object.Role;
 import com.matterial.mtr.api.object.RoleRight;
@@ -26,6 +27,7 @@ public class Mapping {
         m.put(Document.INDEX_FIELD_FOLLOWERS, Person.class);
         m.put(Document.INDEX_FIELD_MARKED_AS_HELPFUL_BY, Person.class);
         m.put(Document.INDEX_FIELD_ADDITIONAL_PROPERTIES, AdditionalProperty.class);
+        m.put(Document.INDEX_FIELD_EXTENSION_VALUES, ExtensionValue.class);
         // *** person;
         m.put(Person.INDEX_FIELD_ROLES_FUNCTIONAL, Role.class);
         m.put(Person.INDEX_FIELD_ROLES_CONTENT, Role.class);
