@@ -410,11 +410,6 @@ public class Person extends Indexable implements Identifiable {
     }
 
     @Override
-    public String indexTypeName() {
-        return INDEX_TYPE_NAME;
-    }
-
-    @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("FirstName: ");

@@ -35,7 +35,7 @@ public abstract class IndexableChild extends ListResultEntry {
      *
      * @return Map of key:String and value:Object
      */
-    public Map<String, Object> indexMap(List<String> doNotIndexKeys) {
+    protected Map<String, Object> indexMap(List<String> doNotIndexKeys) {
         Map<String, Object> indexMap = new HashMap<>();
         // *** for each declared method;
         for (Method m : this.getClass().getDeclaredMethods()) {
@@ -98,14 +98,6 @@ public abstract class IndexableChild extends ListResultEntry {
      * Default implementation uses reflection to fill the object.
      */
     public void initFromIndexMap(Map<String, Object> indexMap) {
-        this.initFromIndexMapDefault(indexMap);
-    }
-
-    /**
-     * Init object with data from indexMap.
-     * Default implementation uses reflection to fill the object.
-     */
-    public void initFromIndexMapDefault(Map<String, Object> indexMap) {
         if(indexMap != null) {
             // *** for each entry;
             for(String key : indexMap.keySet()) {
@@ -239,6 +231,28 @@ public abstract class IndexableChild extends ListResultEntry {
                 // *** access private field;
                 f.setAccessible(true);
                 try {
+                    // *** special handling for Number;
+                    if(value instanceof Number) {
+                        Class<?> numberType = f.getType();
+                        if(numberType != null) {
+                            // *** Long;
+                            if(numberType.getName().equals(Long.class.getName())) {
+                                value = ((Number)value).longValue();
+                            }
+                            // *** Integer;
+                            else if(numberType.getName().equals(Integer.class.getName())) {
+                                value = ((Number)value).intValue();
+                            }
+                            // *** Double;
+                            if(numberType.getName().equals(Double.class.getName())) {
+                                value = ((Number)value).doubleValue();
+                            }
+                            // *** Float;
+                            if(numberType.getName().equals(Float.class.getName())) {
+                                value = ((Number)value).floatValue();
+                            }
+                        }
+                    }
                     f.set(this, value);
                 }
                 catch (IllegalArgumentException | IllegalAccessException e) {

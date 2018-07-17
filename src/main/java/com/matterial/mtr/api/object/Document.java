@@ -23,6 +23,8 @@ public class Document extends Indexable implements Identifiable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String INDEX_TYPE_NAME = Document.class.getSimpleName().toLowerCase();
+
     /**
      * usage:
      * PATTERN_FILE_NAME.matcher(name).replaceAll("_");
@@ -47,8 +49,6 @@ public class Document extends Indexable implements Identifiable {
         }
         return fileNameCleaned;
     }
-
-    public static final String INDEX_TYPE_NAME = Document.class.getSimpleName().toLowerCase();
 
     // *** document-poperties;
     public static final String INDEX_FIELD_ID = "id";
@@ -1036,7 +1036,7 @@ public class Document extends Indexable implements Identifiable {
 
     @Override
     public void initFromIndexMap(Map<String, Object> indexMap) {
-        this.initFromIndexMapDefault(indexMap);
+        super.initFromIndexMap(indexMap);
         // *** special handlings;
         // *** categoryIds;
         Object oCategoryIds = indexMap.get(INDEX_FIELD_CATEGORY_IDS);
@@ -1117,11 +1117,6 @@ public class Document extends Indexable implements Identifiable {
         return  this.getLanguageVersionTitle()
                 +" "+
                 (this.getLanguageVersionAbstract() != null ? this.getLanguageVersionAbstract() : "");
-    }
-
-    @Override
-    public String indexTypeName() {
-        return INDEX_TYPE_NAME;
     }
 
 }

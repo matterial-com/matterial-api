@@ -3,7 +3,6 @@ package com.matterial.mtr.api.object.meta;
 /**
  * Interface for classes to be indexable by the EmbeddedSearchServer
  */
-//*** Indexable has to be a class (no interface), because of JAXB marshalling to XML will fail!
 public abstract class Indexable extends IndexableChild {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +24,9 @@ public abstract class Indexable extends IndexableChild {
     /**
      * Get the typeName to be used for indexing
      */
-    public abstract String indexTypeName();
+    public String indexTypeName() {
+        return this.getJsonType().toLowerCase();
+    }
 
     /**
      * Textual information to be used for autocomplete<br/>

@@ -163,7 +163,7 @@ public class ExtensionValue extends IndexableChild implements Identifiable, Comp
 
     @Override
     public void initFromIndexMap(Map<String, Object> indexMap) {
-        this.initFromIndexMapDefault(indexMap);
+        super.initFromIndexMap(indexMap);
         // *** special handling for value, which is an object (object will not be handled by super-class);
         this.setValue(indexMap.get("value"));
     }
