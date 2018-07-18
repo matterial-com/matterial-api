@@ -178,7 +178,7 @@ public abstract class IndexableChild extends ListResultEntry {
                         if(oMap != null && oMap instanceof Map) {
                             Map<String, Object> map = (Map<String, Object>)oMap;
                             // *** try to intantiate IndexableChild;
-                            Class<?> clazz = Mapping.FIELD_CLASS.get(key);
+                            Class<?> clazz = IndexableChildEmbeddedListObjectMapping.FIELD_CLASS.get(key);
                             if(clazz != null) {
                                 try {
                                     Object instance = clazz.newInstance();

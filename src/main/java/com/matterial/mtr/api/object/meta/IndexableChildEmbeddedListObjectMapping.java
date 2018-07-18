@@ -15,7 +15,15 @@ import com.matterial.mtr.api.object.Person;
 import com.matterial.mtr.api.object.Role;
 import com.matterial.mtr.api.object.RoleRight;
 
-public class Mapping {
+/**
+ * <strong>IndexableChildEmbeddedListObjectMapping</strong>
+ *
+ * Provides a `field` to `class` mapping for `IndexableChilds`.
+ * IndexableChilds may contain List<IndexableChild). The type of the embedded objects will not be available at runtime.
+ * So this class provides a class-mapping by IndexableChild.INDEX_FIELD.
+ * This is needed within `IndexableChild.initFromIndexMap()` which mainly uses reflection to init the IndexableChild.
+ */
+public class IndexableChildEmbeddedListObjectMapping {
 
     public static final Map<String, Class<?>> FIELD_CLASS;
     static {

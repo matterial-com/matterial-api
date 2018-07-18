@@ -3,9 +3,7 @@ package com.matterial.mtr.api.object;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Indexable;
@@ -21,7 +19,7 @@ public class SearchResultEntry extends ListResultEntry {
     private String type;
     private String id;
     private Indexable source;
-    private Map<String, Highlights> highlights;
+    private List<Highlight> highlights;
     private float score;
 
     /**
@@ -65,11 +63,14 @@ public class SearchResultEntry extends ListResultEntry {
         this.source = source;
     }
 
-    public Map<String, Highlights> getHighlights() {
+    public List<Highlight> getHighlights() {
+        if(this.highlights == null) {
+            this.highlights = new ArrayList<>();
+        }
         return highlights;
     }
 
-    public void setHighlights(Map<String, Highlights> highlights) {
+    public void setHighlights(List<Highlight> highlights) {
         this.highlights = highlights;
     }
 
@@ -91,26 +92,39 @@ public class SearchResultEntry extends ListResultEntry {
     }
 
     /**
-     * <strong>Highlights</strong>
+     * <strong>Highlight</strong>
      */
-    public static class Highlights {
+    public static class Highlight {
 
-        private List<String> highlights;
+        /**
+         * searchquery found in this field.
+         * for example: languageVersionTitle, languageVersionAbstract, mainContent, ...
+         */
+        private String indexField;
+        /** fragments found within indexField */
+        private List<String> fragments;
 
-        public Highlights() {
+        public Highlight() {
             // *** do nothing;
         }
 
-        @XmlElement(name="highlight")
-        public List<String> getHighlights() {
-            if(this.highlights == null) {
-                this.highlights = new ArrayList<>();
-            }
-            return this.highlights;
+        public String getIndexField() {
+            return indexField;
         }
 
-        public void setHighlights(List<String> highlights) {
-            this.highlights = highlights;
+        public void setIndexField(String indexField) {
+            this.indexField = indexField;
+        }
+
+        public List<String> getFragments() {
+            if(this.fragments == null) {
+                this.fragments = new ArrayList<>();
+            }
+            return this.fragments;
+        }
+
+        public void setFragments(List<String> fragments) {
+            this.fragments = fragments;
         }
 
     }

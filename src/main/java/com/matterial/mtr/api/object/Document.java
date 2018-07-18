@@ -956,6 +956,7 @@ public class Document extends Indexable implements Identifiable {
                                                                    INDEX_FIELD_CATEGORY_IDS,
                                                                    INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS,
                                                                    INDEX_FIELD_LAST_WRITE_TIMES_IN_SECONDS,
+                                                                   INDEX_FIELD_EXTENSION_VALUES,
                                                                    // *** using indexMapLight();
                                                                    INDEX_FIELD_RESPONSIBLES,
                                                                    INDEX_FIELD_FOLLOWERS,
@@ -1005,6 +1006,11 @@ public class Document extends Indexable implements Identifiable {
             responsibles.add(respPerson.indexMapLight());
         });
         indexMap.put(INDEX_FIELD_RESPONSIBLES, responsibles);
+
+        // *** extension-values;
+        this.getExtensionValues().stream().forEach((ev) -> {
+            indexMap.put(INDEX_FIELD_EXTENSION_VALUES+ev.getKey(), ev.getValue());
+        });
 
         final List<String> partialUpdateKeys;
         if(this.isPartialUpdateFollowers()) {
