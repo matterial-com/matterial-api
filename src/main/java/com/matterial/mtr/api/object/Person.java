@@ -56,7 +56,7 @@ public class Person extends Indexable implements Identifiable {
     private Long accountCreateTimeInSeconds;
     private Long accountLastLoginInSeconds;
     private boolean instanceOwner;
-    private boolean limited;
+    private boolean demo;
 
     private long contactId;
     private String firstName;
@@ -90,7 +90,7 @@ public class Person extends Indexable implements Identifiable {
                   Long accountCreateTimeInSeconds,
                   Long accountLastLoginInSeconds,
                   Boolean instanceOwner,
-                  Boolean limited,
+                  Boolean demo,
                   long contactId,
                   String firstName,
                   String lastName,
@@ -104,7 +104,7 @@ public class Person extends Indexable implements Identifiable {
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
         // *** no acount => no instance-owner;
         this.instanceOwner = instanceOwner==null?false:instanceOwner;
-        this.limited = limited==null?false:limited;
+        this.demo = demo==null?false:demo;
         this.contactId = contactId;
         this.firstName = "";
         if(firstName != null) {
@@ -182,12 +182,12 @@ public class Person extends Indexable implements Identifiable {
         this.instanceOwner = instanceOwner;
     }
 
-    public boolean isLimited() {
-        return this.limited;
+    public boolean isDemo() {
+        return this.demo;
     }
 
-    public void setLimited(boolean limited) {
-        this.limited = limited;
+    public void setDemo(boolean demo) {
+        this.demo = demo;
     }
 
     public long getContactId() {
