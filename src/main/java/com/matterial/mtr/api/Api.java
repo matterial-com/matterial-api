@@ -5,6 +5,49 @@ package com.matterial.mtr.api;
  */
 public interface Api {
 
+    // *** MODULE;
+    public static final String CATEGORY = "category";
+    public static final String TYPE = "type";
+    public static final String CLIENT = "client";
+    public static final String PREFERENCE = "preference";
+    public static final String COMMENT = "comment";
+    public static final String CONVERSION = "conversion";
+    public static final String DOCUMENT = "document";
+    public static final String ADDITIONAL_PROPERTY = "additionalproperty";
+    public static final String ATTACHMENT = "attachment";
+    public static final String CHANGE_LOG = "changelog";
+    public static final String EXTENSION_VALUE = "extensionvalue";
+    public static final String LOCK = "lock";
+    public static final String RATING = "rating";
+    public static final String SAVED_SEARCH = "savedsearch";
+    public static final String SKIN = "skin";
+    public static final String TEMP_FILE = "tempfile";
+    public static final String APP_INITIALIZER = "appinitializer";
+    public static final String INSTANCE_CONTROL = "instancecontrol";
+    public static final String LANGUAGE = "language";
+    public static final String LICENCE = "licence";
+    public static final String LOGON = "logon";
+    public static final String AUTO = "auto";
+    public static final String LTI = "lti";
+    public static final String NTLM = "ntlm";
+    public static final String OAUTH2 = "oauth2";
+    public static final String COBOT = "cobot";
+    public static final String GOOGLE = "google";
+    public static final String MICROSOFT = "microsoft";
+    public static final String PASSWORD_RESET = "passwordreset";
+    public static final String SAML = "saml";
+    public static final String MIGRATE = "migrate";
+    public static final String NOTIFICATION = "notification";
+    public static final String PERSON = "person";
+    public static final String ACCOUNT_SETTING = "accountsetting";
+    public static final String CONTACT_IMAGE = "contactimage";
+    public static final String ROLE = "role";
+    public static final String TASK = "task";
+    public static final String STATUS = "status";
+    public static final String TRACKING = "tracking";
+    public static final String TEST = "test";
+    public static final String VERSION = "version";
+
     // *** PATH;
     // *** general;
     public static final String CSV = "csv";
@@ -31,9 +74,7 @@ public interface Api {
     public static final String MIME_TYPE = "mimetype";
     public static final String THUMBNAIL = "thumbnail";
     // *** document;
-    public static final String VERSION = "version";
     public static final String FILE = "file";
-    public static final String LANGUAGE = "language";
     public static final String TRASH = "trash";
     public static final String UNTRASH = "untrash";
     public static final String ARCHIVE = "archive";
@@ -68,7 +109,6 @@ public interface Api {
     public static final String USAGE = "usage";
     public static final String GENERATE = "generate";
     // *** logon;
-    public static final String CLIENT = "client";
     public static final String LOGIN_DATA = "logindata";
     public static final String LOGOUT = "logout";
     public static final String IMPERSONATE = "impersonate";
