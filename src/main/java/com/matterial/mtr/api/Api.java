@@ -206,7 +206,6 @@ public interface Api {
     public static final String PARAM_MIME_TYPE = "mimeType";
     public static final String PARAM_MENTIONED_ACCOUNT_ID_IN_COMMENT = "mentionedAccountIdInComment";
     public static final String PARAM_MENTIONED_ACCOUNT_ID_IN_COMMENT_UNREAD = "mentionedAccountIdInCommentUnread";
-    public static final String PARAM_DISABLE_RIGHTS_CHECK = "disableRightsCheck";
     public static final String PARAM_LOAD_RESPONSIBLES = "loadResponsibles";
     public static final String PARAM_LOAD_AUTHORS = "loadAuthors";
     public static final String PARAM_LOAD_LAST_AUTHOR_ONLY = "loadLastAuthorOnly";
