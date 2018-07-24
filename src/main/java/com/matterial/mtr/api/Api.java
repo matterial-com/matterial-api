@@ -54,6 +54,7 @@ public interface Api {
     public static final String VCARD = "vcard";
     public static final String ACTIVATE = "activate";
     public static final String DEACTIVATE = "deactivate";
+    public static final String RESET = "reset";
     public static final String MAP = "map";
     public static final String AVAILABLE = "available";
     public static final String FOLLOW = "follow";
@@ -84,6 +85,7 @@ public interface Api {
     public static final String REMOVAL = "removal";
     public static final String PDF_CONVERSION = "pdfconversion";
     public static final String SNAP = "snap";
+    public static final String DISABLE_RIGHTS_CHECK = "disablerightscheck";
     // *** skin;
     public static final String CUSTOMER_CSS = "customer.css";
     // *** app-initializer;
