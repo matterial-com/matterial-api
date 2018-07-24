@@ -21,6 +21,7 @@ public class LoginData implements Serializable {
 
     private String sessionId;
     private long sessionDataTimeout;
+    private boolean firstLogin;
     private boolean pwdMustChange;
     private boolean pwdExists;
     private boolean externallyAuthenticated;
@@ -62,6 +63,14 @@ public class LoginData implements Serializable {
 
     public void setSessionDataTimeout(long sessionDataTimeout) {
         this.sessionDataTimeout = sessionDataTimeout;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 
     public boolean isPwdMustChange() {
