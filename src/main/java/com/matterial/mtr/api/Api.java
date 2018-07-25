@@ -305,6 +305,7 @@ public interface Api {
     public static final String PARAM_TASK_ID = "taskId";
     public static final String PARAM_AUTHOR_ACCOUNT_ID = "authorAccountId";
     public static final String PARAM_ASSIGNED_ONLY = "assignedOnly";
+    public static final String PARAM_HIDE_TASKS_OF_REMOVED_DOCUMENTS = "hideTasksOfRemovedDocuments";
     // *** task/status;
     public static final String PARAM_STATUS_ID = "statusId";
     public static final String PARAM_STATUS_ID_EXCLUDE = "statusIdExclude";
