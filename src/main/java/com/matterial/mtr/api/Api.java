@@ -85,6 +85,7 @@ public interface Api {
     public static final String REMOVAL = "removal";
     public static final String PDF_CONVERSION = "pdfconversion";
     public static final String SNAP = "snap";
+    public static final String COMPARE = "compare";
     public static final String DISABLE_RIGHTS_CHECK = "disablerightscheck";
     // *** skin;
     public static final String CUSTOMER_CSS = "customer.css";
@@ -214,6 +215,8 @@ public interface Api {
     public static final String PARAM_LOAD_FOLLOWERS = "loadFollowers";
     public static final String PARAM_LOAD_AM_I_FOLLOWING = "loadAmIFollowing";
     public static final String PARAM_LOAD_MARKED_AS_HELPFUL_BY = "loadMarkedAsHelpfulBy";
+    public static final String PARAM_OLD_DOCUMENT_LANGUAGE_VERSION_ID = "oldDocumentLanguageVersionId";
+    public static final String PARAM_NEW_DOCUMENT_LANGUAGE_VERSION_ID = "newDocumentLanguageVersionId";
     /** load attachments related to current version */
     public static final String PARAM_LOAD_ATTACHMENTS = "loadAttachments";
     /** load attachments related to current language */
