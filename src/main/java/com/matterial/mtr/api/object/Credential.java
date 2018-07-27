@@ -14,6 +14,9 @@ public class Credential implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final long SYSTEM_ACCOUNT_ID = 1L;
+    public static final String SYSTEM_ACCOUNT_LOGIN = "system";
+
     private long id;
     private String login;
     private String password;

@@ -32,11 +32,6 @@ public class Permissions implements Serializable {
     public static final long EDIT_CATEGORY_TYPE_TAG = 1L << 16;
     public static final long CREATE_SNAP = 1L << 17;
 
-    /**
-     * not related to bitmask;
-     */
-    private boolean systemAccount;
-
     private long bitmask;
     private boolean administrateAll;
     private boolean editPerson;
@@ -61,13 +56,7 @@ public class Permissions implements Serializable {
         // *** do nothing;
     }
 
-    public Permissions(long bitmask, boolean systemAccount) {
-        this(bitmask);
-        this.systemAccount = systemAccount;
-    }
-
     public Permissions(long bitmask) {
-        this.systemAccount = false;
         this.bitmask = bitmask;
         this.administrateAll = ((bitmask & ADMINISTRATE_ALL) > 0);
         this.editPerson = ((bitmask & (EDIT_PERSON | ADMINISTRATE_ALL)) > 0);
@@ -150,14 +139,6 @@ public class Permissions implements Serializable {
             bitmask |= CREATE_SNAP;
         }
         this.setBitmask(bitmask);
-    }
-
-    public boolean isSystemAccount() {
-        return systemAccount;
-    }
-
-    public void setSystemAccount(boolean systemAccount) {
-        this.systemAccount = systemAccount;
     }
 
     public long getBitmask() {

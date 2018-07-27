@@ -57,6 +57,7 @@ public class Person extends Indexable implements Identifiable {
     private Long accountLastLoginInSeconds;
     private boolean instanceOwner;
     private boolean demo;
+    private boolean systemAccount;
 
     private long contactId;
     private String firstName;
@@ -65,6 +66,7 @@ public class Person extends Indexable implements Identifiable {
     private Long birthdayInSeconds;
     private Integer gender;
 
+    private Permissions permissions;
     private ContactImage contactImage;
     private Role rolePersonal;
     private Role roleClientGate;
@@ -98,7 +100,8 @@ public class Person extends Indexable implements Identifiable {
                   Long birthdayInSeconds,
                   Integer gender) {
         this.accountId = accountId;
-        this.accountLogin = accountLogin;
+        // *** additionally sets system-account-flag;
+        this.setAccountLogin(accountLogin);
         this.superiorAccountId = superiorAccountId;
         this.accountCreateTimeInSeconds = accountCreateTimeInSeconds;
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
@@ -146,8 +149,12 @@ public class Person extends Indexable implements Identifiable {
         return accountLogin;
     }
 
+    /**
+     * additionally sets system-account-flag.
+     */
     public void setAccountLogin(String accountLogin) {
         this.accountLogin = accountLogin;
+        this.systemAccount = this.checkForSystemAccount();
     }
 
     public Long getSuperiorAccountId() {
@@ -188,6 +195,14 @@ public class Person extends Indexable implements Identifiable {
 
     public void setDemo(boolean demo) {
         this.demo = demo;
+    }
+
+    public boolean isSystemAccount() {
+        return systemAccount;
+    }
+
+    public void setSystemAccount(boolean systemAccount) {
+        this.systemAccount = systemAccount;
     }
 
     public long getContactId() {
@@ -236,6 +251,14 @@ public class Person extends Indexable implements Identifiable {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Permissions getPermissions() {
+        return this.permissions;
+    }
+
+    public void setPermissions(Permissions permissions) {
+        this.permissions = permissions;
     }
 
     public ContactImage getContactImage() {
@@ -407,6 +430,57 @@ public class Person extends Indexable implements Identifiable {
             buffer.append(this.getAccountLogin());
         }
         return buffer.toString();
+    }
+
+    public void updatePermissions(Licence licence) {
+        // *** load all roles of current account for this client;
+        long permissionBitmask = 0L;
+        Role rolePersonal = this.getRolePersonal();
+        if(rolePersonal != null) {
+            // *** adding role.bitmask;
+            permissionBitmask |= rolePersonal.getBitmask();
+        }
+        for(Role roleFunctional : this.getRolesFunctional()) {
+            if(roleFunctional != null) {
+                // *** adding role.bitmask;
+                permissionBitmask |= roleFunctional.getBitmask();
+            }
+        }
+        // *** if no review-roles...
+        if(licence != null && !licence.isPackageReview()) {
+            // *** everybody gets permission: PUBLISH_UNREVIEWED;
+            permissionBitmask |= Permissions.PUBLISH_UNREVIEWED;
+        }
+        // *** if no functional-roles, everybody gets all permissions;
+        if(licence != null && !licence.isPackageRole()) {
+            permissionBitmask |= Permissions.ADMINISTRATE_ALL;
+        }
+        // *** system should get instance-owner- and system-flag;
+        if(this.checkForSystemAccount()) {
+            // *** sets the instance-owner-flag for system-account;
+            this.setInstanceOwner(true);
+            this.setSystemAccount(true);
+        }
+        // *** instance-owners should always get admin-bitmask;
+        if(this.isInstanceOwner()) {
+            permissionBitmask |= Permissions.ADMINISTRATE_ALL;
+        }
+        this.setPermissions(new Permissions(permissionBitmask));
+    }
+
+    /**
+     * check for system-account.
+     *
+     * @return true, if current person is a system-account
+     */
+    public boolean checkForSystemAccount() {
+        boolean result = false;
+        String currentAccountLogin = this.getAccountLogin();
+        if(currentAccountLogin != null &&
+           Credential.SYSTEM_ACCOUNT_LOGIN.equalsIgnoreCase(currentAccountLogin)) {
+            result = true;
+        }
+        return result;
     }
 
     @Override

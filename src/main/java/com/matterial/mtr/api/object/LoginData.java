@@ -29,7 +29,6 @@ public class LoginData implements Serializable {
     private Licence licence;
     private DataSource currentDataSource;
     private DataSource favouriteDataSource;
-    private Permissions permissions;
     private Person person;
     private Client client;
     private Collection<Language> availableLanguages;
@@ -129,14 +128,6 @@ public class LoginData implements Serializable {
 
     public void setFavouriteDataSource(DataSource favouriteDataSource) {
         this.favouriteDataSource = favouriteDataSource;
-    }
-
-    public Permissions getPermissions() {
-        return this.permissions;
-    }
-
-    public void setPermissions(Permissions permissions) {
-        this.permissions = permissions;
     }
 
     public Person getPerson() {
