@@ -1,6 +1,7 @@
 package com.matterial.mtr.api.object;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +16,39 @@ import com.matterial.mtr.api.object.meta.Indexable;
  * Container representing a person
  */
 @XmlRootElement
-public class Person extends ListResultEntry implements Identifiable, Indexable{
+public class Person extends Indexable implements Identifiable {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * typeName to be used in index
-     */
-    public static final String INDEX_TYPE_NAME  = "person";
+
+    public static final String INDEX_TYPE_NAME = Person.class.getSimpleName().toLowerCase();
+
+    public static final String INDEX_FIELD_ACCOUNT_ID = "accountId";
+    public static final String INDEX_FIELD_ACCOUNT_LOGIN = "accountLogin";
+    public static final String INDEX_FIELD_SUPERIOR_ACCOUNT_ID = "superiorAccountId";
+    public static final String INDEX_FIELD_ACCOUNT_CREATE_TIME_IN_SECONDS = "accountCreateTimeInSeconds";
+    public static final String INDEX_FIELD_ACCOUNT_LAST_LOGIN_IN_SECONDS = "accountLastLoginInSeconds";
+    public static final String INDEX_FIELD_INSTANCE_OWNER = "instanceOwner";
+    public static final String INDEX_FIELD_LIMITED = "limited";
+
+    public static final String INDEX_FIELD_CONTACT_ID = "contactId";
+    public static final String INDEX_FIELD_FIRST_NAME = "firstName";
+    public static final String INDEX_FIELD_LAST_NAME = "lastName";
+    public static final String INDEX_FIELD_POSITION = "position";
+    public static final String INDEX_FIELD_BIRTHDAY_IN_SECONDS = "birthdayInSeconds";
+    public static final String INDEX_FIELD_GENDER = "gender";
+
+    public static final String INDEX_FIELD_CONTACT_IMAGE = "contactImage";
+    public static final String INDEX_FIELD_ROLE_PERSONAL = "rolePersonal";
+    public static final String INDEX_FIELD_ROLE_CLIENT_GATE = "roleClientGate";
+
+    public static final String INDEX_FIELD_ROLES_FUNCTIONAL = "rolesFunctional";
+    public static final String INDEX_FIELD_ROLES_CONTENT = "rolesContent";
+    public static final String INDEX_FIELD_ROLES_REVIEW = "rolesReview";
+    public static final String INDEX_FIELD_CLIENTS = "clients";
+    public static final String INDEX_FIELD_ADDRESSES = "addresses";
+    public static final String INDEX_FIELD_COMMUNICATION_DATA = "communicationData";
+    public static final String INDEX_FIELD_CONTACT_IMAGES = "contactImages";
+
 
     private long accountId;
     private String accountLogin;
@@ -29,7 +56,8 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long accountCreateTimeInSeconds;
     private Long accountLastLoginInSeconds;
     private boolean instanceOwner;
-    private boolean limited;
+    private boolean demo;
+    private boolean systemAccount;
 
     private long contactId;
     private String firstName;
@@ -38,6 +66,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     private Long birthdayInSeconds;
     private Integer gender;
 
+    private Permissions permissions;
     private ContactImage contactImage;
     private Role rolePersonal;
     private Role roleClientGate;
@@ -63,7 +92,7 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
                   Long accountCreateTimeInSeconds,
                   Long accountLastLoginInSeconds,
                   Boolean instanceOwner,
-                  Boolean limited,
+                  Boolean demo,
                   long contactId,
                   String firstName,
                   String lastName,
@@ -71,13 +100,14 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
                   Long birthdayInSeconds,
                   Integer gender) {
         this.accountId = accountId;
-        this.accountLogin = accountLogin;
+        // *** additionally sets system-account-flag;
+        this.setAccountLogin(accountLogin);
         this.superiorAccountId = superiorAccountId;
         this.accountCreateTimeInSeconds = accountCreateTimeInSeconds;
         this.accountLastLoginInSeconds = accountLastLoginInSeconds;
         // *** no acount => no instance-owner;
         this.instanceOwner = instanceOwner==null?false:instanceOwner;
-        this.limited = limited==null?false:limited;
+        this.demo = demo==null?false:demo;
         this.contactId = contactId;
         this.firstName = "";
         if(firstName != null) {
@@ -119,8 +149,12 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         return accountLogin;
     }
 
+    /**
+     * additionally sets system-account-flag.
+     */
     public void setAccountLogin(String accountLogin) {
         this.accountLogin = accountLogin;
+        this.systemAccount = this.checkForSystemAccount();
     }
 
     public Long getSuperiorAccountId() {
@@ -155,12 +189,20 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
         this.instanceOwner = instanceOwner;
     }
 
-    public boolean isLimited() {
-        return this.limited;
+    public boolean isDemo() {
+        return this.demo;
     }
 
-    public void setLimited(boolean limited) {
-        this.limited = limited;
+    public void setDemo(boolean demo) {
+        this.demo = demo;
+    }
+
+    public boolean isSystemAccount() {
+        return systemAccount;
+    }
+
+    public void setSystemAccount(boolean systemAccount) {
+        this.systemAccount = systemAccount;
     }
 
     public long getContactId() {
@@ -209,6 +251,14 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Permissions getPermissions() {
+        return this.permissions;
+    }
+
+    public void setPermissions(Permissions permissions) {
+        this.permissions = permissions;
     }
 
     public ContactImage getContactImage() {
@@ -349,81 +399,8 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
 
     @Override
     public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("accountCreateTimeInSeconds", this.getAccountCreateTimeInSeconds());
-        indexMap.put("accountId", this.getAccountId());
-        indexMap.put("accountLastLoginInSeconds", this.getAccountLastLoginInSeconds());
-        indexMap.put("accountLogin", this.getAccountLogin());
-        indexMap.put("instanceOwner", this.isInstanceOwner());
-        indexMap.put("birthdayInSeconds", this.getBirthdayInSeconds());
-
-        List<Map<String, Object>> addressMap = new ArrayList<>();
-        if(this.getAddresses() != null){
-            this.getAddresses().stream().forEach((add) -> {
-                addressMap.add(add.indexMap());
-            });
-        }
-        indexMap.put("addresses", addressMap);
-
-        List<Map<String, Object>> communicationDataMap = new ArrayList<>();
-        if(this.getCommunicationData() != null){
-            this.getCommunicationData().stream().forEach((cd) -> {
-                communicationDataMap.add(cd.indexMap());
-            });
-        }
-        indexMap.put("communicationData", communicationDataMap);
-
-        if(this.getContactImage() != null){
-            indexMap.put("contactImage", this.getContactImage().indexMap());
-        }
-
-        indexMap.put("contactId", this.getContactId());
-        indexMap.put("firstName", this.getFirstName());
-        indexMap.put("gender", this.getGender());
-        indexMap.put("lastName", this.getLastName());
-        indexMap.put("superiorAccountId", this.getSuperiorAccountId());
-        indexMap.put("position", this.getPosition());
-
-        if(this.getRolePersonal() != null){
-            indexMap.put("rolePersonal", this.getRolePersonal().indexMap());
-        }
-        if(this.getRoleClientGate() != null){
-            indexMap.put("roleClientGate", this.getRoleClientGate().indexMap());
-        }
-
-        List<Map<String, Object>> rolesFunctionalMap = new ArrayList<>();
-        if(this.getRolesFunctional()!= null){
-            this.getRolesFunctional().stream().forEach((role) -> {
-                rolesFunctionalMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesFunctional", rolesFunctionalMap);
-
-        List<Map<String, Object>> rolesContentMap = new ArrayList<>();
-        if(this.getRolesContent()!= null){
-            this.getRolesContent().stream().forEach((role) -> {
-                rolesContentMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesContent", rolesContentMap);
-
-        List<Map<String, Object>> rolesReviewMap = new ArrayList<>();
-        if(this.getRolesReview()!= null){
-            this.getRolesReview().stream().forEach((role) -> {
-                rolesReviewMap.add(role.indexMap());
-            });
-        }
-        indexMap.put("rolesReview", rolesReviewMap);
-
-        List<Map<String, Object>> clientsMap = new ArrayList<>();
-        if(this.getClients()!= null){
-            this.getClients().stream().forEach((client) -> {
-                clientsMap.add(client.indexMap());
-            });
-        }
-        indexMap.put("clients", clientsMap);
-
-        return indexMap;
+        // *** overwritten, to set doNotIndexKeys;
+        return this.indexMap(Arrays.asList("contactImages"));
     }
 
     @Override
@@ -432,13 +409,78 @@ public class Person extends ListResultEntry implements Identifiable, Indexable{
     }
 
     @Override
-    public String indexTypeName() {
-        return INDEX_TYPE_NAME;
-    }
-
-    @Override
     public String indexAutocompleteInput() {
         return null;
+    }
+
+    /**
+     * @return firstName lastName
+     */
+    public String toName() {
+        StringBuilder buffer = new StringBuilder();
+        if(this.getFirstName() != null && !this.getFirstName().trim().isEmpty()) {
+            buffer.append(this.getFirstName().trim());
+            buffer.append(" ");
+        }
+        if(this.getLastName() != null && !this.getLastName().trim().isEmpty()) {
+            buffer.append(this.getLastName().trim());
+        }
+        // *** empty buffer;
+        if(buffer.length() == 0) {
+            buffer.append(this.getAccountLogin());
+        }
+        return buffer.toString();
+    }
+
+    public void updatePermissions(Licence licence) {
+        // *** load all roles of current account for this client;
+        long permissionBitmask = 0L;
+        Role rolePersonal = this.getRolePersonal();
+        if(rolePersonal != null) {
+            // *** adding role.bitmask;
+            permissionBitmask |= rolePersonal.getBitmask();
+        }
+        for(Role roleFunctional : this.getRolesFunctional()) {
+            if(roleFunctional != null) {
+                // *** adding role.bitmask;
+                permissionBitmask |= roleFunctional.getBitmask();
+            }
+        }
+        // *** if no review-roles...
+        if(licence != null && !licence.isPackageReview()) {
+            // *** everybody gets permission: PUBLISH_UNREVIEWED;
+            permissionBitmask |= Permissions.PUBLISH_UNREVIEWED;
+        }
+        // *** if no functional-roles, everybody gets all permissions;
+        if(licence != null && !licence.isPackageRole()) {
+            permissionBitmask |= Permissions.ADMINISTRATE_ALL;
+        }
+        // *** system should get instance-owner- and system-flag;
+        if(this.checkForSystemAccount()) {
+            // *** sets the instance-owner-flag for system-account;
+            this.setInstanceOwner(true);
+            this.setSystemAccount(true);
+        }
+        // *** instance-owners should always get admin-bitmask;
+        if(this.isInstanceOwner()) {
+            permissionBitmask |= Permissions.ADMINISTRATE_ALL;
+        }
+        this.setPermissions(new Permissions(permissionBitmask));
+    }
+
+    /**
+     * check for system-account.
+     *
+     * @return true, if current person is a system-account
+     */
+    public boolean checkForSystemAccount() {
+        boolean result = false;
+        String currentAccountLogin = this.getAccountLogin();
+        if(currentAccountLogin != null &&
+           Credential.SYSTEM_ACCOUNT_LOGIN.equalsIgnoreCase(currentAccountLogin)) {
+            result = true;
+        }
+        return result;
     }
 
     @Override

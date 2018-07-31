@@ -1,8 +1,7 @@
 package com.matterial.mtr.api.object.meta;
 
 /**
- *
- * @author Philipp
+ * <strong>EntityType</strong>
  */
 public class EntityType {
 

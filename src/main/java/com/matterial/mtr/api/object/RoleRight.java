@@ -1,53 +1,50 @@
 package com.matterial.mtr.api.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.matterial.mtr.api.object.meta.IndexableChild; 
+import com.matterial.mtr.api.object.meta.IndexableChild;
 
 /**
  * Container representing a right of a role for a document
  */
 @XmlRootElement
-public class RoleRight implements IndexableChild, Comparable<RoleRight> {
-    
+public class RoleRight extends IndexableChild implements Comparable<RoleRight> {
+
     private static final long serialVersionUID = 1L;
 
     public static final long READ = 1L;
     public static final long EDIT = 2L;
-    
+
     private Role role;
     private long type;
-    
+
     public RoleRight() {
         // *** do nothing;
     }
-    
+
     public RoleRight(long roleId,
                      long roleClientId,
-                     long roleEntityTypeId, 
-                     String roleName, 
-                     String roleDescription, 
-                     long roleBitmask, 
+                     long roleEntityTypeId,
+                     String roleName,
+                     String roleDescription,
+                     long roleBitmask,
                      long type) {
-        this(new Role(roleId, 
-                      roleClientId, 
-                      roleEntityTypeId, 
-                      roleName, 
-                      roleDescription, 
+        this(new Role(roleId,
+                      roleClientId,
+                      roleEntityTypeId,
+                      roleName,
+                      roleDescription,
                       roleBitmask,
                       false,
                       false,
                       0), type);
     }
-    
+
     public RoleRight(Role role, long type) {
         this.role = role;
         this.type = type;
     }
-    
+
     public Role getRole() {
         return role;
     }
@@ -62,18 +59,6 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
 
     public void setType(long type) {
         this.type = type;
-    }
-
-    @Override
-    public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        if(this.getRole() != null) {
-            indexMap.put("roleId", this.getRole().getId());
-            indexMap.put("roleType", this.getRole().getEntityTypeId());
-            indexMap.put("roleClientId", this.getRole().getClientId());
-        }
-        indexMap.put("type", this.getType());
-        return indexMap;
     }
 
     @Override
@@ -121,5 +106,5 @@ public class RoleRight implements IndexableChild, Comparable<RoleRight> {
         }
         return true;
     }
-    
+
 }

@@ -6,13 +6,12 @@ import com.matterial.mtr.api.object.meta.Identifiable;
 
 /**
  * Container representing a language
- * @author Philipp
  */
 @XmlRootElement
 public class Language implements Identifiable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final long ANY = -1L;
     public static final long DE = 1L;
     public static final long EN = 2L;
@@ -21,15 +20,17 @@ public class Language implements Identifiable {
     public static final long ES = 5L;
     public static final long SV = 6L;
     public static final long ZH = 7L;
-    
+
     private long id;
     private String name;
     private String i18nKey;
     private boolean active;
     private int prio;
 
-    public Language(){}
-    
+    public Language() {
+        // *** do nothing;
+    }
+
     public Language(long id, String name, String i18nKey, boolean active, int prio) {
         this.id = id;
         this.name = name;
@@ -75,7 +76,7 @@ public class Language implements Identifiable {
     public int getPrio() {
         return prio;
     }
-    
+
     public void setPrio(int prio) {
         this.prio = prio;
     }

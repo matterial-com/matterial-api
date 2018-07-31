@@ -1,8 +1,5 @@
 package com.matterial.mtr.api.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
@@ -12,17 +9,17 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing ContactImages
  */
 @XmlRootElement
-public class ContactImage implements Identifiable, IndexableChild {
-    
+public class ContactImage extends IndexableChild implements Identifiable {
+
     private static final long serialVersionUID = 1L;
-    
+
     public static final int STATUS_BIT_INTERNAL = 1 << 0;          // 1
     public static final int STATUS_BIT_ACTIVE = 1 << 1;            // 2
     public static final int STATUS_BIT_EXTERNAL = 1 << 2;          // 4
     public static final int STATUS_BIT_GRAVATAR = 1 << 3;          // 8
     public static final int STATUS_BIT_GOOGLE = 1 << 4;            // 16
     public static final int STATUS_BIT_COBOT = 1 << 5;             // 32
-    
+
     private long id;
     private String name;
     private String casId;
@@ -39,14 +36,14 @@ public class ContactImage implements Identifiable, IndexableChild {
     private boolean google;
     private boolean cobot;
     private String reference;
-    
+
     public ContactImage() {
         // *** empty;
     }
-    
-    public ContactImage(long id, String name, 
-                        int status, String casId, 
-                        String casIdThumbnail, 
+
+    public ContactImage(long id, String name,
+                        int status, String casId,
+                        String casIdThumbnail,
                         Long fileSize, Long fileSizeThumbnail,
                         long createTimeInSeconds,
                         String externalImgUrl,
@@ -55,10 +52,10 @@ public class ContactImage implements Identifiable, IndexableChild {
         this(id, name, status, casId, casIdThumbnail, fileSize, fileSizeThumbnail, createTimeInSeconds, externalImgUrl, mimeType);
         this.reference = reference;
     }
-    
-    public ContactImage(long id, String name, 
-                        int status, String casId, 
-                        String casIdThumbnail, 
+
+    public ContactImage(long id, String name,
+                        int status, String casId,
+                        String casIdThumbnail,
                         Long fileSize, Long fileSizeThumbnail,
                         long createTimeInSeconds,
                         String externalImgUrl,
@@ -75,16 +72,16 @@ public class ContactImage implements Identifiable, IndexableChild {
         // *** status;
         if((status & STATUS_BIT_INTERNAL) > 0) {
             this.setInternal(true);
-        }        
+        }
         if((status & STATUS_BIT_ACTIVE) > 0) {
             this.setActive(true);
-        }        
+        }
         if((status & STATUS_BIT_EXTERNAL) > 0) {
             this.setExternal(true);
-        }        
+        }
         if((status & STATUS_BIT_GRAVATAR) > 0) {
             this.setGravatar(true);
-        }        
+        }
         if((status & STATUS_BIT_GOOGLE) > 0) {
             this.setGoogle(true);
         }
@@ -92,53 +89,53 @@ public class ContactImage implements Identifiable, IndexableChild {
             this.setCobot(true);
         }
     }
-    
+
     @Override
     public long getId() {
         return id;
     }
-    
+
     @Override
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getCasId() {
         return casId;
     }
-    
+
     public void setCasId(String casId) {
         this.casId = casId;
     }
-    
+
     public String getCasIdThumbnail() {
         return casIdThumbnail;
     }
-    
+
     public void setCasIdThumbnail(String casIdThumbnail) {
         this.casIdThumbnail = casIdThumbnail;
     }
-    
+
     public Long getFileSize() {
         return fileSize;
     }
-    
+
     public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
-    
+
     public Long getFileSizeThumbnail() {
         return fileSizeThumbnail;
     }
-    
+
     public void setFileSizeThumbnail(Long fileSizeThumbnail) {
         this.fileSizeThumbnail = fileSizeThumbnail;
     }
@@ -146,108 +143,85 @@ public class ContactImage implements Identifiable, IndexableChild {
     public long getCreateTimeInSeconds() {
         return createTimeInSeconds;
     }
-    
+
     public void setCreateTimeInSeconds(long createTimeInSeconds) {
         this.createTimeInSeconds = createTimeInSeconds;
     }
-    
+
     public String getMimeType() {
         return mimeType;
     }
-    
+
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
-    
+
     public String getExternalImgUrl() {
         return externalImgUrl;
     }
-    
+
     public void setExternalImgUrl(String externalImgUrl) {
         this.externalImgUrl = externalImgUrl;
     }
-    
+
     public boolean isInternal() {
         return internal;
     }
-    
+
     public void setInternal(boolean internal) {
         this.internal = internal;
     }
-    
+
     public boolean isActive() {
         return active;
     }
-    
+
     public void setActive(boolean active) {
         this.active = active;
     }
-    
+
     public boolean isExternal() {
         return external;
     }
-    
+
     public void setExternal(boolean external) {
         this.external = external;
     }
-    
+
     public boolean isGravatar() {
         return gravatar;
     }
-    
+
     public void setGravatar(boolean gravatar) {
         this.gravatar = gravatar;
     }
-    
+
     public boolean isGoogle() {
         return google;
     }
-    
+
     public void setGoogle(boolean google) {
         this.google = google;
     }
-    
+
     public boolean isCobot() {
         return cobot;
     }
-    
+
     public void setCobot(boolean cobot) {
         this.cobot = cobot;
     }
 
     public String getReference() {
-        if(this.reference == null && 
+        if(this.reference == null &&
            this.isGravatar()) {
-           return this.name; 
+           return this.name;
         }
         return reference;
     }
-    
+
     public void setReference(String reference) {
         this.reference = reference;
-    }
-
-    @Override
-    public Map<String, Object> indexMap() {
-        
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("id", this.getId());
-        indexMap.put("name", this.getName());
-        indexMap.put("casId", this.getCasId());
-        indexMap.put("casIdThumbnail", this.getCasIdThumbnail());
-        indexMap.put("fileSize", this.getFileSize());
-        indexMap.put("fileSizeThumbnail", this.getFileSizeThumbnail());
-        indexMap.put("mimeType", this.getMimeType());
-        indexMap.put("externalImgUrl", this.getExternalImgUrl());
-        indexMap.put("internal", this.isInternal());
-        indexMap.put("active", this.isActive());
-        indexMap.put("external", this.isExternal());
-        indexMap.put("gravatar", this.isGravatar());
-        indexMap.put("google", this.isGoogle());
-        indexMap.put("cobot", this.isCobot());
-        indexMap.put("reference", this.getReference());
-        
-        return indexMap;
     }
 
 }

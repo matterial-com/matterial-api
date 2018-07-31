@@ -1,8 +1,5 @@
 package com.matterial.mtr.api.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.matterial.mtr.api.object.meta.Identifiable;
@@ -12,10 +9,10 @@ import com.matterial.mtr.api.object.meta.IndexableChild;
  * Container representing an address
  */
 @XmlRootElement
-public class Address implements Identifiable, IndexableChild {
-    
+public class Address extends IndexableChild implements Identifiable {
+
     private static final long serialVersionUID = 1L;
-    
+
     /** indicates that a commdata was imported from an external system (ldap) */
     public static final short STATUS_BIT_IMPORTED = 1 << 0;   // 1
 
@@ -33,7 +30,7 @@ public class Address implements Identifiable, IndexableChild {
     public Address() {
         // *** empty;
     }
-    
+
     /**
      * Constructor
      * @param id
@@ -42,7 +39,7 @@ public class Address implements Identifiable, IndexableChild {
      * @param country
      * @param street
      * @param houseNumber
-     * @param status 
+     * @param status
      */
     public Address(long id, String postalCode, String city, String country, String street, String houseNumber, int status) {
         this.id = id;
@@ -54,9 +51,9 @@ public class Address implements Identifiable, IndexableChild {
         // *** status;
         if((status & STATUS_BIT_IMPORTED) > 0) {
             this.setImported(true);
-        }    
+        }
     }
-    
+
     @Override
     public long getId() {
         return id;
@@ -114,7 +111,7 @@ public class Address implements Identifiable, IndexableChild {
     public void setImported(boolean imported) {
         this.imported = imported;
     }
-    
+
     /**
      * @return true, if no attributes are filled
      */
@@ -122,20 +119,8 @@ public class Address implements Identifiable, IndexableChild {
         return ((postalCode == null  || postalCode.trim().length() == 0) &&
                 (city == null        || city.trim().length() == 0) &&
                 (country == null     || country.trim().length() == 0) &&
-                (street == null      || street.trim().length() == 0) && 
-                (houseNumber == null || houseNumber.trim().length() == 0)); 
+                (street == null      || street.trim().length() == 0) &&
+                (houseNumber == null || houseNumber.trim().length() == 0));
     }
 
-    @Override
-    public Map<String, Object> indexMap() {
-        Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("id", this.getId());
-        indexMap.put("postalCode", this.getPostalCode());
-        indexMap.put("city", this.getCity());
-        indexMap.put("country", this.getCountry());
-        indexMap.put("street", this.getStreet());
-        indexMap.put("houseNumber", this.getHouseNumber());
-        indexMap.put("imported", this.isImported());
-        return indexMap;
-    }
 }
