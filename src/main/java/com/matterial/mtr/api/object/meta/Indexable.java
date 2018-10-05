@@ -7,12 +7,14 @@ public abstract class Indexable extends IndexableChild {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String INDEX_FIELD_INDEX_TYPE_NAME = "indexTypeName";
+
     public enum Language {
         de,en,fr,it,es,sv //,zh
     }
 
     /**
-     * Get id (unique for this type)
+     * Get id. Should be always be prefixed with indexTypeName!
      */
     public abstract String indexId();
 

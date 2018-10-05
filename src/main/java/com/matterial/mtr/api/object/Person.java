@@ -28,7 +28,7 @@ public class Person extends Indexable implements Identifiable {
     public static final String INDEX_FIELD_ACCOUNT_CREATE_TIME_IN_SECONDS = "accountCreateTimeInSeconds";
     public static final String INDEX_FIELD_ACCOUNT_LAST_LOGIN_IN_SECONDS = "accountLastLoginInSeconds";
     public static final String INDEX_FIELD_INSTANCE_OWNER = "instanceOwner";
-    public static final String INDEX_FIELD_LIMITED = "limited";
+    public static final String INDEX_FIELD_DEMO = "demo";
 
     public static final String INDEX_FIELD_CONTACT_ID = "contactId";
     public static final String INDEX_FIELD_FIRST_NAME = "firstName";
@@ -382,9 +382,13 @@ public class Person extends Indexable implements Identifiable {
         }
     }
 
+    /**
+     * indexTypeName + '-' + accountId: 'person-1'.
+     */
     @Override
     public String indexId() {
-        return this.getAccountId()+"";
+        // *** since elastic-search 6, we have to support single type indices;
+        return this.indexTypeName()+"-"+this.getAccountId();
     }
 
     /**
@@ -392,15 +396,25 @@ public class Person extends Indexable implements Identifiable {
      */
     public Map<String, Object> indexMapLight() {
         Map<String, Object> indexMap = new HashMap<>();
-        indexMap.put("accountId", this.getAccountId());
-        indexMap.put("contactId", this.getContactId());
+        indexMap.put(INDEX_FIELD_ACCOUNT_ID, this.getAccountId());
+        indexMap.put(INDEX_FIELD_CONTACT_ID, this.getContactId());
         return indexMap;
     }
 
     @Override
     public Map<String, Object> indexMap() {
-        // *** overwritten, to set doNotIndexKeys;
-        return this.indexMap(Arrays.asList("contactImages"));
+        // *** creating index-map;
+        Map<String, Object> indexMap = this.indexMap(Arrays.asList(// *** currently unused;
+                                                                   INDEX_FIELD_SUPERIOR_ACCOUNT_ID,
+                                                                   INDEX_FIELD_ROLE_CLIENT_GATE,
+                                                                   // *** not neccessary;
+                                                                   //INDEX_FIELD_PERMISSIONS, // *** no indexable child;
+                                                                   INDEX_FIELD_CONTACT_IMAGES));
+
+        // *** indexTypeName to support elasticSearch 6 with single-type indices;
+        indexMap.put(INDEX_FIELD_INDEX_TYPE_NAME, this.indexTypeName());
+
+        return indexMap;
     }
 
     @Override

@@ -68,7 +68,7 @@ public class Document extends Indexable implements Identifiable {
     // *** document-language-version-properties;
     public static final String INDEX_FIELD_LANGUAGE_VERSION_ID = "languageVersionId";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_VERSION = "languageVersionVersion";
-    public static final String INDEX_FIELD_LANGUAGE_VERSIONS_TITLE = "languageVersionTitle";
+    public static final String INDEX_FIELD_LANGUAGE_VERSION_TITLE = "languageVersionTitle";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_ABSTRACT = "languageVersionAbstract";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_VERSION_COMMENT = "languageVersionVersionComment";
     public static final String INDEX_FIELD_LANGUAGE_VERSION_STATUS = "languageVersionStatus";
@@ -920,9 +920,13 @@ public class Document extends Indexable implements Identifiable {
         // *** do nothing;
     }
 
+    /**
+     * indexTypeName + '-' + languageVersionId: 'document-1'.
+     */
     @Override
     public String indexId() {
-        return this.getLanguageVersionId()+"";
+        // *** since elastic-search 6, we have to support single type indices;
+        return this.indexTypeName()+"-"+this.getLanguageVersionId();
     }
 
     @Override
@@ -930,6 +934,7 @@ public class Document extends Indexable implements Identifiable {
         // *** creating index-map;
         Map<String, Object> indexMap = this.indexMap(Arrays.asList(// *** currently unused;
                                                                    INDEX_FIELD_CLICK_COUNT,
+                                                                   INDEX_FIELD_REVIEW_UNTIL_IN_SECONDS,
                                                                    INDEX_FIELD_DOWNLOAD_COUNT,
                                                                    INDEX_FIELD_LANGUAGE_VERSION_NOTIFY_ON_REVIEW,
                                                                    INDEX_FIELD_LANGUAGE_VERSION_VERSION_COMMENT,
@@ -941,7 +946,7 @@ public class Document extends Indexable implements Identifiable {
                                                                    INDEX_FIELD_ROLE_RELATION_TYPE,
                                                                    INDEX_FIELD_REVIEW_RIGHT,
                                                                    INDEX_FIELD_MENTIONED_IN_COMMENT_UNREAD,
-                                                                   INDEX_FIELD_ATTACHMENTS,
+                                                                   INDEX_FIELD_ATTACHMENTS, // *** XXX should be indexed with indexLightMap() in future! AttachmentName!
                                                                    INDEX_FIELD_LANGUAGE_ATTACHMENTS,
                                                                    INDEX_FIELD_DOCUMENT_ATTACHMENTS,
                                                                    INDEX_EDITOR_TYPE,
@@ -963,6 +968,10 @@ public class Document extends Indexable implements Identifiable {
                                                                    INDEX_FIELD_RESPONSIBLES,
                                                                    INDEX_FIELD_FOLLOWERS,
                                                                    INDEX_FIELD_MARKED_AS_HELPFUL_BY));
+
+        // *** indexTypeName to support elasticSearch 6 with single-type indices;
+        indexMap.put(INDEX_FIELD_INDEX_TYPE_NAME, this.indexTypeName());
+
         // *** list of ids;
         indexMap.put(INDEX_FIELD_CATEGORY_IDS, this.getCategoryIds());
 
@@ -1127,4 +1136,8 @@ public class Document extends Indexable implements Identifiable {
                 (this.getLanguageVersionAbstract() != null ? this.getLanguageVersionAbstract() : "");
     }
 
+    public static void main(String[] args) {
+        Document doc = new Document();
+        System.out.println(doc.indexMap());
+    }
 }

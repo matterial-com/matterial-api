@@ -52,6 +52,8 @@ public class AdditionalProperty extends IndexableChild implements Identifiable, 
     public static final String INDEX_FIELD_PROPERTY_TYPE = "propertyType";
     public static final String INDEX_FIELD_NAME = "name";
     public static final String INDEX_FIELD_DESCRIPTION = "description";
+    public static final String INDEX_FIELD_VALID_BEGIN_IN_SECONDS = "validBeginInSeconds";
+    public static final String INDEX_FIELD_VALID_END_IN_SECONDS = "validEndInSeconds";
 
     public static final List<Integer> KNOWN_PROPERTY_TYPES;
     static {
@@ -167,7 +169,12 @@ public class AdditionalProperty extends IndexableChild implements Identifiable, 
     @Override
     public Map<String, Object> indexMap() {
         // *** overwritten, to set doNotIndexKeys;
-        return this.indexMap(Arrays.asList("name", "description"));
+        return this.indexMap(Arrays.asList(// *** should be i18n;
+                                           INDEX_FIELD_NAME,
+                                           INDEX_FIELD_DESCRIPTION,
+                                           // *** unused;
+                                           INDEX_FIELD_VALID_BEGIN_IN_SECONDS,
+                                           INDEX_FIELD_VALID_END_IN_SECONDS));
     }
 
     @Override
