@@ -1131,9 +1131,8 @@ public class Document extends Indexable implements Identifiable {
 
     @Override
     public String indexAutocompleteInput() {
-        return  this.getLanguageVersionTitle()
-                +" "+
-                (this.getLanguageVersionAbstract() != null ? this.getLanguageVersionAbstract() : "");
+        return this.getLanguageVersionTitle()+" "+
+               (this.getLanguageVersionAbstract() != null ? this.getLanguageVersionAbstract() : "");
     }
 
     public static void main(String[] args) {

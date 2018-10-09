@@ -424,7 +424,10 @@ public class Person extends Indexable implements Identifiable {
 
     @Override
     public String indexAutocompleteInput() {
-        return null;
+        return this.getLastName()+" "+
+               (this.getFirstName() != null ? this.getFirstName() : "")+" "+
+               (this.getPosition() != null ? this.getPosition() : "")+" "+
+               (this.getAccountLogin() != null ? this.getAccountLogin() : "");
     }
 
     /**
