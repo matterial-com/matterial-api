@@ -957,8 +957,6 @@ public class Document extends Indexable implements Identifiable {
                                                                    INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE,
                                                                    INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_PDF,
                                                                    INDEX_FIELD_LANGUAGE_VERSION_FILE_SIZE_THUMBNAIL,
-                                                                   // *** not wanted;
-                                                                   INDEX_FIELD_LANGUAGE_VERSION_MIME_TYPE,
                                                                    // *** special handling:
                                                                    INDEX_FIELD_CATEGORY_IDS,
                                                                    INDEX_FIELD_FIRST_READ_TIMES_IN_SECONDS,
