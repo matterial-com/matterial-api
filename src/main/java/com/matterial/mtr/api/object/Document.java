@@ -946,7 +946,7 @@ public class Document extends Indexable implements Identifiable {
                                                                    INDEX_FIELD_ROLE_RELATION_TYPE,
                                                                    INDEX_FIELD_REVIEW_RIGHT,
                                                                    INDEX_FIELD_MENTIONED_IN_COMMENT_UNREAD,
-                                                                   INDEX_FIELD_ATTACHMENTS, // *** XXX should be indexed with indexLightMap() in future! AttachmentName!
+                                                                   INDEX_FIELD_ATTACHMENTS,
                                                                    INDEX_FIELD_LANGUAGE_ATTACHMENTS,
                                                                    INDEX_FIELD_DOCUMENT_ATTACHMENTS,
                                                                    INDEX_EDITOR_TYPE,
