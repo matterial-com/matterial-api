@@ -87,6 +87,7 @@ public interface Api {
     public static final String SNAP = "snap";
     public static final String COMPARE = "compare";
     public static final String DISABLE_RIGHTS_CHECK = "disablerightscheck";
+    public static final String DUPLICATE = "duplicate";
     // *** skin;
     public static final String CUSTOMER_CSS = "customer.css";
     // *** app-initializer;
