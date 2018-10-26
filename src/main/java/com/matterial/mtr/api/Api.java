@@ -148,6 +148,7 @@ public interface Api {
     public static final String PARAM_ACTIVE = "active";
     public static final String PARAM_REGENERATE = "regenerate";
     public static final String PARAM_ENTITY_TYPE_ID = "entityTypeId";
+    public static final String PARAM_FORCE_ATTACHMENT = "forceAttachment";
     // *** category;
     public static final String PARAM_CATEGORY_ID = "categoryId";
     public static final String PARAM_PERSONAL = "personal";
